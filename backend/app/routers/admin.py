@@ -3,7 +3,7 @@ from uuid import uuid4
 from fastapi import APIRouter, HTTPException
 
 from app.core.storage import Coupon, Courier, NeighborhoodFee, db
-from app.schemas.admin import OrderStatusUpdate
+from app.schemas.admin import DailyCloseReport, OrderStatusUpdate
 from app.schemas.admin_settings import StoreSettingsResponse, StoreSettingsUpdate
 from app.schemas.marketing import (
     CouponCreate,
@@ -150,6 +150,31 @@ def list_orders() -> list[OrderSummaryResponse]:
         )
         for pedido in db.orders
     ]
+
+
+@router.get("/reports/daily-close", response_model=DailyCloseReport)
+def daily_close_report() -> DailyCloseReport:
+    """Gera um resumo financeiro simples dos pedidos entregues."""
+    pedidos_entregues = [pedido for pedido in db.orders if pedido.status == "delivered"]
+    total_vendas = sum(pedido.total_geral for pedido in pedidos_entregues)
+    total_pix = sum(
+        pedido.total_geral for pedido in pedidos_entregues if pedido.metodo_pagamento == "pix"
+    )
+    total_cartao = sum(
+        pedido.total_geral
+        for pedido in pedidos_entregues
+        if pedido.metodo_pagamento == "card_on_delivery"
+    )
+    total_dinheiro = sum(
+        pedido.total_geral for pedido in pedidos_entregues if pedido.metodo_pagamento == "cash"
+    )
+    return DailyCloseReport(
+        total_pedidos=len(pedidos_entregues),
+        total_vendas=total_vendas,
+        total_pix=total_pix,
+        total_cartao=total_cartao,
+        total_dinheiro=total_dinheiro,
+    )
 
 
 @router.post("/neighborhoods", response_model=NeighborhoodResponse)
