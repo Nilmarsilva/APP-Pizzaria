@@ -32,6 +32,8 @@ class OrderSummaryResponse(BaseModel):
 
     pedido_id: str
     status: str
+    usuario_id: str
+    courier_id: str | None
     total_produtos: float
     taxa_entrega: float
     total_geral: float

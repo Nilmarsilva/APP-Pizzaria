@@ -129,6 +129,7 @@ class Order:
     metodo_pagamento: str
     tipo_entrega: str
     usuario_id: str
+    courier_id: str | None = None
     itens: list[OrderItem]
     total_produtos: float
     taxa_entrega: float

@@ -89,9 +89,31 @@ def get_order_summary(order_id: str) -> OrderSummaryResponse:
     return OrderSummaryResponse(
         pedido_id=pedido.id,
         status=pedido.status,
+        usuario_id=pedido.usuario_id,
+        courier_id=pedido.courier_id,
         total_produtos=pedido.total_produtos,
         taxa_entrega=pedido.taxa_entrega,
         total_geral=pedido.total_geral,
         desconto_aplicado=pedido.desconto_aplicado,
         cupom_codigo=pedido.cupom_codigo,
     )
+
+
+@router.get("/user/{user_id}", response_model=list[OrderSummaryResponse])
+def list_user_orders(user_id: str) -> list[OrderSummaryResponse]:
+    """Lista pedidos de um usuário específico."""
+    pedidos = [pedido for pedido in db.orders if pedido.usuario_id == user_id]
+    return [
+        OrderSummaryResponse(
+            pedido_id=pedido.id,
+            status=pedido.status,
+            usuario_id=pedido.usuario_id,
+            courier_id=pedido.courier_id,
+            total_produtos=pedido.total_produtos,
+            taxa_entrega=pedido.taxa_entrega,
+            total_geral=pedido.total_geral,
+            desconto_aplicado=pedido.desconto_aplicado,
+            cupom_codigo=pedido.cupom_codigo,
+        )
+        for pedido in pedidos
+    ]

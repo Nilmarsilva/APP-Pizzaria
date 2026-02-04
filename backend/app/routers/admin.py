@@ -2,7 +2,7 @@ from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException
 
-from app.core.storage import Coupon, NeighborhoodFee, db
+from app.core.storage import Coupon, Courier, NeighborhoodFee, db
 from app.schemas.admin import OrderStatusUpdate
 from app.schemas.admin_settings import StoreSettingsResponse, StoreSettingsUpdate
 from app.schemas.marketing import (
@@ -14,6 +14,7 @@ from app.schemas.marketing import (
 from app.schemas.menu import CategoryCreate, CategoryResponse, ProductCreate, ProductResponse
 from app.schemas.loyalty import LoyaltySettingsResponse, LoyaltySettingsUpdate
 from app.schemas.orders import OrderSummaryResponse
+from app.schemas.couriers import CourierCreate, CourierResponse
 
 router = APIRouter()
 
@@ -139,6 +140,8 @@ def list_orders() -> list[OrderSummaryResponse]:
         OrderSummaryResponse(
             pedido_id=pedido.id,
             status=pedido.status,
+            usuario_id=pedido.usuario_id,
+            courier_id=pedido.courier_id,
             total_produtos=pedido.total_produtos,
             taxa_entrega=pedido.taxa_entrega,
             total_geral=pedido.total_geral,
@@ -207,3 +210,52 @@ def list_coupons() -> list[CouponResponse]:
         )
         for c in db.coupons
     ]
+
+
+@router.post("/couriers", response_model=CourierResponse)
+def create_courier(payload: CourierCreate) -> CourierResponse:
+    """Cadastra um novo motoboy."""
+    courier = db.add_courier(
+        Courier(
+            id=str(uuid4()),
+            nome=payload.nome,
+            whatsapp=payload.whatsapp,
+            placa_veiculo=payload.placa_veiculo,
+            ativo=payload.ativo,
+        )
+    )
+    return CourierResponse(
+        id=courier.id,
+        nome=courier.nome,
+        whatsapp=courier.whatsapp,
+        placa_veiculo=courier.placa_veiculo,
+        ativo=courier.ativo,
+    )
+
+
+@router.get("/couriers", response_model=list[CourierResponse])
+def list_couriers() -> list[CourierResponse]:
+    """Lista os motoboys cadastrados."""
+    return [
+        CourierResponse(
+            id=courier.id,
+            nome=courier.nome,
+            whatsapp=courier.whatsapp,
+            placa_veiculo=courier.placa_veiculo,
+            ativo=courier.ativo,
+        )
+        for courier in db.couriers
+    ]
+
+
+@router.patch("/orders/{order_id}/assign-courier")
+def assign_courier(order_id: str, courier_id: str) -> dict:
+    """Atribui um motoboy ao pedido."""
+    pedido = next((o for o in db.orders if o.id == order_id), None)
+    if not pedido:
+        raise HTTPException(status_code=404, detail="Pedido não encontrado.")
+    courier = next((c for c in db.couriers if c.id == courier_id), None)
+    if not courier:
+        raise HTTPException(status_code=404, detail="Motoboy não encontrado.")
+    pedido.courier_id = courier.id
+    return {"pedido_id": order_id, "courier_id": courier.id}
