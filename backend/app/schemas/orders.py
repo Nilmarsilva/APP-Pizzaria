@@ -15,6 +15,9 @@ class CreateOrderRequest(BaseModel):
     itens: list[OrderItem]
     metodo_pagamento: str
     tipo_entrega: str
+    cupom_codigo: str | None = None
+    bairro_entrega: str | None = None
+    usuario_id: str | None = None
 
 
 class OrderStatusResponse(BaseModel):
@@ -22,3 +25,17 @@ class OrderStatusResponse(BaseModel):
 
     pedido_id: str
     status: str
+
+
+class OrderSummaryResponse(BaseModel):
+    """Resumo completo do pedido."""
+
+    pedido_id: str
+    status: str
+    usuario_id: str
+    courier_id: str | None
+    total_produtos: float
+    taxa_entrega: float
+    total_geral: float
+    desconto_aplicado: float
+    cupom_codigo: str | None
