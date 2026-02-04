@@ -13,6 +13,7 @@ from app.schemas.marketing import (
 )
 from app.schemas.menu import CategoryCreate, CategoryResponse, ProductCreate, ProductResponse
 from app.schemas.loyalty import LoyaltySettingsResponse, LoyaltySettingsUpdate
+from app.schemas.payment import PaymentSettingsResponse, PaymentSettingsUpdate
 from app.schemas.orders import OrderSummaryResponse
 from app.schemas.couriers import CourierCreate, CourierResponse
 
@@ -61,6 +62,28 @@ def update_loyalty_settings(payload: LoyaltySettingsUpdate) -> LoyaltySettingsRe
     db.loyalty_settings.pontos_por_regra = payload.pontos_por_regra
     db.loyalty_settings.limite_premio = payload.limite_premio
     return LoyaltySettingsResponse(**payload.model_dump())
+
+
+@router.get("/payment-settings", response_model=PaymentSettingsResponse)
+def get_payment_settings() -> PaymentSettingsResponse:
+    """Retorna as configurações de pagamento."""
+    settings = db.payment_settings
+    return PaymentSettingsResponse(
+        pix_chave=settings.pix_chave,
+        habilitar_cartao=settings.habilitar_cartao,
+        habilitar_dinheiro=settings.habilitar_dinheiro,
+        url_webhook_pagamento=settings.url_webhook_pagamento,
+    )
+
+
+@router.put("/payment-settings", response_model=PaymentSettingsResponse)
+def update_payment_settings(payload: PaymentSettingsUpdate) -> PaymentSettingsResponse:
+    """Atualiza as configurações de pagamento."""
+    db.payment_settings.pix_chave = payload.pix_chave
+    db.payment_settings.habilitar_cartao = payload.habilitar_cartao
+    db.payment_settings.habilitar_dinheiro = payload.habilitar_dinheiro
+    db.payment_settings.url_webhook_pagamento = payload.url_webhook_pagamento
+    return PaymentSettingsResponse(**payload.model_dump())
 
 
 @router.post("/categories", response_model=CategoryResponse)

@@ -25,6 +25,16 @@ class LoyaltySettings:
 
 
 @dataclass
+class PaymentSettings:
+    """Configurações de pagamento e integrações."""
+
+    pix_chave: str = ""
+    habilitar_cartao: bool = True
+    habilitar_dinheiro: bool = True
+    url_webhook_pagamento: str = ""
+
+
+@dataclass
 class Category:
     """Categoria do cardápio."""
 
@@ -51,6 +61,7 @@ class InMemoryDB:
 
     settings: StoreSettings = field(default_factory=StoreSettings)
     loyalty_settings: LoyaltySettings = field(default_factory=LoyaltySettings)
+    payment_settings: PaymentSettings = field(default_factory=PaymentSettings)
     categories: list[Category] = field(default_factory=list)
     products: list[Product] = field(default_factory=list)
     orders: list["Order"] = field(default_factory=list)
