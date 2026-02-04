@@ -1,0 +1,1 @@
+"""Módulo central da aplicação."""
