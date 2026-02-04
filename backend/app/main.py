@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.routers import admin, auth, menu, orders
+from app.routers import admin, auth, loyalty, menu, orders
 
 
 app = FastAPI(
@@ -14,6 +14,7 @@ app = FastAPI(
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(menu.router, prefix="/menu", tags=["menu"])
 app.include_router(orders.router, prefix="/orders", tags=["orders"])
+app.include_router(loyalty.router, prefix="/loyalty", tags=["loyalty"])
 
 # Rotas administrativas
 app.include_router(admin.router, prefix="/admin", tags=["admin"])

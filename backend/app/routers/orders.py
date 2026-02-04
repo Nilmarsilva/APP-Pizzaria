@@ -52,11 +52,13 @@ def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
 
     total_geral = max(total_produtos + taxa_entrega - desconto_aplicado, 0.0)
 
+    usuario_id = payload.usuario_id or "anonimo"
     pedido = Order(
         id=str(uuid4()),
         status="pending",
         metodo_pagamento=payload.metodo_pagamento,
         tipo_entrega=payload.tipo_entrega,
+        usuario_id=usuario_id,
         itens=itens_pedido,
         total_produtos=total_produtos,
         taxa_entrega=taxa_entrega,

@@ -16,6 +16,15 @@ class StoreSettings:
 
 
 @dataclass
+class LoyaltySettings:
+    """Configurações do programa de fidelidade."""
+
+    regra_valor: float = 50.0
+    pontos_por_regra: int = 1
+    limite_premio: int = 10
+
+
+@dataclass
 class Category:
     """Categoria do cardápio."""
 
@@ -41,12 +50,14 @@ class InMemoryDB:
     """Banco de dados simples em memória para apoiar o protótipo."""
 
     settings: StoreSettings = field(default_factory=StoreSettings)
+    loyalty_settings: LoyaltySettings = field(default_factory=LoyaltySettings)
     categories: list[Category] = field(default_factory=list)
     products: list[Product] = field(default_factory=list)
     orders: list["Order"] = field(default_factory=list)
     neighborhoods: list["NeighborhoodFee"] = field(default_factory=list)
     coupons: list["Coupon"] = field(default_factory=list)
     couriers: list["Courier"] = field(default_factory=list)
+    users: list["User"] = field(default_factory=list)
 
     def add_category(self, nome: str, posicao: int) -> Category:
         categoria = Category(id=str(uuid4()), nome=nome, posicao=posicao)
@@ -92,6 +103,11 @@ class InMemoryDB:
         self.couriers.append(courier)
         return courier
 
+    def add_user(self, user: "User") -> "User":
+        """Registra um novo usuário."""
+        self.users.append(user)
+        return user
+
 
 
 @dataclass
@@ -112,6 +128,7 @@ class Order:
     status: str
     metodo_pagamento: str
     tipo_entrega: str
+    usuario_id: str
     itens: list[OrderItem]
     total_produtos: float
     taxa_entrega: float
@@ -149,6 +166,16 @@ class Courier:
     whatsapp: str
     placa_veiculo: str
     ativo: bool = True
+
+
+@dataclass
+class User:
+    """Usuário do sistema."""
+
+    id: str
+    nome: str
+    whatsapp: str
+    pontos_fidelidade: int = 0
 
 
 db = InMemoryDB()

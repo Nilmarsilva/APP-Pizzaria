@@ -17,6 +17,7 @@ class CreateOrderRequest(BaseModel):
     tipo_entrega: str
     cupom_codigo: str | None = None
     bairro_entrega: str | None = None
+    usuario_id: str | None = None
 
 
 class OrderStatusResponse(BaseModel):

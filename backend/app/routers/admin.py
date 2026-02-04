@@ -12,6 +12,7 @@ from app.schemas.marketing import (
     NeighborhoodResponse,
 )
 from app.schemas.menu import CategoryCreate, CategoryResponse, ProductCreate, ProductResponse
+from app.schemas.loyalty import LoyaltySettingsResponse, LoyaltySettingsUpdate
 from app.schemas.orders import OrderSummaryResponse
 
 router = APIRouter()
@@ -39,6 +40,26 @@ def update_settings(payload: StoreSettingsUpdate) -> StoreSettingsResponse:
     db.settings.horario_fechamento = payload.horario_fechamento
     db.settings.taxa_entrega_padrao = payload.taxa_entrega_padrao
     return StoreSettingsResponse(**payload.model_dump())
+
+
+@router.get("/loyalty-settings", response_model=LoyaltySettingsResponse)
+def get_loyalty_settings() -> LoyaltySettingsResponse:
+    """Retorna as configurações do programa de fidelidade."""
+    settings = db.loyalty_settings
+    return LoyaltySettingsResponse(
+        regra_valor=settings.regra_valor,
+        pontos_por_regra=settings.pontos_por_regra,
+        limite_premio=settings.limite_premio,
+    )
+
+
+@router.put("/loyalty-settings", response_model=LoyaltySettingsResponse)
+def update_loyalty_settings(payload: LoyaltySettingsUpdate) -> LoyaltySettingsResponse:
+    """Atualiza as configurações do programa de fidelidade."""
+    db.loyalty_settings.regra_valor = payload.regra_valor
+    db.loyalty_settings.pontos_por_regra = payload.pontos_por_regra
+    db.loyalty_settings.limite_premio = payload.limite_premio
+    return LoyaltySettingsResponse(**payload.model_dump())
 
 
 @router.post("/categories", response_model=CategoryResponse)
@@ -102,6 +123,12 @@ def update_order_status(order_id: str, payload: OrderStatusUpdate) -> dict:
     if not pedido:
         raise HTTPException(status_code=404, detail="Pedido não encontrado.")
     pedido.status = payload.status
+    if payload.status == "delivered":
+        usuario = next((user for user in db.users if user.id == pedido.usuario_id), None)
+        if usuario:
+            settings = db.loyalty_settings
+            pontos = int(pedido.total_geral // settings.regra_valor) * settings.pontos_por_regra
+            usuario.pontos_fidelidade += pontos
     return {"pedido_id": order_id, "status": payload.status}
 
 

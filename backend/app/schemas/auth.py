@@ -14,3 +14,11 @@ class AuthResponse(BaseModel):
 
     token: str
     usuario_id: str
+
+
+class UserResponse(BaseModel):
+    """Dados básicos do usuário."""
+
+    id: str
+    nome: str
+    whatsapp: str
