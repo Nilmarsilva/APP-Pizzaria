@@ -1,8 +1,16 @@
+from uuid import uuid4
+
 from fastapi import APIRouter, HTTPException
 
-from app.core.storage import db
+from app.core.storage import Coupon, NeighborhoodFee, db
 from app.schemas.admin import OrderStatusUpdate
 from app.schemas.admin_settings import StoreSettingsResponse, StoreSettingsUpdate
+from app.schemas.marketing import (
+    CouponCreate,
+    CouponResponse,
+    NeighborhoodCreate,
+    NeighborhoodResponse,
+)
 from app.schemas.menu import CategoryCreate, CategoryResponse, ProductCreate, ProductResponse
 from app.schemas.orders import OrderSummaryResponse
 
@@ -107,6 +115,68 @@ def list_orders() -> list[OrderSummaryResponse]:
             total_produtos=pedido.total_produtos,
             taxa_entrega=pedido.taxa_entrega,
             total_geral=pedido.total_geral,
+            desconto_aplicado=pedido.desconto_aplicado,
+            cupom_codigo=pedido.cupom_codigo,
         )
         for pedido in db.orders
+    ]
+
+
+@router.post("/neighborhoods", response_model=NeighborhoodResponse)
+def create_neighborhood(payload: NeighborhoodCreate) -> NeighborhoodResponse:
+    """Cria taxa de entrega por bairro."""
+    bairro = db.add_neighborhood(
+        neighborhood=NeighborhoodFee(
+            id=str(uuid4()),
+            nome=payload.nome,
+            taxa=payload.taxa,
+        )
+    )
+    return NeighborhoodResponse(id=bairro.id, nome=bairro.nome, taxa=bairro.taxa)
+
+
+@router.get("/neighborhoods", response_model=list[NeighborhoodResponse])
+def list_neighborhoods() -> list[NeighborhoodResponse]:
+    """Lista taxas de entrega por bairro."""
+    return [
+        NeighborhoodResponse(id=b.id, nome=b.nome, taxa=b.taxa) for b in db.neighborhoods
+    ]
+
+
+@router.post("/coupons", response_model=CouponResponse)
+def create_coupon(payload: CouponCreate) -> CouponResponse:
+    """Cria um cupom de desconto."""
+    codigo = payload.codigo.upper()
+    if any(c.codigo == codigo for c in db.coupons):
+        raise HTTPException(status_code=409, detail="Cupom já existente.")
+    cupom = db.add_coupon(
+        coupon=Coupon(
+            codigo=codigo,
+            tipo=payload.tipo,
+            valor=payload.valor,
+            minimo_pedido=payload.minimo_pedido,
+            ativo=payload.ativo,
+        )
+    )
+    return CouponResponse(
+        codigo=cupom.codigo,
+        tipo=cupom.tipo,
+        valor=cupom.valor,
+        minimo_pedido=cupom.minimo_pedido,
+        ativo=cupom.ativo,
+    )
+
+
+@router.get("/coupons", response_model=list[CouponResponse])
+def list_coupons() -> list[CouponResponse]:
+    """Lista os cupons cadastrados."""
+    return [
+        CouponResponse(
+            codigo=c.codigo,
+            tipo=c.tipo,
+            valor=c.valor,
+            minimo_pedido=c.minimo_pedido,
+            ativo=c.ativo,
+        )
+        for c in db.coupons
     ]

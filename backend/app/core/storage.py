@@ -44,6 +44,9 @@ class InMemoryDB:
     categories: list[Category] = field(default_factory=list)
     products: list[Product] = field(default_factory=list)
     orders: list["Order"] = field(default_factory=list)
+    neighborhoods: list["NeighborhoodFee"] = field(default_factory=list)
+    coupons: list["Coupon"] = field(default_factory=list)
+    couriers: list["Courier"] = field(default_factory=list)
 
     def add_category(self, nome: str, posicao: int) -> Category:
         categoria = Category(id=str(uuid4()), nome=nome, posicao=posicao)
@@ -74,6 +77,22 @@ class InMemoryDB:
         self.orders.append(order)
         return order
 
+    def add_neighborhood(self, neighborhood: "NeighborhoodFee") -> "NeighborhoodFee":
+        """Registra taxa de entrega por bairro."""
+        self.neighborhoods.append(neighborhood)
+        return neighborhood
+
+    def add_coupon(self, coupon: "Coupon") -> "Coupon":
+        """Registra cupom de desconto."""
+        self.coupons.append(coupon)
+        return coupon
+
+    def add_courier(self, courier: "Courier") -> "Courier":
+        """Cadastra um novo motoboy."""
+        self.couriers.append(courier)
+        return courier
+
+
 
 @dataclass
 class OrderItem:
@@ -97,6 +116,39 @@ class Order:
     total_produtos: float
     taxa_entrega: float
     total_geral: float
+    cupom_codigo: str | None = None
+    desconto_aplicado: float = 0.0
+
+
+@dataclass
+class NeighborhoodFee:
+    """Taxa de entrega por bairro."""
+
+    id: str
+    nome: str
+    taxa: float
+
+
+@dataclass
+class Coupon:
+    """Cupom de desconto."""
+
+    codigo: str
+    tipo: str
+    valor: float
+    minimo_pedido: float = 0.0
+    ativo: bool = True
+
+
+@dataclass
+class Courier:
+    """Cadastro de motoboys."""
+
+    id: str
+    nome: str
+    whatsapp: str
+    placa_veiculo: str
+    ativo: bool = True
 
 
 db = InMemoryDB()
