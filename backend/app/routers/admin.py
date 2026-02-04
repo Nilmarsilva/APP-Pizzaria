@@ -1,6 +1,7 @@
+import os
 from uuid import uuid4
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException, status
 
 from app.core.storage import Coupon, Courier, NeighborhoodFee, db
 from app.schemas.admin import DailyCloseReport, OrderStatusUpdate
@@ -17,7 +18,19 @@ from app.schemas.payment import PaymentSettingsResponse, PaymentSettingsUpdate
 from app.schemas.orders import OrderSummaryResponse
 from app.schemas.couriers import CourierCreate, CourierResponse
 
-router = APIRouter()
+def require_admin(
+    admin_token: str | None = Header(default=None, alias="X-Admin-Token"),
+) -> None:
+    """Valida acesso administrativo via token simples."""
+    expected_token = os.getenv("ADMIN_TOKEN", "admin-token")
+    if not admin_token or admin_token != expected_token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token administrativo inválido.",
+        )
+
+
+router = APIRouter(dependencies=[Depends(require_admin)])
 
 
 @router.get("/settings", response_model=StoreSettingsResponse)
