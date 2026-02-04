@@ -1,7 +1,8 @@
 import os
 from uuid import uuid4
 
-from fastapi import APIRouter, Depends, Header, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Security, status
+from fastapi.security import APIKeyHeader
 
 from app.core.storage import Coupon, Courier, NeighborhoodFee, db
 from app.schemas.admin import DailyCloseReport, OrderStatusUpdate
@@ -18,9 +19,10 @@ from app.schemas.payment import PaymentSettingsResponse, PaymentSettingsUpdate
 from app.schemas.orders import OrderSummaryResponse
 from app.schemas.couriers import CourierCreate, CourierResponse
 
-def require_admin(
-    admin_token: str | None = Header(default=None, alias="X-Admin-Token"),
-) -> None:
+admin_token_header = APIKeyHeader(name="X-Admin-Token", auto_error=False)
+
+
+def require_admin(admin_token: str | None = Security(admin_token_header)) -> None:
     """Valida acesso administrativo via token simples."""
     expected_token = os.getenv("ADMIN_TOKEN", "admin-token")
     if not admin_token or admin_token != expected_token:
