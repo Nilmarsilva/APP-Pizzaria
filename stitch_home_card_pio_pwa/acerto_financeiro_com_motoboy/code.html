@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acerto Financeiro - Painel de Logística</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#198cb3",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111d21",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111617] dark:text-white transition-colors duration-200">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center px-4 py-3 justify-between">
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+<span class="material-symbols-outlined block">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold leading-tight tracking-tight">Acerto de Contas</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-[#111617] dark:text-white">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-md mx-auto pb-32">
+<!-- Profile Section -->
+<section class="p-4 bg-white dark:bg-background-dark/50 mb-2 border-b border-gray-100 dark:border-gray-800">
+<div class="flex items-center gap-5">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-20 w-20 ring-4 ring-primary/10" data-alt="Profile photo of delivery driver João Silva" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB7OUp9baHxAOrBnhr1GVEZmcv1v7DCZYi8cWckRI7-DPrDjAxksLYxqK9_D6cN1yNvgzrZfLWLTKq09SqhVrjhVKICqVQbvQx8-XWgT35qyVQM_JdzuZpDZo_cbQGS8UhMs3ptE66eG3yxuK4aHihSka-yY9oeLQJcLP0MIO0Ss-Gskd6pwdjwH5xPUbv5iexFXBSTjFdo1jkFXO-71VFwr4m3iWszbnTgABS8Qj2hub3Oq_i0yQkSqUJy337zekhInzMS0DbXXaQ");'>
+</div>
+<div class="absolute bottom-0 right-0 h-5 w-5 bg-green-500 border-2 border-white dark:border-background-dark rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<p class="text-xl font-bold tracking-tight">João Silva</p>
+<p class="text-primary font-medium text-sm">Motoboy Ativo • Noturno</p>
+<p class="text-gray-500 dark:text-gray-400 text-xs mt-1">ID: #MT-8842 • 18:00 - 23:30</p>
+</div>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="grid grid-cols-2 gap-3 p-4">
+<div class="col-span-2 flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm">
+<div class="flex justify-between items-center">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Total Coletado</p>
+<span class="material-symbols-outlined text-green-500">payments</span>
+</div>
+<p class="text-3xl font-bold leading-tight tracking-tight">R$ 450,00</p>
+<div class="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-green-500 h-full w-3/4"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Entregas</p>
+<div class="flex items-baseline gap-1">
+<p class="text-2xl font-bold">14</p>
+<span class="text-xs text-gray-400">concluídas</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Taxas a Pagar</p>
+<div class="flex items-baseline gap-1">
+<p class="text-2xl font-bold text-primary">R$ 70,00</p>
+</div>
+</div>
+</section>
+<!-- Detailing Header -->
+<div class="px-4 py-2 mt-2 flex justify-between items-end">
+<h3 class="text-lg font-bold tracking-tight">Detalhamento</h3>
+<span class="text-xs font-medium text-gray-400 uppercase tracking-widest">Hoje, 24 Mai</span>
+</div>
+<!-- Transaction List -->
+<section class="px-4 flex flex-col gap-3 mt-2">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/10 text-primary h-12 w-12 shrink-0">
+<span class="material-symbols-outlined">package_2</span>
+</div>
+<div>
+<p class="font-bold text-base">Pedido #4502</p>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider">Dinheiro</span>
+<p class="text-gray-400 text-xs">Taxa: R$ 5,00</p>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-base">R$ 85,00</p>
+<p class="text-[10px] text-gray-400">19:20</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/10 text-primary h-12 w-12 shrink-0">
+<span class="material-symbols-outlined">package_2</span>
+</div>
+<div>
+<p class="font-bold text-base">Pedido #4515</p>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-[10px] font-bold uppercase tracking-wider">Cartão</span>
+<p class="text-gray-400 text-xs">Taxa: R$ 5,00</p>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-base">R$ 112,50</p>
+<p class="text-[10px] text-gray-400">20:05</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm opacity-80">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/10 text-primary h-12 w-12 shrink-0">
+<span class="material-symbols-outlined">package_2</span>
+</div>
+<div>
+<p class="font-bold text-base">Pedido #4522</p>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-1.5 py-0.5 rounded bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 text-[10px] font-bold uppercase tracking-wider">App Online</span>
+<p class="text-gray-400 text-xs">Taxa: R$ 5,00</p>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-base">R$ 54,00</p>
+<p class="text-[10px] text-gray-400">20:45</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded-lg bg-primary/10 text-primary h-12 w-12 shrink-0">
+<span class="material-symbols-outlined">package_2</span>
+</div>
+<div>
+<p class="font-bold text-base">Pedido #4530</p>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-1.5 py-0.5 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider">Dinheiro</span>
+<p class="text-gray-400 text-xs">Taxa: R$ 5,00</p>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-base">R$ 198,50</p>
+<p class="text-[10px] text-gray-400">21:30</p>
+</div>
+</div>
+</section>
+<!-- Final Summary Banner -->
+<section class="mx-4 mt-6 p-5 bg-primary/10 border-2 border-dashed border-primary/30 rounded-2xl flex flex-col items-center justify-center gap-1">
+<p class="text-xs font-bold text-primary uppercase tracking-widest">Saldo Final para Receber</p>
+<p class="text-4xl font-bold text-primary">R$ 380,00</p>
+<p class="text-[10px] text-gray-400 text-center mt-2 italic px-8">Calculado: Total Coletado em Dinheiro minus Taxas Pendentes</p>
+</section>
+</main>
+<!-- Bottom Sticky Action -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 flex justify-center">
+<div class="max-w-md w-full">
+<button class="w-full bg-primary hover:bg-primary/90 text-white h-16 rounded-xl font-bold text-lg flex items-center justify-center gap-3 shadow-lg shadow-primary/30 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">check_circle</span>
+                Concluir Acerto
+            </button>
+</div>
+</div>
+</body></html>

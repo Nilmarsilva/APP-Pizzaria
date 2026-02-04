@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel de Gestão de Pedidos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ee2b34",
+              "background-light": "#f8f6f6",
+              "background-dark": "#120808",
+              "status-new": "#3b82f6",
+              "status-preparing": "#f59e0b",
+              "status-delivery": "#10b981",
+            },
+            fontFamily: {
+              "display": ["Work Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      .status-column {
+        @apply flex flex-col gap-4 min-w-[300px] max-w-[300px] h-full;
+      }
+      .new-order-pulse {
+        animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse-ring {
+        0% { box-shadow: 0 0 0 0 rgba(238, 43, 52, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(238, 43, 52, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(238, 43, 52, 0); }
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#181111] dark:text-white min-h-screen overflow-hidden flex flex-col">
+<header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between z-50 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+</div>
+<div>
+<h1 class="text-base font-bold leading-none">Gestão de Pedidos</h1>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+<span class="text-[10px] text-gray-500 font-medium uppercase tracking-wider">Tempo Real</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative bg-gray-100 dark:bg-gray-800 p-2 rounded-full">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">notifications</span>
+<span class="absolute top-0 right-0 size-2.5 bg-primary border-2 border-white dark:border-gray-900 rounded-full"></span>
+</button>
+<div class="size-9 rounded-full bg-cover bg-center border-2 border-gray-100 dark:border-gray-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBy9muZut4gpa8HWC7Rp9rHB1d-S8mv9FPWzdAkyi0-A9Jywl-dpd2DlRWS2ltUAHgMjcft3unYBt4XM_xoOW-TyDV6LucpVWG-htO-jfDhIryzxeJSrFjngYlreyrMoz1K2dWIcbmDJ0nCzMoGUrog6RsWXY5TRxeaQ0QPesmRuyMaSmfdTkkT6brrJq3mM6c5B0GT5tAw8x8DbKPtCMWqz4zSGcJdG8uOUro45uRqmResve5o71BQ1zsZJuAvoQ33ULTO-kmPuVo')"></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<nav class="hidden md:flex flex-col w-20 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 py-6 items-center gap-8">
+<a class="text-primary bg-primary/10 p-3 rounded-xl" href="#">
+<span class="material-symbols-outlined">assignment</span>
+</a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+</a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+</a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+</a>
+<div class="mt-auto">
+<a class="text-gray-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+</div>
+</nav>
+<main class="flex-1 flex flex-col overflow-hidden bg-gray-50 dark:bg-black/20">
+<div class="p-4 flex items-center justify-between">
+<div class="flex gap-2">
+<button class="px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-xs font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filtrar
+                </button>
+</div>
+<div class="text-xs font-medium text-gray-500">
+                Total Hoje: <span class="text-gray-900 dark:text-white font-bold">R$ 1.240,50</span>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto no-scrollbar pb-8">
+<div class="flex h-full px-4 gap-4 min-w-max">
+<div class="status-column">
+<div class="flex items-center justify-between bg-status-new/10 p-3 rounded-xl border border-status-new/20">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-status-new rounded-full"></span>
+<h2 class="text-sm font-bold text-status-new uppercase tracking-wide">Novos (3)</h2>
+</div>
+<span class="material-symbols-outlined text-status-new text-lg">fiber_new</span>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto no-scrollbar pr-1">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-2 border-primary new-order-pulse relative">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-gray-400">#4852</span>
+<span class="text-xs font-bold text-primary bg-primary/5 px-2 py-0.5 rounded">HÁ 2 MIN</span>
+</div>
+<h3 class="font-bold text-sm mb-1">2x Pizza Calabresa G</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-3">1x Coca-Cola 2L</p>
+<div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
+<span class="font-bold text-sm">R$ 112,00</span>
+<button class="bg-primary text-white text-[10px] font-bold py-1.5 px-4 rounded-lg uppercase tracking-wider hover:bg-red-600 transition-colors">Aceitar</button>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-gray-400">#4851</span>
+<span class="text-xs font-medium text-gray-400">HÁ 8 MIN</span>
+</div>
+<h3 class="font-bold text-sm mb-1">1x Pizza Margherita M</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Borda Recheada Catupiry</p>
+<div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
+<span class="font-bold text-sm">R$ 58,90</span>
+<button class="bg-primary text-white text-[10px] font-bold py-1.5 px-4 rounded-lg uppercase tracking-wider">Aceitar</button>
+</div>
+</div>
+</div>
+</div>
+<div class="status-column">
+<div class="flex items-center justify-between bg-status-preparing/10 p-3 rounded-xl border border-status-preparing/20">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-status-preparing rounded-full"></span>
+<h2 class="text-sm font-bold text-status-preparing uppercase tracking-wide">Em Preparo (2)</h2>
+</div>
+<span class="material-symbols-outlined text-status-preparing text-lg">outdoor_grill</span>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto no-scrollbar pr-1">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-gray-400">#4849</span>
+<span class="text-xs font-medium text-status-preparing">22 MIN RESTANTES</span>
+</div>
+<h3 class="font-bold text-sm mb-1">3x Pizza Portuguesa G</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Sem cebola em 1 unidade</p>
+<div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
+<span class="font-bold text-sm">R$ 185,70</span>
+<button class="bg-status-preparing text-white text-[10px] font-bold py-1.5 px-4 rounded-lg uppercase tracking-wider">Concluir</button>
+</div>
+</div>
+</div>
+</div>
+<div class="status-column">
+<div class="flex items-center justify-between bg-status-delivery/10 p-3 rounded-xl border border-status-delivery/20">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-status-delivery rounded-full"></span>
+<h2 class="text-sm font-bold text-status-delivery uppercase tracking-wide">Saiu para Entrega (4)</h2>
+</div>
+<span class="material-symbols-outlined text-status-delivery text-lg">delivery_dining</span>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto no-scrollbar pr-1">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-gray-400">#4845</span>
+<span class="text-xs font-medium text-status-delivery">SAIU HÁ 12 MIN</span>
+</div>
+<h3 class="font-bold text-sm mb-1">1x Combo Casal</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Entregador: Carlos S.</p>
+<div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
+<span class="font-bold text-sm">R$ 89,90</span>
+<button class="bg-status-delivery text-white text-[10px] font-bold py-1.5 px-4 rounded-lg uppercase tracking-wider">Finalizar</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<nav class="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-6 py-3 flex items-center justify-between safe-area-bottom">
+<a class="flex flex-col items-center text-primary" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-[10px] font-bold mt-1">Pedidos</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[10px] font-medium mt-1">Cardápio</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium mt-1">Clientes</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-medium mt-1">Relatórios</span>
+</a>
+</nav>
+<div class="h-6 bg-white dark:bg-gray-900 md:hidden"></div>
+
+</body></html>

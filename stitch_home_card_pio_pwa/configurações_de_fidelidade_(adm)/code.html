@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configurações de Fidelidade (ADM)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1fadad",
+                        "background-light": "#f9fafa",
+                        "background-dark": "#1f242e",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .radio-dot {
+            --radio-dot-svg: url('data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27rgb(31,173,173)%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%274%27/%3e%3c/svg%3e');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#121717] dark:text-white min-h-screen pb-24">
+<!-- Top Navigation Bar -->
+<div class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-[#dce5e5] dark:border-gray-700">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<div class="text-[#121717] dark:text-white flex size-10 shrink-0 items-center justify-start cursor-pointer">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<h2 class="text-[#121717] dark:text-white text-lg font-extrabold leading-tight tracking-tight flex-1 text-center">Configurações</h2>
+<div class="flex size-10 items-center justify-end">
+<button class="text-primary">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-md mx-auto space-y-2">
+<!-- Master Toggle Section -->
+<div class="p-4 @container">
+<div class="flex flex-1 flex-col items-start justify-between gap-4 rounded-xl border border-[#dce5e5] dark:border-gray-700 bg-white dark:bg-gray-800 p-5 @[480px]:flex-row @[480px]:items-center shadow-sm">
+<div class="flex flex-col gap-1">
+<p class="text-[#121717] dark:text-white text-base font-extrabold leading-tight">Programa de Fidelidade</p>
+<p class="text-[#658686] dark:text-gray-400 text-sm font-normal leading-normal">Ative para permitir que clientes acumulem pontos</p>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#f0f4f4] dark:bg-gray-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all duration-200">
+<div class="h-full w-[27px] rounded-full bg-white shadow-md"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Section Header -->
+<div class="px-4 pt-2">
+<h3 class="text-[#121717] dark:text-white text-lg font-bold leading-tight tracking-tight">Regra de Pontuação</h3>
+<p class="text-[#658686] dark:text-gray-400 text-sm">Escolha como seus clientes serão recompensados</p>
+</div>
+<!-- Rule Selection -->
+<div class="flex flex-col gap-3 p-4 radio-dot">
+<label class="flex items-center gap-4 rounded-xl border border-solid border-[#dce5e5] dark:border-gray-700 bg-white dark:bg-gray-800 p-[15px] flex-row-reverse cursor-pointer hover:border-primary transition-colors">
+<input checked="" class="h-5 w-5 border-2 border-[#dce5e5] bg-transparent text-transparent checked:border-primary checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-0 focus:ring-offset-0 checked:focus:border-primary" name="score_rule" type="radio"/>
+<div class="flex grow flex-col">
+<p class="text-[#121717] dark:text-white text-sm font-bold leading-normal">Valor Gasto (R$)</p>
+<p class="text-[#658686] dark:text-gray-400 text-xs font-normal leading-normal">Clientes ganham pontos a cada real gasto</p>
+</div>
+</label>
+<label class="flex items-center gap-4 rounded-xl border border-solid border-[#dce5e5] dark:border-gray-700 bg-white dark:bg-gray-800 p-[15px] flex-row-reverse cursor-pointer hover:border-primary transition-colors">
+<input class="h-5 w-5 border-2 border-[#dce5e5] bg-transparent text-transparent checked:border-primary checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-0 focus:ring-offset-0 checked:focus:border-primary" name="score_rule" type="radio"/>
+<div class="flex grow flex-col">
+<p class="text-[#121717] dark:text-white text-sm font-bold leading-normal">Quantidade de Pedidos</p>
+<p class="text-[#658686] dark:text-gray-400 text-xs font-normal leading-normal">Clientes ganham 1 ponto por pedido finalizado</p>
+</div>
+</label>
+</div>
+<!-- Rule Logic Input -->
+<div class="px-4">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-4 border border-primary/20">
+<div class="flex flex-wrap items-end gap-4">
+<label class="flex flex-col min-w-40 flex-1">
+<p class="text-[#121717] dark:text-white text-sm font-bold leading-normal pb-2">Valor para 1 ponto</p>
+<div class="flex w-full flex-1 items-stretch rounded-lg shadow-sm">
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#121717] dark:text-white focus:outline-0 focus:ring-0 border border-[#dce5e5] dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-primary h-12 placeholder:text-[#658686] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-bold leading-normal" value="10.00"/>
+<div class="text-[#658686] flex border border-[#dce5e5] dark:border-gray-700 bg-white dark:bg-gray-800 items-center justify-center pr-[15px] rounded-r-lg border-l-0">
+<span class="material-symbols-outlined text-xl">payments</span>
+</div>
+</div>
+</label>
+</div>
+<p class="text-xs text-primary font-medium mt-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">info</span>
+                    Ex: R$ 50,00 gastos = 5 pontos acumulados.
+                </p>
+</div>
+</div>
+<!-- Rewards Section Header -->
+<div class="px-4 pt-6 flex items-center justify-between">
+<h3 class="text-[#121717] dark:text-white text-lg font-bold leading-tight tracking-tight">Catálogo de Prêmios</h3>
+<button class="text-sm font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                Novo Prêmio
+            </button>
+</div>
+<!-- Rewards List -->
+<div class="px-4 space-y-3 pb-4">
+<!-- Reward Item 1 -->
+<div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl border border-[#dce5e5] dark:border-gray-700 shadow-sm">
+<div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">local_pizza</span>
+</div>
+<div class="flex-1">
+<p class="text-[#121717] dark:text-white font-bold text-sm">Pizza Brotinho</p>
+<p class="text-[#658686] dark:text-gray-400 text-xs">10 pontos necessários</p>
+</div>
+<button class="text-[#658686] hover:text-red-500">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<!-- Reward Item 2 -->
+<div class="flex items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl border border-[#dce5e5] dark:border-gray-700 shadow-sm">
+<div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">restaurant</span>
+</div>
+<div class="flex-1">
+<p class="text-[#121717] dark:text-white font-bold text-sm">Pizza Grande (Qualquer Sabor)</p>
+<p class="text-[#658686] dark:text-gray-400 text-xs">20 pontos necessários</p>
+</div>
+<button class="text-[#658686] hover:text-red-500">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+<!-- Expiry Section -->
+<div class="px-4 pt-2">
+<h3 class="text-[#121717] dark:text-white text-lg font-bold leading-tight tracking-tight">Validade dos Pontos</h3>
+<div class="mt-3">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between bg-white dark:bg-gray-800 p-4 rounded-xl border border-[#dce5e5] dark:border-gray-700 shadow-sm cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<span class="text-sm font-medium">Os pontos expiram em...</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-sm font-bold text-[#121717] dark:text-white">6 meses</span>
+<span class="material-symbols-outlined text-[#658686]">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="h-10"></div>
+</div>
+<!-- Bottom Save Button -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-t border-[#dce5e5] dark:border-gray-700">
+<div class="max-w-md mx-auto">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-extrabold h-14 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">save</span>
+                Salvar Configurações
+            </button>
+</div>
+</div>
+</body></html>

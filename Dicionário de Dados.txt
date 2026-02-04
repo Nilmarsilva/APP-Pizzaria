@@ -1,0 +1,79 @@
+Estrutura de Banco de Dados (PostgreSQL)
+1. Grupo: Gestão de Usuários e Segurança
+users: Armazena clientes e administradores.
+id: UUID (Primary Key)
+name: VARCHAR(255)
+whatsapp: VARCHAR(20) (Unique, Index) - Usado para login.
+password_hash: TEXT
+is_admin: BOOLEAN (Default: False)
+loyalty_points: INTEGER (Default: 0)
+created_at: TIMESTAMP
+addresses: Endereços salvos dos clientes.
+id: UUID (PK)
+user_id: FK (users.id)
+label: VARCHAR(50) (Ex: "Casa", "Trabalho")
+street, number, neighborhood, complement, reference: VARCHAR
+is_default: BOOLEAN
+2. Grupo: Cardápio e Produtos
+categories: Categorias (Pizzas, Bebidas, Sobremesas).
+id: UUID (PK)
+name: VARCHAR(100)
+position: INTEGER (Para ordenar no app)
+products: Itens à venda.
+id: UUID (PK)
+category_id: FK (categories.id)
+name, description: VARCHAR/TEXT
+image_url: TEXT
+is_available: BOOLEAN (Toggle do ADM)
+product_variants: Diferentes tamanhos (M, G, GG) ou tipos.
+id: UUID (PK)
+product_id: FK (products.id)
+name: VARCHAR(50) (Ex: "Grande")
+price: DECIMAL(10,2)
+product_addons: Adicionais (Borda recheada, Ingredientes extras).
+id: UUID (PK)
+category_id: FK (Para vincular adicionais a categorias específicas)
+name: VARCHAR(100)
+price: DECIMAL(10,2)
+3. Grupo: Pedidos e Logística
+orders: O cabeçalho do pedido.
+id: UUID (PK)
+user_id: FK (users.id)
+status: ENUM ('pending', 'preparing', 'dispatched', 'delivered', 'cancelled')
+total_products: DECIMAL(10,2)
+delivery_fee: DECIMAL(10,2)
+total_amount: DECIMAL(10,2)
+payment_method: ENUM ('pix', 'card_at_delivery', 'cash')
+delivery_address_snapshot: JSONB (Guarda o endereço completo para histórico, caso o usuário mude o cadastro depois)
+courier_id: FK (couriers.id, Nullable)
+order_items: Itens dentro de um pedido.
+id: UUID (PK)
+order_id: FK (orders.id)
+product_id: FK (products.id)
+variant_id: FK (product_variants.id)
+quantity: INTEGER
+unit_price: DECIMAL(10,2)
+notes: TEXT (Ex: "Sem cebola")
+couriers: Cadastro de motoboys.
+id: UUID (PK)
+name, whatsapp, vehicle_plate: VARCHAR
+is_active: BOOLEAN
+4. Grupo: Configurações e Fidelidade
+neighborhood_fees: Taxas de entrega por bairro.
+id: UUID (PK)
+name: VARCHAR(100)
+fee: DECIMAL(10,2)
+coupons: Cupons de desconto.
+code: VARCHAR(20) (PK)
+type: ENUM ('percentage', 'fixed')
+value: DECIMAL(10,2)
+min_order_value: DECIMAL(10,2)
+expires_at: TIMESTAMP
+settings: Configurações gerais da loja (Key-Value).
+key: VARCHAR (Ex: 'store_open', 'loyalty_rule_value')
+value: TEXT
+💡 Dica para o Deploy White-Label (Multi-Tenant)
+Como você vai vender o sistema como projeto fechado (CapEx), a melhor forma de isolar os clientes é:
+
+Isolamento por Banco de Dados: Cada pizzaria tem sua própria URL de conexão com o banco de dados.
+Ambiente Docker: Use um arquivo docker-compose.yml que sobe o backend FastAPI e o banco Postgres separadamente para cada cliente.

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configurações de Pagamento e API</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: "Work Sans", sans-serif; }
+        .material-symbols-outlined { font-size: 24px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white transition-colors">
+<div class="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-white dark:bg-background-dark shadow-xl overflow-x-hidden">
+<!-- TopAppBar -->
+<div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-gray-100 dark:border-gray-800">
+<div class="text-[#111418] dark:text-white flex size-12 shrink-0 items-center cursor-pointer">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Configurações de Pagamento</h2>
+</div>
+<div class="flex-1 pb-24">
+<!-- Section: Métodos de Pagamento -->
+<div class="pt-2">
+<h3 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Métodos de Pagamento</h3>
+<p class="px-4 text-sm text-gray-500 dark:text-gray-400 pb-2">Ative ou desative as opções que seus clientes verão no checkout.</p>
+<!-- ListItem: PIX -->
+<div class="flex items-center gap-4 bg-white dark:bg-background-dark px-4 min-h-14 justify-between border-b border-gray-50 dark:border-gray-800/50">
+<div class="flex items-center gap-4">
+<div class="text-[#111418] dark:text-white flex items-center justify-center rounded-lg bg-[#f0f2f4] dark:bg-gray-800 shrink-0 size-10">
+<span class="material-symbols-outlined">qr_code_2</span>
+</div>
+<p class="text-[#111418] dark:text-white text-base font-normal leading-normal flex-1 truncate">PIX</p>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#f0f2f4] dark:bg-gray-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+<div class="h-full w-[27px] rounded-full bg-white" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px, rgba(0, 0, 0, 0.06) 0px 3px 1px;"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- ListItem: Cartão Online -->
+<div class="flex items-center gap-4 bg-white dark:bg-background-dark px-4 min-h-14 justify-between border-b border-gray-50 dark:border-gray-800/50">
+<div class="flex items-center gap-4">
+<div class="text-[#111418] dark:text-white flex items-center justify-center rounded-lg bg-[#f0f2f4] dark:bg-gray-800 shrink-0 size-10">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<p class="text-[#111418] dark:text-white text-base font-normal leading-normal flex-1 truncate">Cartão Online</p>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#f0f2f4] dark:bg-gray-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+<div class="h-full w-[27px] rounded-full bg-white" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px, rgba(0, 0, 0, 0.06) 0px 3px 1px;"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- ListItem: Pagamento na Entrega -->
+<div class="flex items-center gap-4 bg-white dark:bg-background-dark px-4 min-h-14 justify-between">
+<div class="flex items-center gap-4">
+<div class="text-[#111418] dark:text-white flex items-center justify-center rounded-lg bg-[#f0f2f4] dark:bg-gray-800 shrink-0 size-10">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<p class="text-[#111418] dark:text-white text-base font-normal leading-normal flex-1 truncate">Pagamento na Entrega</p>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-[#f0f2f4] dark:bg-gray-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+<div class="h-full w-[27px] rounded-full bg-white" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px, rgba(0, 0, 0, 0.06) 0px 3px 1px;"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Section: Configuração de API -->
+<div class="mt-4 border-t border-gray-100 dark:border-gray-800">
+<h3 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6">Integração Gateway</h3>
+<div class="px-4 mt-2">
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">Selecione o Provedor</label>
+<div class="flex p-1 bg-gray-100 dark:bg-gray-800 rounded-lg mb-6">
+<button class="flex-1 py-2 text-sm font-semibold rounded-md bg-white dark:bg-gray-700 shadow-sm text-primary">Mercado Pago</button>
+<button class="flex-1 py-2 text-sm font-semibold text-gray-500 dark:text-gray-400">Asaas</button>
+</div>
+<div class="space-y-4">
+<div>
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">Public Key</label>
+<input class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="APP_USR-..." type="text"/>
+</div>
+<div>
+<label class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">Access Token</label>
+<div class="relative">
+<input class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="TEST-..." type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary/5 transition-colors mt-2">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+                            Testar Conexão
+                        </button>
+</div>
+</div>
+</div>
+<!-- Instructions Section -->
+<div class="mx-4 mt-8 p-4 rounded-xl bg-primary/5 dark:bg-primary/10 border border-primary/10">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<div>
+<h4 class="text-sm font-bold text-[#111418] dark:text-white mb-1">Onde encontrar minhas chaves?</h4>
+<p class="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
+                            Acesse o seu Dashboard do Mercado Pago em <strong>Suas integrações &gt; Credenciais</strong>. Certifique-se de estar usando as credenciais de <strong>Produção</strong> para aceitar pagamentos reais.
+                        </p>
+<a class="text-xs font-bold text-primary mt-2 inline-block" href="#">Ir para painel do desenvolvedor →</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-4 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-gray-100 dark:border-gray-800">
+<button class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/20 active:scale-[0.98] transition-all">
+                Salvar Alterações
+            </button>
+</div>
+</div>
+</body></html>

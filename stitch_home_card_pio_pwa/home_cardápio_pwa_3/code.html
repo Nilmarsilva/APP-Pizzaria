@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel de Gestão de Pedidos - Impressão Automática</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ee2b34",
+              "background-light": "#f8f6f6",
+              "background-dark": "#120808",
+              "status-new": "#3b82f6",
+              "status-preparing": "#f59e0b",
+              "status-delivery": "#10b981",
+            },
+            fontFamily: {
+              "display": ["Work Sans"],
+              "mono-receipt": ["Courier Prime", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      .status-column {
+        @apply flex flex-col gap-4 min-w-[300px] max-w-[300px] h-full;
+      }
+      .new-order-pulse {
+        animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse-ring {
+        0% { box-shadow: 0 0 0 0 rgba(238, 43, 52, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(238, 43, 52, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(238, 43, 52, 0); }
+      }
+      .receipt-paper {
+        width: 320px;
+        background: white;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        position: relative;
+        filter: drop-shadow(0 0 10px rgba(0,0,0,0.1));
+      }
+      .receipt-paper::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        right: 0;
+        height: 10px;
+        background: linear-gradient(-45deg, transparent 5px, white 5px), linear-gradient(45deg, transparent 5px, white 5px);
+        background-size: 10px 10px;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#181111] dark:text-white min-h-screen overflow-hidden flex flex-col">
+<div class="fixed top-4 left-1/2 -translate-x-1/2 z-[60] animate-bounce">
+<div class="bg-primary text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 border-2 border-white/20">
+<span class="material-symbols-outlined fill-1">notifications_active</span>
+<span class="font-bold text-sm uppercase tracking-wider">Novo Pedido Recebido!</span>
+</div>
+</div>
+<div class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+<div class="max-w-md w-full flex flex-col items-center">
+<div class="mb-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md px-4 py-2 rounded-full flex items-center gap-2 shadow-lg border border-white/20">
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+<span class="text-xs font-bold text-gray-700 dark:text-gray-200 uppercase tracking-widest">Impressora Conectada - EPSON-TM80</span>
+</div>
+<div class="receipt-paper p-6 text-black font-mono-receipt overflow-hidden">
+<div class="flex flex-col items-center mb-4">
+<div class="bg-black text-white p-2 mb-2 rounded">
+<span class="material-symbols-outlined text-3xl">local_pizza</span>
+</div>
+<h2 class="text-lg font-bold uppercase">Pizzaria Deliziosa</h2>
+<p class="text-[10px] text-center">Rua das Flores, 123 - Centro<br/>Tel: (11) 99999-9999</p>
+</div>
+<div class="border-y-2 border-dashed border-black py-4 my-4 flex flex-col items-center">
+<span class="text-xs uppercase font-bold">Pedido #</span>
+<span class="text-6xl font-bold tracking-tighter">4853</span>
+</div>
+<div class="mb-4 text-xs">
+<p><strong>CLIENTE:</strong> MARCELO OLIVEIRA</p>
+<p><strong>DATA:</strong> 24/10/2023 20:45</p>
+<p class="mt-2"><strong>ENTREGA:</strong></p>
+<p>Av. Paulista, 1500 - Apto 102</p>
+<p>Bela Vista - São Paulo/SP</p>
+</div>
+<div class="border-t border-black pt-2 mb-4">
+<div class="flex justify-between text-[11px] font-bold mb-1">
+<span>ITEM</span>
+<span>VALOR</span>
+</div>
+<div class="flex flex-col gap-1 text-[11px]">
+<div class="flex justify-between">
+<span>1x PIZZA CALABRESA G</span>
+<span>R$ 56,00</span>
+</div>
+<span class="text-[9px] -mt-1 ml-4 italic">- SEM CEBOLA</span>
+<div class="flex justify-between">
+<span>1x PIZZA MARGHERITA G</span>
+<span>R$ 52,00</span>
+</div>
+<div class="flex justify-between">
+<span>1x COCA-COLA 2L</span>
+<span>R$ 14,00</span>
+</div>
+</div>
+</div>
+<div class="border-t-2 border-black pt-2 flex flex-col gap-1">
+<div class="flex justify-between font-bold text-sm">
+<span>TOTAL</span>
+<span>R$ 122,00</span>
+</div>
+<div class="flex justify-between text-[10px]">
+<span>PAGAMENTO:</span>
+<span class="font-bold">CARTÃO (MÁQUINA)</span>
+</div>
+</div>
+<div class="mt-8 flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl mb-2">qr_code_2</span>
+<p class="text-[8px] uppercase">Acompanhe pelo site</p>
+</div>
+</div>
+<div class="mt-8 flex gap-3 w-full">
+<button class="flex-1 bg-white hover:bg-gray-100 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-xl transition-all active:scale-95">
+<span class="material-symbols-outlined">print</span>
+                Reimprimir
+            </button>
+<button class="flex-1 bg-primary hover:bg-red-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-xl transition-all active:scale-95">
+<span class="material-symbols-outlined">check_circle</span>
+                Confirmar
+            </button>
+</div>
+</div>
+</div>
+<header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between z-50 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+</div>
+<div>
+<h1 class="text-base font-bold leading-none">Gestão de Pedidos</h1>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+<span class="text-[10px] text-gray-500 font-medium uppercase tracking-wider">Tempo Real</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative bg-gray-100 dark:bg-gray-800 p-2 rounded-full">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">notifications</span>
+<span class="absolute top-0 right-0 size-2.5 bg-primary border-2 border-white dark:border-gray-900 rounded-full"></span>
+</button>
+<div class="size-9 rounded-full bg-cover bg-center border-2 border-gray-100 dark:border-gray-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD3pWWNeh2X717CZevsJ7ZfP-gd3nlLKn5u9NitP7O7r4ltP1TWG5-72IL8skd__Gq1KFz76KLJdpsarv0YqtJiGVZoDve9p85hq6mVAaR4BOCaIuP4ggapnUG0JYDg0vbjaR93sY9N-E-2IjMDSPvE8dFePRAi-Ju5z8JcdL0iQBGYTxzTe55fnwuaNOWDOWWqF7OFKkPgpJb5pe47q3cE7PVD6S8V7O0flqZ0mcjeadXFR8tXf0ZQQhWWNk-LZ2-IIb9xSiuKXa4')"></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<nav class="hidden md:flex flex-col w-20 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 py-6 items-center gap-8">
+<a class="text-primary bg-primary/10 p-3 rounded-xl" href="#">
+<span class="material-symbols-outlined">assignment</span>
+</a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+</a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+</a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+</a>
+<div class="mt-auto">
+<a class="text-gray-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+</div>
+</nav>
+<main class="flex-1 flex flex-col overflow-hidden bg-gray-50 dark:bg-black/20">
+<div class="p-4 flex items-center justify-between">
+<div class="flex gap-2">
+<button class="px-3 py-1.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-xs font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filtrar
+                </button>
+</div>
+<div class="text-xs font-medium text-gray-500">
+                Total Hoje: <span class="text-gray-900 dark:text-white font-bold">R$ 1.362,50</span>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto no-scrollbar pb-8">
+<div class="flex h-full px-4 gap-4 min-w-max">
+<div class="status-column">
+<div class="flex items-center justify-between bg-status-new/10 p-3 rounded-xl border border-status-new/20">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-status-new rounded-full"></span>
+<h2 class="text-sm font-bold text-status-new uppercase tracking-wide">Novos (4)</h2>
+</div>
+<span class="material-symbols-outlined text-status-new text-lg">fiber_new</span>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto no-scrollbar pr-1">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-2 border-primary new-order-pulse relative">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-gray-400">#4853</span>
+<span class="text-xs font-bold text-primary bg-primary/5 px-2 py-0.5 rounded">AGORA</span>
+</div>
+<h3 class="font-bold text-sm mb-1">2x Pizza Calabresa G</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Marcelo Oliveira - 1.2km</p>
+<div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
+<span class="font-bold text-sm">R$ 122,00</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-sm">print</span>
+<span class="text-[10px] font-bold text-primary uppercase">Imprimindo...</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 opacity-60">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-gray-400">#4852</span>
+<span class="text-xs font-bold text-gray-400">HÁ 5 MIN</span>
+</div>
+<h3 class="font-bold text-sm mb-1">2x Pizza Calabresa G</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400 mb-3">1x Coca-Cola 2L</p>
+<div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
+<span class="font-bold text-sm">R$ 112,00</span>
+<button class="bg-primary text-white text-[10px] font-bold py-1.5 px-4 rounded-lg uppercase tracking-wider">Aceitar</button>
+</div>
+</div>
+</div>
+</div>
+<div class="status-column opacity-30 pointer-events-none">
+<div class="flex items-center justify-between bg-status-preparing/10 p-3 rounded-xl border border-status-preparing/20">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-status-preparing rounded-full"></span>
+<h2 class="text-sm font-bold text-status-preparing uppercase tracking-wide">Em Preparo</h2>
+</div>
+</div>
+</div>
+<div class="status-column opacity-30 pointer-events-none">
+<div class="flex items-center justify-between bg-status-delivery/10 p-3 rounded-xl border border-status-delivery/20">
+<div class="flex items-center gap-2">
+<span class="size-2 bg-status-delivery rounded-full"></span>
+<h2 class="text-sm font-bold text-status-delivery uppercase tracking-wide">Em Entrega</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<nav class="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-6 py-3 flex items-center justify-between safe-area-bottom">
+<a class="flex flex-col items-center text-primary" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-[10px] font-bold mt-1">Pedidos</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[10px] font-medium mt-1">Cardápio</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium mt-1">Clientes</span>
+</a>
+<a class="flex flex-col items-center text-gray-400" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-medium mt-1">Relatórios</span>
+</a>
+</nav>
+<div class="h-6 bg-white dark:bg-gray-900 md:hidden"></div>
+
+</body></html>

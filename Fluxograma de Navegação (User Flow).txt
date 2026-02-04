@@ -1,0 +1,50 @@
+O Fluxograma de Navegação (User Flow) é o mapa que mostra como o usuário se move dentro do sistema. Ele é essencial para o desenvolvedor entender quais ações levam a quais telas e onde estão as "travas" de lógica (como precisar estar logado para finalizar um pedido).
+
+Aqui está o mapeamento dos dois fluxos principais:
+
+1. Fluxo do Cliente (PWA - Compra e Retenção)
+Início: Landing Page ou Link Direto do App
+
+Home (Cardápio): Cliente navega pelas categorias.
+Ação: Clica em um produto.
+Detalhe/Personalização: Escolhe tamanho, borda e adicionais.
+Ação: Clica em "Adicionar ao Carrinho".
+Carrinho: Revisa itens e valores.
+Ação: Clica em "Finalizar Pedido".
+Verificação de Login (Decisão):
+Se não logado: Vai para Tela de Cadastro/Login -> Retorna ao Carrinho.
+Se logado: Segue para Seleção de Endereço.
+Checkout: Escolhe endereço de entrega (ou retirada) e método de pagamento.
+Ação: Clica em "Confirmar Pedido".
+Confirmação/Pagamento:
+Se PIX: Exibe QR Code e Copia/Cola.
+Se Cartão/Dinheiro: Segue direto.
+Status do Pedido: Tela em tempo real mostrando o progresso na cozinha.
+Pós-entrega: Usuário pode ir para Histórico de Pedidos ou Programa de Fidelidade para ver seus novos pontos.
+2. Fluxo do Administrador (Painel - Operação e Gestão)
+Início: URL Administrativa
+
+Login ADM: Autenticação do dono da pizzaria.
+Dashboard de Pedidos (Monitor): Fica aberto aguardando WebSockets.
+Evento: Chegada de Novo Pedido -> Alerta Sonoro.
+Gestão do Pedido (Decisão):
+Ação: Clica em "Aceitar".
+Resultado: Dispara Impressão Automática e muda status para "Em Preparo" (notifica cliente).
+Logística: Pedido pronto -> ADM clica em "Enviar para Entrega".
+Ação: Abre modal para Atribuir Motoboy.
+Resultado: Muda status para "Saiu para Entrega" (notifica cliente com dados do motoboy).
+Finalização: Quando o motoboy retorna, ADM marca como "Entregue".
+Resultado: Libera pontos de fidelidade para o cliente.
+Encerramento do Turno:
+Acessa Acerto de Contas (por motoboy).
+Acessa Fechamento de Caixa (relatório geral do dia).
+3. Fluxo de Configuração (Setup Inicial)
+Configurações: Define horários e bairros atendidos.
+Cardápio: Cadastra produtos e preços.
+Marketing: Cria cupons ou dispara Push de "Loja Aberta".
+💡 Dica de Implementação Técnica:
+Ao codificar, use uma biblioteca de roteamento (como react-router-dom).
+
+As rotas do Cliente devem ser públicas (exceto Checkout e Perfil).
+As rotas do ADM devem estar protegidas por um "Guard" que verifica se user.is_admin é verdadeiro.
+Este fluxograma garante que você não esqueça de criar os "estados vazios" (ex: o que aparece no carrinho quando ele está vazio) e as transições suaves entre as telas.

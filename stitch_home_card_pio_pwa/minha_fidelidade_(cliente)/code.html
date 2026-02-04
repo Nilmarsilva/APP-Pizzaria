@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f53d6b",
+                        "background-light": "#f8f5f6",
+                        "background-dark": "#221014",
+                        "accent-green": "#4ade80",
+                        "accent-yellow": "#fbbf24"
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Spline Sans', sans-serif; }
+        .stamp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+        .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .glass-effect { backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.8); }
+        .dark .glass-effect { background: rgba(34, 16, 20, 0.8); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen text-[#181113] dark:text-white font-display">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 glass-effect border-b border-gray-100 dark:border-gray-800 px-4 py-3 flex items-center justify-between">
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow-sm">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight">Minha Fidelidade</h1>
+<div class="relative w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-zinc-800 shadow-sm">
+<span class="material-symbols-outlined text-[#181113] dark:text-white">notifications</span>
+<span class="absolute top-2 right-2 w-2.5 h-2.5 bg-primary rounded-full border-2 border-white dark:border-zinc-800"></span>
+</div>
+</header>
+<main class="p-4 pb-24 space-y-6">
+<!-- Profile & Status Card -->
+<section class="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-xl shadow-primary/5 border border-primary/10">
+<div class="flex items-center gap-4 mb-6">
+<div class="relative">
+<div class="w-20 h-20 rounded-full border-4 border-primary/20 overflow-hidden bg-cover bg-center" data-alt="Profile picture of a smiling customer" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCavq2nPxTRabXgJW8K9aqsYmVq03A87gjO1GvIKDh2G4J-IEX9UwRAV5PQb5eG8dJskGDdMSqeZVJtGk9AlUSslBoAQ86NVo9WJY-MJOVMIDJ2a_8q5Zfz2mu9OFFYJ3prV1u4lRXI-ajXrAS2YD8yY6o2Du39RAouxnef3oEryM8JlSabSSprCy69a4xqixsq3Qeb9HVSbYhgiQkN6ndbB89zgEdM82aqBfXPIpMweBXSQr1hrWjEmKotnlhNWS9OwDoolzecIMY')">
+</div>
+<div class="absolute -bottom-1 -right-1 bg-accent-yellow text-[#181113] p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-sm font-bold">star</span>
+</div>
+</div>
+<div>
+<h2 class="text-2xl font-extrabold">Olá, João!</h2>
+<p class="text-primary font-bold text-sm tracking-wide uppercase">Pizzaiolo Prateado</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm text-zinc-400">local_fire_department</span>
+<p class="text-zinc-500 dark:text-zinc-400 text-sm">700 pontos acumulados</p>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<p class="text-sm font-semibold opacity-70">Progresso do Prêmio</p>
+<p class="text-xl font-black text-primary">7/10</p>
+</div>
+<div class="w-full h-4 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 70%"></div>
+</div>
+<p class="text-center font-bold text-lg mt-4 text-[#181113] dark:text-white">
+                    Faltam <span class="text-primary text-2xl">3</span> pizzas para sua Margherita grátis!
+                </p>
+</div>
+</section>
+<!-- Digital Stamp Card (Tactile Grid) -->
+<section>
+<div class="flex items-center justify-between mb-4 px-1">
+<h3 class="text-xl font-bold">Cartela de Selos</h3>
+<span class="text-xs font-bold bg-zinc-200 dark:bg-zinc-800 px-2 py-1 rounded uppercase tracking-widest text-zinc-500">Cartão #04</span>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 border-2 border-dashed border-primary/30 rounded-xl p-5">
+<div class="stamp-grid">
+<!-- Filled Stamps -->
+<div class="aspect-square rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transform -rotate-12 border-2 border-white/20">
+<span class="material-symbols-outlined text-white text-2xl">local_pizza</span>
+</div>
+<div class="aspect-square rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transform rotate-6 border-2 border-white/20">
+<span class="material-symbols-outlined text-white text-2xl">local_pizza</span>
+</div>
+<div class="aspect-square rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transform -rotate-3 border-2 border-white/20">
+<span class="material-symbols-outlined text-white text-2xl">local_pizza</span>
+</div>
+<div class="aspect-square rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transform rotate-12 border-2 border-white/20">
+<span class="material-symbols-outlined text-white text-2xl">local_pizza</span>
+</div>
+<div class="aspect-square rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transform -rotate-6 border-2 border-white/20">
+<span class="material-symbols-outlined text-white text-2xl">local_pizza</span>
+</div>
+<div class="aspect-square rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transform rotate-2 border-2 border-white/20">
+<span class="material-symbols-outlined text-white text-2xl">local_pizza</span>
+</div>
+<div class="aspect-square rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 transform -rotate-12 border-2 border-white/20">
+<span class="material-symbols-outlined text-white text-2xl">local_pizza</span>
+</div>
+<!-- Empty/Locked Stamps -->
+<div class="aspect-square rounded-full border-2 border-primary/20 bg-white/50 dark:bg-zinc-900/50 flex items-center justify-center">
+<span class="text-primary/20 font-bold text-xl">8</span>
+</div>
+<div class="aspect-square rounded-full border-2 border-primary/20 bg-white/50 dark:bg-zinc-900/50 flex items-center justify-center">
+<span class="text-primary/20 font-bold text-xl">9</span>
+</div>
+<div class="aspect-square rounded-full border-2 border-accent-yellow bg-accent-yellow/10 flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-accent-yellow">card_giftcard</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Marketplace -->
+<section>
+<h3 class="text-xl font-bold mb-4 px-1">Prêmios Disponíveis</h3>
+<div class="bento-grid">
+<!-- Large Card (Target Reward) -->
+<div class="col-span-2 bg-zinc-900 rounded-xl overflow-hidden relative min-h-[160px] flex flex-col justify-end p-4 group">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:scale-105 transition-transform duration-500" data-alt="A delicious wood-fired Margherita pizza with fresh basil" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD8X2n6MqAFp-6AoRI_gaxMyv1nhrKxR34XPreWFk-WLxME85kElgcBhjdusKsD2o_3T2N5pA7ngWGFfpMjREeXmmiVhiQ_n6wTyPEt4U-SEsiP7XIu2vGwxeLIa14z79K94d_2oDzuI--3Fafmo8bbLdqzEwvExIGHxj-QWHENSdfJwU2ztSWoHqgWqMqOb8gfRy5_cZS_xJbRfwSj11HzfEK1PvYns2sxgFoX3ey1d2Fn9zdq0DMn1TwMllL60P71UQuhD_FvueM')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-end">
+<div>
+<h4 class="text-white text-lg font-bold leading-tight">Margherita Grátis</h4>
+<p class="text-zinc-300 text-sm">Faltam 300 pontos</p>
+</div>
+<button class="bg-zinc-700/50 backdrop-blur-md text-white px-4 py-2 rounded-lg font-bold text-sm border border-white/20 opacity-50 cursor-not-allowed">
+                                Resgatar
+                            </button>
+</div>
+</div>
+</div>
+<!-- Small Card 1 -->
+<div class="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 bg-accent-green/10 rounded-lg flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-accent-green">payments</span>
+</div>
+<h4 class="font-bold leading-tight">R$ 10,00 Desconto</h4>
+<p class="text-xs text-zinc-500 mt-1">Gaste seus pontos agora</p>
+</div>
+<button class="w-full mt-4 bg-primary text-white py-2 rounded-lg font-bold text-xs">
+                        Resgatar (500 pts)
+                    </button>
+</div>
+<!-- Small Card 2 -->
+<div class="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 bg-accent-yellow/10 rounded-lg flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-accent-yellow">icecream</span>
+</div>
+<h4 class="font-bold leading-tight">Sobremesa Grátis</h4>
+<p class="text-xs text-zinc-500 mt-1">No seu próximo pedido</p>
+</div>
+<button class="w-full mt-4 bg-primary text-white py-2 rounded-lg font-bold text-xs">
+                        Resgatar (400 pts)
+                    </button>
+</div>
+</div>
+</section>
+<!-- Activity Feed -->
+<section>
+<div class="flex items-center justify-between mb-4 px-1">
+<h3 class="text-xl font-bold">Histórico</h3>
+<button class="text-sm font-bold text-primary">Ver Tudo</button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-zinc-500">shopping_bag</span>
+</div>
+<div>
+<p class="font-bold text-sm">Pedido #1245</p>
+<p class="text-xs text-zinc-500">12 Out, 20:30</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-accent-green font-black">+1 Selo</p>
+<p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">+100 pts</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-100 dark:border-zinc-800 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-zinc-500">celebration</span>
+</div>
+<div>
+<p class="font-bold text-sm">Bônus de Cadastro</p>
+<p class="text-xs text-zinc-500">01 Out, 12:00</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-accent-green font-black">+100 pts</p>
+<p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Inaugural</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 p-4 z-50">
+<div class="max-w-md mx-auto bg-[#181113]/90 dark:bg-white/95 backdrop-blur-xl rounded-full px-8 py-3 flex items-center justify-between shadow-2xl">
+<button class="text-zinc-500 hover:text-white dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">restaurant</span>
+</button>
+<button class="text-primary flex flex-col items-center">
+<span class="material-symbols-outlined text-3xl font-bold">loyalty</span>
+<span class="w-1 h-1 bg-primary rounded-full mt-1"></span>
+</button>
+<button class="text-zinc-500 hover:text-white dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">history</span>
+</button>
+<button class="text-zinc-500 hover:text-white dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">person</span>
+</button>
+</div>
+</nav>
+<!-- Safe Area Inset Bottom (iOS) -->
+<div class="h-8 bg-transparent"></div>
+</body></html>

@@ -1,0 +1,212 @@
+Especificação Técnica: Sistema Pizzaria Pro (White-Label)
+1. Arquitetura do Banco de Dados (PostgreSQL)
+Cada cliente possui seu próprio schema/banco. As tabelas principais são:
+
+Tabela: users (Clientes e Admins)
+id (UUID, PK)
+name (Varchar)
+whatsapp (Varchar, Unique) - Chave principal de login
+password_hash (Text)
+is_admin (Boolean)
+created_at (Timestamp)
+Tabela: products (Pizzas, Bebidas, etc)
+id (UUID, PK)
+category_id (FK)
+name (Varchar)
+description (Text)
+base_price (Decimal)
+image_url (Text)
+is_available (Boolean) - Switch do Painel ADM
+has_sizes (Boolean) - Se permite M, G, GG
+Tabela: orders (Gestão de Pedidos)
+id (UUID, PK)
+user_id (FK)
+status (Enum: pending, preparing, on_the_way, delivered, cancelled)
+delivery_type (Enum: delivery, pickup)
+payment_method (Enum: pix, card_on_delivery, cash)
+total_amount (Decimal)
+address_json (JSONB) - Snapshot do endereço no momento do pedido
+courier_id (FK, Nullable) - Motoboy atribuído
+2. Endpoints Principais (FastAPI)
+Módulo Cliente (PWA)
+POST /auth/register: Cadastro via WhatsApp.
+GET /menu: Retorna categorias e produtos (Cache via Redis).
+POST /orders: Cria novo pedido e dispara WebSocket para o ADM.
+GET /orders/track/{id}: Status em tempo real para o cliente.
+GET /loyalty/points: Saldo de pontos do cliente.
+Módulo Administrativo
+GET /admin/orders/realtime: Conexão WebSocket para receber pedidos com alerta sonoro.
+PATCH /admin/orders/{id}/status: Atualiza status e dispara Push/WhatsApp.
+PATCH /admin/products/{id}/toggle: Ativa/Desativa produto no app.
+POST /admin/campaigns/push: Dispara notificação para base de usuários.
+GET /admin/reports/daily-close: Resumo financeiro e itens consumidos.
+3. Lógica de Funcionalidades Críticas
+A. Impressão Automática (Coordenador de Tarefas)
+Ao mudar o status do pedido para preparing no FastAPI:
+
+O backend envia um sinal via WebSocket para um pequeno script cliente (Python) rodando no PC/Tablet da pizzaria.
+O script formata o texto para padrão ESC/POS e envia para a impressora USB/Bluetooth.
+B. Calculadora de Fidelidade
+No endpoint PATCH /orders/{id}/status (marcado como delivered):
+
+O sistema verifica a regra ativa no ADM (ex: R$ 50 = 1 ponto).
+Soma os pontos na tabela loyalty_points do usuário.
+Se atingir o limite, libera um cupom automático no perfil do cliente.
+C. Notificações Push (PWA)
+Utilizar o protocolo Web Push API ou integração com OneSignal.
+O token do navegador do cliente é salvo na tabela user_devices no primeiro acesso.
+4. Stack Recomendada para o Desenvolvedor
+Backend: FastAPI, SQLAlchemy (ORM), Alembic (Migrações), Pydantic.
+Frontend: React + Vite, Tailwind CSS (para Dark Mode), Lucide React (Ícones).
+Real-time: WebSockets (nativo do FastAPI).
+Deploy: Docker Compose (um container por pizzaria).
+Dica para usar com a IA de Código:
+
+"Aja como desenvolvedor sênior, crie o boilerplate deste sistema usando FastAPI para o backend e React para o frontend. Siga a especificação de banco de dados e endpoints fornecida. O frontend deve ser um PWA responsivo com suporte a Dark Mode."
+
+
+Aqui está o Mapa de Telas organizado por módulos e sequência lógica. Você pode usar este guia para agrupar as imagens/prints que geramos:
+
+1. Módulo: Experiência do Cliente (PWA)
+Este é o app que o usuário final instala no celular.
+
+Acesso e Cadastro:
+Cadastro de Usuário PWA: Registro inicial (WhatsApp, Nome, Senha).
+Perfil e Dados de Pagamento: Onde ele salva cartões e endereços.
+Fazer o Pedido:
+Home Cardápio PWA: Navegação por categorias e destaques.
+Personalização de Pizza: Escolha de tamanhos, bordas e adicionais.
+Finalização de Pedido: Carrinho, escolha de entrega e pagamento (PIX/Cartão).
+Acompanhamento e Retenção:
+Acompanhamento de Pedido em Tempo Real: Linha do tempo (Cozinha -> Entrega).
+Meus Pedidos e Recompra Rápida: Histórico com o botão "Pedir Novamente".
+Minha Fidelidade (Cliente): Cartela de pontos e recompensas.
+Centro de Promoções e Notificações: Onde ele recebe os alertas Push de ofertas.
+2. Módulo: Painel Administrativo (Gestão)
+Este é o sistema que fica no tablet/computador no balcão da pizzaria.
+
+Operação Diária:
+Painel de Gestão de Pedidos Real-time: (Versão Clara ou Dark Mode) – Controle de pedidos novos, em preparo e entrega.
+Gestão de Pedidos com Impressão Térmica: Onde aparece o cupom para a cozinha.
+Logística e Financeiro:
+Gestão de Entregadores e Logística: Atribuição de motoboys.
+Acerto Financeiro com Motoboy: Conferência de taxas e pagamentos na volta da entrega.
+Fechamento de Caixa e Relatórios: O resumo financeiro e de estoque do dia.
+Configurações e Marketing:
+Gestão de Cardápio e Estoque: Cadastro de produtos e controle de disponibilidade.
+Configurações de Fidelidade (ADM): Regras do programa de pontos.
+Gestão de Campanhas Push: Onde o dono cria os envios de notificações.
+Gestão de Cupons de Desconto: Criação de códigos promocionais.
+Configurações Gerais da Loja: Horários, taxas de entrega e bairros.
+Configuração de Impressão e Hardware: Conectar a impressora térmica.
+3. Módulo: Comercial (Sua Ferramenta de Venda)
+O que você usa para vender o sistema para as pizzarias.
+
+Landing Page com Calculadora de ROI: Página de vendas com a ferramenta que mostra quanto o dono da pizzaria está perdendo para o iFood.
+Dica de Organização: Se você estiver usando uma ferramenta como o Figma ou até pastas no seu computador, nomeie as imagens com números seguindo essas categorias (Ex: 1.1_Cadastro.png, 1.2_Cardápio.png, 2.1_Gestao_Pedidos.png). Isso cria uma narrativa perfeita para quem for codificar.
+
+As Histórias de Usuário (User Stories) são a ponte final entre o design e o código. Elas explicam o porquê de cada funcionalidade, garantindo que o desenvolvedor ou a IA de código não esqueça de nenhuma regra de negócio.
+
+Aqui estão as principais histórias para o seu sistema:
+
+1. Módulo: Cliente Final (PWA)
+Cadastro Simplificado: "Como cliente, quero me cadastrar usando meu WhatsApp para que eu não precise memorizar nomes de usuário complexos."
+Montagem de Pizza: "Como cliente, quero poder escolher o tamanho da pizza e adicionar borda recheada para que o pedido seja exatamente do meu gosto."
+Pagamento Ágil: "Como cliente, quero salvar meu cartão de crédito e endereços preferidos para que meus próximos pedidos sejam feitos em menos de 1 minuto."
+Redução de Ansiedade: "Como cliente, quero acompanhar o status do meu pedido em tempo real (preparo, forno, entrega) para saber exatamente quando minha pizza chegará."
+Fidelização: "Como cliente, quero ver quantos selos faltam para eu ganhar uma pizza grátis para que eu me sinta motivado a pedir sempre na mesma pizzaria."
+Recompra: "Como cliente, quero poder repetir meu último pedido com apenas um botão para economizar tempo."
+2. Módulo: Dono da Pizzaria (Painel ADM)
+Gestão de Pedidos: "Como administrador, quero receber alertas sonoros e visuais de novos pedidos em tempo real para que a cozinha possa começar o preparo imediatamente."
+Automação de Cozinha: "Como administrador, quero que o pedido seja impresso automaticamente na impressora térmica assim que eu o aceitar para evitar erros de transcrição manual."
+Controle de Disponibilidade: "Como administrador, quero poder desativar um ingrediente ou refrigerante que acabou no estoque instantaneamente para que o cliente não peça algo que eu não possa entregar."
+Gestão de Entregas: "Como administrador, quero atribuir pedidos a motoboys específicos para ter controle de quem está com qual pedido e qual o valor total que cada um deve me prestar contas."
+Fechamento de Caixa: "Como administrador, quero um relatório automático ao final do turno que mostre o total vendido por cada método de pagamento (PIX, Cartão, Dinheiro) para conferir meu caixa em minutos."
+Engajamento de Clientes: "Como administrador, quero enviar uma notificação push para todos os meus clientes em dias de baixo movimento para estimular novas vendas."
+3. Módulo: Logística (Motoboys)
+Acerto de Contas: "Como administrador, quero ver quanto cada motoboy coletou em dinheiro na rua para que o acerto de contas no final da noite seja justo e sem erros."
+4. Regras de Negócio (O que a IA de código precisa saber)
+Taxa de Entrega: O sistema deve calcular o frete baseado no bairro selecionado pelo cliente no momento do checkout.
+Horário de Funcionamento: O PWA do cliente deve impedir pedidos se a loja estiver configurada como "Fechada" no painel ADM.
+Segurança: Apenas usuários com a flag is_admin = true podem acessar a rota /admin.
+Dica Pro: Ao enviar essas histórias para o Cursor ou Claude, diga: "Codifique as funcionalidades baseando-se nestas User Stories para garantir que todos os requisitos de negócio sejam atendidos."
+
+Estrutura de Banco de Dados (PostgreSQL)
+1. Grupo: Gestão de Usuários e Segurança
+users: Armazena clientes e administradores.
+id: UUID (Primary Key)
+name: VARCHAR(255)
+whatsapp: VARCHAR(20) (Unique, Index) - Usado para login.
+password_hash: TEXT
+is_admin: BOOLEAN (Default: False)
+loyalty_points: INTEGER (Default: 0)
+created_at: TIMESTAMP
+addresses: Endereços salvos dos clientes.
+id: UUID (PK)
+user_id: FK (users.id)
+label: VARCHAR(50) (Ex: "Casa", "Trabalho")
+street, number, neighborhood, complement, reference: VARCHAR
+is_default: BOOLEAN
+2. Grupo: Cardápio e Produtos
+categories: Categorias (Pizzas, Bebidas, Sobremesas).
+id: UUID (PK)
+name: VARCHAR(100)
+position: INTEGER (Para ordenar no app)
+products: Itens à venda.
+id: UUID (PK)
+category_id: FK (categories.id)
+name, description: VARCHAR/TEXT
+image_url: TEXT
+is_available: BOOLEAN (Toggle do ADM)
+product_variants: Diferentes tamanhos (M, G, GG) ou tipos.
+id: UUID (PK)
+product_id: FK (products.id)
+name: VARCHAR(50) (Ex: "Grande")
+price: DECIMAL(10,2)
+product_addons: Adicionais (Borda recheada, Ingredientes extras).
+id: UUID (PK)
+category_id: FK (Para vincular adicionais a categorias específicas)
+name: VARCHAR(100)
+price: DECIMAL(10,2)
+3. Grupo: Pedidos e Logística
+orders: O cabeçalho do pedido.
+id: UUID (PK)
+user_id: FK (users.id)
+status: ENUM ('pending', 'preparing', 'dispatched', 'delivered', 'cancelled')
+total_products: DECIMAL(10,2)
+delivery_fee: DECIMAL(10,2)
+total_amount: DECIMAL(10,2)
+payment_method: ENUM ('pix', 'card_at_delivery', 'cash')
+delivery_address_snapshot: JSONB (Guarda o endereço completo para histórico, caso o usuário mude o cadastro depois)
+courier_id: FK (couriers.id, Nullable)
+order_items: Itens dentro de um pedido.
+id: UUID (PK)
+order_id: FK (orders.id)
+product_id: FK (products.id)
+variant_id: FK (product_variants.id)
+quantity: INTEGER
+unit_price: DECIMAL(10,2)
+notes: TEXT (Ex: "Sem cebola")
+couriers: Cadastro de motoboys.
+id: UUID (PK)
+name, whatsapp, vehicle_plate: VARCHAR
+is_active: BOOLEAN
+4. Grupo: Configurações e Fidelidade
+neighborhood_fees: Taxas de entrega por bairro.
+id: UUID (PK)
+name: VARCHAR(100)
+fee: DECIMAL(10,2)
+coupons: Cupons de desconto.
+code: VARCHAR(20) (PK)
+type: ENUM ('percentage', 'fixed')
+value: DECIMAL(10,2)
+min_order_value: DECIMAL(10,2)
+expires_at: TIMESTAMP
+settings: Configurações gerais da loja (Key-Value).
+key: VARCHAR (Ex: 'store_open', 'loyalty_rule_value')
+value: TEXT
+💡 Dica para o Deploy White-Label (Multi-Tenant)
+Como você vai vender o sistema como projeto fechado (CapEx), a melhor forma de isolar os clientes é:
+
+Isolamento por Banco de Dados: Cada pizzaria tem sua própria URL de conexão com o banco de dados.
+Ambiente Docker: Use um arquivo docker-compose.yml que sobe o backend FastAPI e o banco Postgres separadamente para cada cliente.

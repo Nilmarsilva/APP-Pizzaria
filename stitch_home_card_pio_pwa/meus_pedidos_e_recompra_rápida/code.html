@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00c28e",
+              "background-light": "#fbfaf9",
+              "background-dark": "#21242c",
+            },
+            fontFamily: {
+              "display": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#101816] dark:text-[#fbfaf9] min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[#101816] dark:text-white">arrow_back_ios_new</span>
+</button>
+<h1 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Meus Pedidos</h1>
+</div>
+</header>
+<main class="max-w-md mx-auto pb-24">
+<!-- Tabs Section -->
+<div class="px-4 mt-2">
+<div class="flex border-b border-gray-200 dark:border-gray-800 gap-8">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-4 transition-all" href="#">
+<p class="text-sm font-bold tracking-wide">Histórico</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-gray-400 dark:text-gray-500 pb-3 pt-4 hover:text-gray-600 transition-all" href="#">
+<p class="text-sm font-bold tracking-wide">Em andamento</p>
+</a>
+</div>
+</div>
+<!-- Orders List -->
+<div class="flex flex-col gap-4 p-4 mt-2">
+<!-- Order Card 1: Recent Success -->
+<div class="flex flex-col gap-4 rounded-xl bg-white dark:bg-[#2c303a] p-5 soft-shadow border border-gray-50 dark:border-gray-700/50">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary"></span>
+<p class="text-primary text-xs font-semibold uppercase tracking-wider">Entregue</p>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Hoje, 19:30 • #8842</p>
+</div>
+<p class="text-lg font-bold text-[#101816] dark:text-white">R$ 84,90</p>
+</div>
+<div class="flex gap-4 items-center">
+<div class="size-16 shrink-0 bg-center bg-no-repeat bg-cover rounded-lg" data-alt="Pizza de calabresa suculenta com cebolas" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC83U1XbuNCBbMxayT8hVXwLQBzyHrgWIzM79ymsY9JVoes0hHXgyd4w5gqbbFqmPGApuYpbMFl7-0kZjH9LjVAdivsDlXt0M6hjZlkayP9VhNsqQ0jxsAOV_DKZ4wOegkjUqZ_qWp8zAuw5UVNSYtqsCcAhtgYka9hLUCm5z_-M6K1lxbF9Xgz41zdzuqAA25QC1mtJNYHIvqJEbT8_lmvHea0Xq4W8pTujlK90MPIPPHefePZWTUQhtEZoSds-iwTvr1-26iavgc");'>
+</div>
+<div class="flex flex-col flex-1 overflow-hidden">
+<p class="text-sm font-medium text-[#101816] dark:text-gray-200 truncate">1x Pizza Calabresa G, 1x Coca-Cola 2L</p>
+<button class="text-xs font-semibold text-primary mt-1 text-left">Ver detalhes do pedido</button>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-gray-50 dark:border-gray-700/50">
+<button class="flex-1 flex h-11 items-center justify-center rounded-lg bg-primary text-white gap-2 text-sm font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">reorder</span>
+                        Pedir Novamente
+                    </button>
+</div>
+</div>
+<!-- Order Card 2: Past Success -->
+<div class="flex flex-col gap-4 rounded-xl bg-white dark:bg-[#2c303a] p-5 soft-shadow border border-gray-50 dark:border-gray-700/50">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary"></span>
+<p class="text-primary text-xs font-semibold uppercase tracking-wider">Entregue</p>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">12 Out 2023 • #8721</p>
+</div>
+<p class="text-lg font-bold text-[#101816] dark:text-white">R$ 112,00</p>
+</div>
+<div class="flex gap-4 items-center">
+<div class="size-16 shrink-0 bg-center bg-no-repeat bg-cover rounded-lg" data-alt="Duas pizzas margherita artesanais" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCs-WIlSOeWCcDuKWIlJ2DzzFPIKpG8q1DvYFmVcU_gQw8Uwf5sKwA_O825uCuah1w4t0BPjqIVQgO5-QctsImoaF0X_meLfZ3F3jMu9IzkA4Z8lghBCMKfWLmAx4wekmYeN4nyFsOGF2SG_Nn9G-IVj4IhaDRkd2CEnMt-_smh67Wy_vKRkwo55GOV6UgH8UScMrsrdI3D5DisBljKUt_lxFMBUaxu-jmmfpqiAT3QKfY080XJOr0bapM8Xiz584Hgmdd65olqMow");'>
+</div>
+<div class="flex flex-col flex-1 overflow-hidden">
+<p class="text-sm font-medium text-[#101816] dark:text-gray-200 truncate">2x Pizza Margherita, 1x Guaraná 1.5L</p>
+<button class="text-xs font-semibold text-primary mt-1 text-left">Ver detalhes do pedido</button>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-gray-50 dark:border-gray-700/50">
+<button class="flex-1 flex h-11 items-center justify-center rounded-lg bg-primary/10 text-primary gap-2 text-sm font-bold active:scale-95 transition-transform dark:bg-primary/20">
+<span class="material-symbols-outlined text-[20px]">reorder</span>
+                        Pedir Novamente
+                    </button>
+</div>
+</div>
+<!-- Order Card 3: Cancelled -->
+<div class="flex flex-col gap-4 rounded-xl bg-white dark:bg-[#2c303a] p-5 soft-shadow border border-gray-50 dark:border-gray-700/50 opacity-80">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-red-400"></span>
+<p class="text-red-400 text-xs font-semibold uppercase tracking-wider">Cancelado</p>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">05 Out 2023 • #8650</p>
+</div>
+<p class="text-lg font-bold text-[#101816] dark:text-white">R$ 45,00</p>
+</div>
+<div class="flex gap-4 items-center">
+<div class="size-16 shrink-0 bg-center bg-no-repeat bg-cover rounded-lg grayscale" data-alt="Pizza de quatro queijos" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASeUtQBKdD0EU5H-o4m-XGcHUC-ESiPXT-DJqdFQ-2xqC-Q5HwOM_iODa85bX-yvilDKVW0KF0o12_PHAG6P0O_nrHejq7yXXuAXvW2rMgmdSliFcQAFX-vkGfteKn8uWiCptkmjnoFUGr05p5anrJSvxHBX2AoYAHpJAFIRDZgYdsDdLPaGfhb60NQIoAnqu0GujhMLj7Vpm9RiNSTJ3Wr8VPNyya_56f1jjbiNSEVL-eVUvrU9GA5QU0jVxdfNbuXLWuvq9X1CY");'>
+</div>
+<div class="flex flex-col flex-1 overflow-hidden">
+<p class="text-sm font-medium text-[#101816] dark:text-gray-200 truncate">1x Pizza Quatro Queijos M</p>
+<button class="text-xs font-semibold text-gray-400 mt-1 text-left">Ver motivo do cancelamento</button>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-gray-50 dark:border-gray-700/50">
+<button class="flex-1 flex h-11 items-center justify-center rounded-lg bg-gray-100 text-gray-500 gap-2 text-sm font-bold dark:bg-gray-800 dark:text-gray-400">
+<span class="material-symbols-outlined text-[20px]">history</span>
+                        Tentar Novamente
+                    </button>
+</div>
+</div>
+</div>
+<!-- Loyalty Incentive Section -->
+<div class="px-4 mt-4">
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-xl p-4 flex items-center gap-4">
+<div class="bg-primary text-white size-12 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">card_giftcard</span>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-bold text-[#101816] dark:text-white">Falta pouco!</p>
+<p class="text-xs text-gray-600 dark:text-gray-400">Peça mais 2 vezes para ganhar um cupom de 20% OFF.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (iOS Style) -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-[#1a1c22]/90 backdrop-blur-lg border-t border-gray-100 dark:border-gray-800 pb-6 pt-2">
+<div class="max-w-md mx-auto flex justify-around items-center px-4">
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium">Início</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[10px] font-medium">Cardápio</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-1">receipt_long</span>
+<span class="text-[10px] font-bold">Pedidos</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<div class="relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-primary text-white text-[8px] size-4 flex items-center justify-center rounded-full border-2 border-white dark:border-[#1a1c22]">2</span>
+</div>
+<span class="text-[10px] font-medium">Sacola</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</button>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b34",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221011",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<nav class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-gray-100 dark:border-gray-800 px-4 py-4 flex items-center justify-between">
+<button class="flex items-center justify-center p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Finalização</h2>
+<button class="flex items-center justify-center p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</nav>
+<main class="flex-1 pb-32">
+<!-- SegmentedButtons -->
+<div class="px-4 py-4">
+<div class="flex h-11 flex-1 items-center justify-center rounded-xl bg-gray-200/50 dark:bg-white/10 p-1">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-primary has-[:checked]:shadow-sm has-[:checked]:text-[#181111] dark:has-[:checked]:text-white text-gray-600 dark:text-gray-400 text-sm font-semibold transition-all">
+<span class="truncate">Entrega</span>
+<input checked="" class="hidden" name="delivery_type" type="radio" value="Entrega"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-primary has-[:checked]:shadow-sm has-[:checked]:text-[#181111] dark:has-[:checked]:text-white text-gray-600 dark:text-gray-400 text-sm font-semibold transition-all">
+<span class="truncate">Retirada</span>
+<input class="hidden" name="delivery_type" type="radio" value="Retirada"/>
+</label>
+</div>
+</div>
+<!-- Address Section -->
+<section>
+<div class="flex items-center justify-between px-4 pt-4 pb-2">
+<h3 class="text-lg font-bold">Endereço de Entrega</h3>
+</div>
+<div class="mx-4 bg-white dark:bg-white/5 rounded-xl border border-gray-100 dark:border-gray-800">
+<div class="flex items-center gap-4 px-4 py-4 justify-between">
+<div class="flex items-center gap-4">
+<div class="text-primary bg-primary/10 flex items-center justify-center rounded-xl shrink-0 size-12">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-base font-semibold leading-normal line-clamp-1">Rua das Pizzas, 123</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal line-clamp-2">Apt 402 - Bairro Centro</p>
+</div>
+</div>
+<button class="flex cursor-pointer items-center justify-center rounded-lg h-8 px-4 bg-gray-100 dark:bg-white/10 text-sm font-semibold transition-colors">
+<span>Editar</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Order Summary -->
+<section class="mt-6">
+<h3 class="text-lg font-bold px-4 pb-2">Resumo do Pedido</h3>
+<div class="mx-4 bg-white dark:bg-white/5 rounded-xl border border-gray-100 dark:border-gray-800 divide-y divide-gray-100 dark:divide-gray-800">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 px-4 py-4">
+<div class="relative size-14 rounded-lg overflow-hidden shrink-0 border border-gray-100 dark:border-gray-800">
+<img class="w-full h-full object-cover" data-alt="Pizza de Calabresa artesanal bem recheada" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5mCRYMF0e7aNo6J7NfO0sFJ-y8eoaSxK37IdnhO6p5JXZscyw0NVMHaAmp_sZUpYzMRV45Sno_1Lx9XnHH016LpN6QUs-A9ois9O69vFHjaKNLCHp3ulVyYflYIvDIoMMW8SV2TawZmeavPjrJYNplwWQHH-xR-7hZbXliwrf4_9lVNq9MWuTLLhMSmMHIlp7mzv28J2klnkBLt7zuwtth_J7sQiCMQHvT8rkHFxULCCbD26YiqwmBq_LSf_954ezOIF_Fl9d3BM"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="text-base font-semibold leading-tight">1x Pizza Calabresa</p>
+<span class="font-bold text-sm">R$ 54,90</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Massa Fina, Borda Recheada</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4 px-4 py-4">
+<div class="relative size-14 rounded-lg overflow-hidden shrink-0 border border-gray-100 dark:border-gray-800">
+<img class="w-full h-full object-cover" data-alt="Lata de refrigerante de cola gelada" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACOvIRdrdPApV_dKSG_PFSTbfAkDpZwI5ENfH8HqdSbPsGr8_uEURdQjNJaLDhLRybLzFGmDPnNW6f-08TJbKexoGzuTmFApASQ5GG7jrYEuyvKrlBXJjeBFVEmw2uyiGnHYJ4fi1vDFZKVapayQCluOyP2mSA0TF8KBwnIEvQZe72jdkrEzmEr4srW1E62OTmgv1PBPuPi0WP5rGICQ9z2LCMYviz7GPg9g_raZdishrOmtAspHxZ-0ixjSzXj8P6gosdHizScKw"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="text-base font-semibold leading-tight">1x Coca-Cola 350ml</p>
+<span class="font-bold text-sm">R$ 7,00</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Selection -->
+<section class="mt-6">
+<h3 class="text-lg font-bold px-4 pb-2">Forma de Pagamento</h3>
+<div class="px-4 space-y-3">
+<!-- PIX Option -->
+<label class="flex items-center gap-4 p-4 rounded-xl border-2 border-primary bg-primary/5 cursor-pointer relative">
+<input checked="" class="hidden" name="payment" type="radio"/>
+<div class="text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-3xl">qr_code_2</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-bold">PIX</p>
+<span class="bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Desconto</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Pague agora e agilize sua entrega</p>
+</div>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</label>
+<!-- Card Option -->
+<label class="flex items-center gap-4 p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-white/5 cursor-pointer">
+<input class="hidden" name="payment" type="radio"/>
+<div class="text-gray-400 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-3xl">credit_card</span>
+</div>
+<div class="flex-1">
+<p class="font-bold">Cartão na Entrega</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Crédito ou Débito</p>
+</div>
+</label>
+<!-- Cash Option -->
+<label class="flex items-center gap-4 p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-white/5 cursor-pointer">
+<input class="hidden" name="payment" type="radio"/>
+<div class="text-gray-400 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<div class="flex-1">
+<p class="font-bold">Dinheiro</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Pague ao receber</p>
+</div>
+</label>
+</div>
+</section>
+<!-- Order Totals -->
+<section class="mt-8 px-4 space-y-2">
+<div class="flex justify-between text-sm text-gray-500 dark:text-gray-400">
+<span>Subtotal</span>
+<span>R$ 61,90</span>
+</div>
+<div class="flex justify-between text-sm text-gray-500 dark:text-gray-400">
+<span>Taxa de Entrega</span>
+<span class="text-green-500 font-medium">Grátis</span>
+</div>
+<div class="flex justify-between text-lg font-bold pt-2 border-t border-dashed border-gray-300 dark:border-gray-700">
+<span>Total</span>
+<span class="text-primary">R$ 61,90</span>
+</div>
+</section>
+</main>
+<!-- Floating Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-gray-100 dark:border-gray-800">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+<span>Finalizar Pedido</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</body></html>

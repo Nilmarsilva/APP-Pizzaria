@@ -1,0 +1,50 @@
+Para que o seu sistema de pizzaria seja confiável, a lógica de cálculo do carrinho deve ocorrer tanto no Frontend (para o cliente ver o preço atualizando em tempo real) quanto no Backend (para validar o valor final e evitar fraudes antes de processar o pagamento).
+
+Aqui está o detalhamento da fórmula e as regras de negócio que você deve passar para o desenvolvedor ou IA de código:
+
+🧮 A Fórmula do Valor Total
+O cálculo deve seguir esta ordem de precedência:
+
+TOTAL FINAL = ((Soma dos Itens + Soma dos Adicionais) - Desconto do Cupom) + Taxa de Entrega
+
+1. Soma dos Itens (Subtotal)
+Cada item no carrinho deve ser calculado individualmente:
+
+Preço Base: Valor da pizza de acordo com o tamanho selecionado (Ex: Média R$ 40, Grande R$ 60).
+Adicionais (Add-ons): Valor da borda recheada ou ingredientes extras (Ex: + R$ 10 da borda de Catupiry).
+Cálculo: (Preço da Variante + Soma dos Preços dos Adicionais) * Quantidade.
+2. Lógica de Pizzas Meio a Meio (Regra de Ouro)
+Como é um sistema para pizzarias, você precisa definir qual regra o ADM prefere (adicione isso nas configurações):
+
+Opção A (Mais comum): Cobrar pelo valor da fatia mais cara.
+Opção B: Cobrar a média aritmética dos sabores.
+Implementação: O sistema deve identificar se há dois sabores e aplicar a regra configurada sobre o preço da variante (tamanho).
+3. Aplicação do Cupom de Desconto
+O cupom deve ser aplicado antes da taxa de entrega para não dar desconto no frete do motoboy:
+
+Cupom de Porcentagem: Subtotal * (1 - Porcentagem/100).
+Cupom de Valor Fixo: Subtotal - Valor do Cupom (O resultado não pode ser menor que zero).
+Validação: O sistema deve checar se o Subtotal atingiu o "Valor Mínimo de Pedido" configurado no cupom.
+4. Taxa de Entrega (Frete)
+A taxa é variável e depende do endereço selecionado:
+
+O sistema busca o neighborhood_id (ID do bairro) do endereço do cliente.
+Consulta a tabela neighborhood_fees e soma o valor ao total.
+Regra de Retirada: Se o delivery_type for "Retirada", a taxa de entrega deve ser automaticamente R$ 0,00.
+🛡️ Regras de Validação (Segurança)
+Para evitar que alguém altere o preço no navegador (inspecionar elemento), o Backend (FastAPI) deve:
+
+Receber apenas os IDs dos produtos e o código do cupom.
+Consultar os preços reais diretamente no banco de dados.
+Refazer todo o cálculo do zero.
+Comparar o resultado com o valor enviado pelo frontend. Se houver divergência, o pedido é rejeitado.
+📝 Exemplo de Objeto de Resumo (JSON)
+O frontend deve exibir um resumo claro para o cliente antes do botão "Confirmar":
+
+{
+  "subtotal_items": 70.00,
+  "addons_total": 10.00,
+  "discount_applied": 8.00, // 10% de cupom sobre 80.00
+  "delivery_fee": 7.00,
+  "total_to_pay": 79.00
+}

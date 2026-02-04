@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard de Desempenho Mensal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              "display": ["Work Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(19, 127, 236, 0.1) 0%, rgba(19, 127, 236, 0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full max-w-[430px] mx-auto flex-col bg-white dark:bg-background-dark overflow-x-hidden pb-20">
+<!-- TopAppBar -->
+<div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-50">
+<div class="text-[#111418] dark:text-white flex size-12 shrink-0 items-center">
+<span class="material-symbols-outlined">chevron_left</span>
+</div>
+<h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Desempenho Mensal</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-[#111418] dark:text-white gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+<!-- SegmentedButtons (Filter) -->
+<div class="flex px-4 py-3">
+<div class="flex h-10 flex-1 items-center justify-center rounded-lg bg-[#f0f2f4] dark:bg-gray-800 p-1">
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-gray-700 has-[:checked]:shadow-[0_0_4px_rgba(0,0,0,0.1)] has-[:checked]:text-primary text-[#617589] dark:text-gray-400 text-sm font-medium leading-normal">
+<span class="truncate">7 dias</span>
+<input class="invisible w-0" name="period" type="radio" value="7 dias"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-gray-700 has-[:checked]:shadow-[0_0_4px_rgba(0,0,0,0.1)] has-[:checked]:text-primary text-[#617589] dark:text-gray-400 text-sm font-medium leading-normal">
+<span class="truncate">Este Mês</span>
+<input checked="" class="invisible w-0" name="period" type="radio" value="Este Mês"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-gray-700 has-[:checked]:shadow-[0_0_4px_rgba(0,0,0,0.1)] has-[:checked]:text-primary text-[#617589] dark:text-gray-400 text-sm font-medium leading-normal">
+<span class="truncate">Mês Anterior</span>
+<input class="invisible w-0" name="period" type="radio" value="Mês Anterior"/>
+</label>
+</div>
+</div>
+<!-- Stats Grid (KPIs) -->
+<div class="flex flex-wrap gap-3 p-4">
+<div class="flex min-w-[160px] flex-1 flex-col gap-2 rounded-xl p-4 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-900/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">payments</span>
+<p class="text-[#617589] dark:text-gray-400 text-xs font-medium leading-normal">Faturamento</p>
+</div>
+<p class="text-[#111418] dark:text-white tracking-light text-xl font-bold leading-tight">R$ 45.280</p>
+<p class="text-[#078838] text-xs font-semibold leading-normal flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>+12.5%
+                </p>
+</div>
+<div class="flex min-w-[160px] flex-1 flex-col gap-2 rounded-xl p-4 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-900/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">shopping_cart</span>
+<p class="text-[#617589] dark:text-gray-400 text-xs font-medium leading-normal">Pedidos</p>
+</div>
+<p class="text-[#111418] dark:text-white tracking-light text-xl font-bold leading-tight">1.240</p>
+<p class="text-[#078838] text-xs font-semibold leading-normal flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>+5.2%
+                </p>
+</div>
+<div class="flex min-w-[160px] flex-1 flex-col gap-2 rounded-xl p-4 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-900/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">confirmation_number</span>
+<p class="text-[#617589] dark:text-gray-400 text-xs font-medium leading-normal">Ticket Médio</p>
+</div>
+<p class="text-[#111418] dark:text-white tracking-light text-xl font-bold leading-tight">R$ 36,50</p>
+<p class="text-[#e73908] text-xs font-semibold leading-normal flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_down</span>-2.1%
+                </p>
+</div>
+<div class="flex min-w-[160px] flex-1 flex-col gap-2 rounded-xl p-4 border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-900/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">person_add</span>
+<p class="text-[#617589] dark:text-gray-400 text-xs font-medium leading-normal">Novos Clientes</p>
+</div>
+<p class="text-[#111418] dark:text-white tracking-light text-xl font-bold leading-tight">145</p>
+<p class="text-[#078838] text-xs font-semibold leading-normal flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>+8.4%
+                </p>
+</div>
+</div>
+<!-- SectionHeader: Sales Chart -->
+<h3 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Evolução de Vendas</h3>
+<!-- Line Chart -->
+<div class="px-4 py-2">
+<div class="flex flex-col gap-4 p-4 rounded-xl border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-900/50">
+<div class="flex flex-col gap-1">
+<p class="text-[#617589] dark:text-gray-400 text-sm font-normal">Total acumulado no período</p>
+<p class="text-[#111418] dark:text-white tracking-tight text-2xl font-bold">R$ 45.280,00</p>
+</div>
+<div class="flex min-h-[160px] flex-1 flex-col gap-4">
+<svg class="overflow-visible" fill="none" height="120" preserveaspectratio="none" viewbox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 100 Q 20 80, 40 90 T 80 40 T 120 70 T 160 30 T 200 60 T 240 20 T 280 80 T 320 10 T 360 50 T 400 30" fill="none" stroke="#137fec" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0 100 Q 20 80, 40 90 T 80 40 T 120 70 T 160 30 T 200 60 T 240 20 T 280 80 T 320 10 T 360 50 T 400 30 V 120 H 0 Z" fill="url(#salesGradient)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="salesGradient" x1="0" x2="0" y1="0" y2="120">
+<stop stop-color="#137fec" stop-opacity="0.2"></stop>
+<stop offset="1" stop-color="#137fec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="flex justify-between text-[#617589] dark:text-gray-400 text-[11px] font-bold">
+<span>1</span><span>7</span><span>14</span><span>21</span><span>28</span><span>31</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Flavors & Peak Hours -->
+<div class="flex flex-col gap-6 p-4">
+<!-- Pie Chart (Sabores) -->
+<div class="flex flex-col gap-4">
+<h3 class="text-[#111418] dark:text-white text-lg font-bold">Sabores Mais Vendidos</h3>
+<div class="flex items-center gap-6 p-4 rounded-xl border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-900/50">
+<div class="relative size-24 shrink-0">
+<svg class="size-full transform -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-gray-100 dark:stroke-gray-800" cx="18" cy="18" fill="none" r="16" stroke-width="4"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="45, 100" stroke-width="4"></circle>
+<circle class="stroke-blue-300" cx="18" cy="18" fill="none" r="16" stroke-dasharray="25, 100" stroke-dashoffset="-45" stroke-width="4"></circle>
+<circle class="stroke-blue-200" cx="18" cy="18" fill="none" r="16" stroke-dasharray="30, 100" stroke-dashoffset="-70" stroke-width="4"></circle>
+</svg>
+</div>
+<div class="flex flex-col gap-2 flex-1">
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary"></span>
+<span class="text-[#617589] dark:text-gray-400 font-medium">Calabresa</span>
+</div>
+<span class="font-bold text-[#111418] dark:text-white">45%</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-blue-300"></span>
+<span class="text-[#617589] dark:text-gray-400 font-medium">Margherita</span>
+</div>
+<span class="font-bold text-[#111418] dark:text-white">25%</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-blue-200"></span>
+<span class="text-[#617589] dark:text-gray-400 font-medium">Portuguesa</span>
+</div>
+<span class="font-bold text-[#111418] dark:text-white">30%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Peak Hours -->
+<div class="flex flex-col gap-4">
+<h3 class="text-[#111418] dark:text-white text-lg font-bold">Horários de Pico</h3>
+<div class="flex flex-col divide-y divide-[#dbe0e6] dark:divide-gray-700 rounded-xl border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-900/50 overflow-hidden">
+<div class="flex items-center justify-between p-4 bg-primary/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">schedule</span>
+<span class="text-sm font-semibold text-[#111418] dark:text-white">19:00 - 21:00</span>
+</div>
+<span class="text-xs px-2 py-1 bg-primary text-white rounded-full font-bold">Pico Máximo</span>
+</div>
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-gray-400">schedule</span>
+<span class="text-sm font-medium text-[#111418] dark:text-white">21:00 - 23:00</span>
+</div>
+<span class="text-xs font-bold text-[#617589] dark:text-gray-400">Médio</span>
+</div>
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-gray-400">schedule</span>
+<span class="text-sm font-medium text-[#111418] dark:text-white">18:00 - 19:00</span>
+</div>
+<span class="text-xs font-bold text-[#617589] dark:text-gray-400">Baixo</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Tab Navigation -->
+<div class="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-white dark:bg-background-dark border-t border-gray-200 dark:border-gray-800 flex justify-around p-3 z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-[1]">dashboard</span>
+<span class="text-[10px] font-bold">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#617589] dark:text-gray-500">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[10px] font-medium">Pedidos</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#617589] dark:text-gray-500">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[10px] font-medium">Estoque</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-[#617589] dark:text-gray-500">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Ajustes</span>
+</button>
+</div>
+</div>
+</body></html>

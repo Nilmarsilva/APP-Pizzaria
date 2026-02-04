@@ -1,0 +1,41 @@
+Roteiro de Telas: Sequência Lógica de Implementação
+Fase 1: O "Cérebro" Administrativo (Backoffice)
+Sem produtos e configurações, o app do cliente não tem o que exibir.
+
+Login Administrativo: Tela de acesso restrito para o dono da pizzaria.
+Configurações Gerais da Loja: Onde se define o nome, endereço, horários e Taxas de Entrega por Bairro (fundamental para o cálculo do carrinho).
+Gestão de Cardápio (Cadastro): Criação de categorias (Pizzas, Bebidas) e cadastro de produtos com variações (M, G, GG) e adicionais.
+Configuração de Impressão: Conexão com a impressora térmica para garantir que a cozinha receba os pedidos.
+Fase 2: O Funil de Vendas (App do Cliente - PWA)
+Foco na jornada de compra do usuário final.
+
+Home / Cardápio Digital: Listagem de produtos baseada no que foi cadastrado na Fase 1.
+Página de Produto (Personalização): Modal ou tela para o cliente escolher tamanhos e bordas.
+Fluxo de Identificação (Cadastro/Login): Cadastro simplificado via WhatsApp para salvar os dados do cliente.
+Carrinho e Checkout: Revisão do pedido, escolha do endereço e método de pagamento (PIX, Cartão ou Dinheiro).
+Fase 3: Operação e Logística (Tempo Real)
+Onde a pizzaria gerencia o pedido que acabou de chegar.
+
+Painel de Pedidos Real-time (Dark Mode): O dashboard principal que "pita" quando chega um pedido novo.
+Impressão Automática de Cupom: Visualização do cupom de cozinha e disparo para a impressora.
+Acompanhamento de Pedido (Cliente): Tela onde o cliente vê o status mudar de "Preparo" para "Saiu para Entrega".
+Gestão de Entregadores: Tela para o ADM "chamar o motoboy" e vincular o pedido a ele.
+Fase 4: Fidelização e Marketing
+Ferramentas para fazer o cliente voltar.
+
+Painel de Fidelidade (ADM): Definição das regras (ex: 10 pedidos = 1 grátis).
+Minha Fidelidade (Cliente): Visualização dos pontos/selos acumulados no PWA.
+Gestão de Campanhas Push: Criação e disparo de notificações para os clientes cadastrados.
+Histórico e Recompra: Tela "Meus Pedidos" com o botão Pedir Novamente.
+Fase 5: Fechamento e Resultados
+Onde o dono vê o lucro.
+
+Acerto com Motoboy: Tela para conferir os valores coletados pelos entregadores na rua.
+Fechamento de Caixa e Relatórios: Resumo do dia com faturamento total e itens consumidos.
+Dashboard de Insights: Gráficos de vendas e produtos mais vendidos.
+💡 Como usar este documento:
+Ao iniciar o desenvolvimento, peça para a sua IA de código:
+
+"Vamos construir o sistema seguindo o 'Roteiro de Telas' fornecido. Comece pela Fase 1, tela de Configurações Gerais da Loja, usando as especificações de banco de dados que já temos."
+
+Isso evita que você tenha um app "bonitinho" mas que não tem lógica por trás para funcionar.

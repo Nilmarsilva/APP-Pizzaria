@@ -1,0 +1,66 @@
+Documentação da API: Sistema Pizzaria Pro
+1. Módulo de Autenticação (/auth)
+Utiliza JWT (JSON Web Tokens) para persistência de sessão.
+
+Método	Endpoint	Descrição
+POST	/auth/register	Cria novo cliente (nome, whatsapp, senha).
+POST	/auth/login	Autentica usuário e retorna o Token JWT.
+GET	/auth/me	Retorna os dados do usuário logado (Perfil).
+2. Módulo de Cardápio e Produtos (/menu)
+Cache recomendado via Redis para alta performance no PWA.
+
+Método	Endpoint	Descrição
+GET	/categories	Lista todas as categorias e seus produtos ativos.
+GET	/products/{id}	Detalhes de um produto, variações e adicionais.
+POST	/admin/products	(ADM) Cadastra novo produto/pizza.
+PATCH	/admin/products/{id}	(ADM) Edita produto ou altera is_available.
+3. Módulo de Pedidos (/orders)
+O coração da operação. Integração com WebSockets.
+
+Método	Endpoint	Descrição
+POST	/orders	Cria o pedido. Valida estoque, cupom e calcula frete.
+GET	/orders/history	Histórico de pedidos do cliente logado.
+GET	/orders/{id}	Status detalhado de um pedido específico.
+POST	/orders/{id}/reorder	Lógica do botão "Pedir Novamente" (clona o carrinho).
+4. Módulo Administrativo e Real-time (/admin)
+Exclusivo para usuários com is_admin: true.
+
+Método	Endpoint	Descrição
+WS	/admin/ws/orders	WebSocket: Envia alerta de novo pedido instantaneamente.
+GET	/admin/orders	Lista pedidos filtrados por status (Novos, Preparo, etc).
+PATCH	/admin/orders/{id}/status	Altera status e dispara Notificação Push/WhatsApp.
+POST	/admin/orders/{id}/assign	Vincula um motoboy (courier_id) ao pedido.
+5. Módulo de Marketing e Configurações (/settings)
+Método	Endpoint	Descrição
+POST	/admin/campaigns/push	Dispara notificação para todos os tokens salvos.
+GET	/admin/coupons	Lista e gerencia cupons de desconto.
+GET	/admin/reports/daily	Retorna faturamento e itens vendidos para o fechamento.
+PATCH	/admin/settings/store	Abre/Fecha a loja e altera horários.
+🛠️ Especificações Técnicas para o Desenvolvedor
+A. Estrutura do JSON de Pedido (POST /orders)
+{
+  "address_id": "uuid",
+  "payment_method": "pix",
+  "coupon_code": "PIZZA10",
+  "items": [
+    {
+      "product_id": "uuid",
+      "variant_id": "uuid",
+      "quantity": 2,
+      "addons": ["uuid_borda", "uuid_extra"],
+      "notes": "Sem cebola por favor"
+    }
+  ]
+}
+B. Eventos do WebSocket (Real-time)
+Quando um pedido é criado, o backend deve emitir para o canal /admin/ws/orders:
+
+{
+  "event": "NEW_ORDER",
+  "order_id": "uuid",
+  "customer_name": "João Silva",
+  "total": 85.50,
+  "timestamp": "2023-10-27T20:00:00Z"
+}
+C. Integração WhatsApp (Sugestão)
+Recomendo criar uma função send_whatsapp_notification(phone, message) que é chamada em background (BackgroundTasks do FastAPI) sempre que o status do pedido mudar.

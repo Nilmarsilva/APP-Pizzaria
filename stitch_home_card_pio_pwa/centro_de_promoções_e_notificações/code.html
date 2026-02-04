@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#df5020",
+                        "background-light": "#fbfaf9",
+                        "background-dark": "#2a2622",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+        .flour-texture {
+            background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen text-[#171311] dark:text-white">
+<!-- iOS Push Notification Simulation (Overlays the content to show context) -->
+<div class="fixed top-2 left-0 right-0 z-50 px-4 pointer-events-none">
+<div class="max-w-[400px] mx-auto ios-blur bg-white/80 dark:bg-[#1a1a1a]/80 rounded-3xl p-4 shadow-2xl flex flex-col gap-3 pointer-events-auto border border-white/20">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-6 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[16px] leading-none">local_pizza</span>
+</div>
+<span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Artesanal Pizza</span>
+</div>
+<span class="text-xs text-gray-400">agora</span>
+</div>
+<div class="flex gap-4">
+<div class="flex-1">
+<h4 class="font-bold text-sm">🍕 Promoção Relâmpago!</h4>
+<p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">Sua pizza favorita com 30% OFF só por 2 horas. Toque para resgatar agora!</p>
+</div>
+<div class="size-14 rounded-xl overflow-hidden shrink-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="Close up of a juicy pepperoni pizza" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFlFEFOOrsS9yaugyUE-8VYLuhWGEdg-_TouYy79Yz_UR5JDF228zDSN4Uu5WdN9GciLUXoKSUUzMPC5i4S3nIKmslNMihRVC457ywL8qvfa7I9AMuyFm8kVpxl1xipaJJNrUjQVu2v5OysKsixj2qrM9symL5QrKCL0xHUIFvZnf2ZwjlZtNZcblOPApGJJFF1n-bhb3KL4Vf6paI8JGy7APWSfzbKCbfSNvs_5ND5pnoCmdKloud1i6M3SOKdLd4S_NebS_rUyM');"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden flour-texture">
+<!-- TopAppBar -->
+<div class="sticky top-0 z-40 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-primary flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-primary/10 transition-colors cursor-pointer" data-icon="ArrowLeft">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</div>
+<h2 class="text-[#171311] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center font-display">Centro de Promoções</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="flex size-12 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-transparent text-[#171311] dark:text-white hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 pb-24">
+<!-- SectionHeader -->
+<div class="px-4 pt-6 flex items-center justify-between">
+<h3 class="text-[#171311] dark:text-white text-xl font-extrabold leading-tight tracking-[-0.02em] font-display">Ofertas Especiais para Você</h3>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-full">3 NOVAS</span>
+</div>
+<!-- Promotion Cards Container -->
+<div class="flex flex-col gap-1">
+<!-- Card 1: Main Offer -->
+<div class="p-4 @container">
+<div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start shadow-xl shadow-black/5 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 overflow-hidden">
+<div class="relative w-full aspect-[16/9] bg-center bg-no-repeat bg-cover" data-alt="Delicious Calabresa pizza with melting cheese" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAr5sq8DtFp0mBLUkyxxT71erckLeKKFy3ZmYU6tZlmlpOXhCSfpMNZ6FRiMCmRCHLLXXMXG6toUVVKiZlpG_uUhq1GOquxahQXRkNYJD8TYkvwRN88TL4iNdp9IZBWxhrjWqJIkQ48Yh-uRA_bnrm0awsYTiLKY7DMFC8Z3aaomU7Ej46wNeYLoJ-PyZiP0Xxmt-t6EmnCfHkrxvCnOBOVS4CH1WJsHSZ5sm06sdin5HhFrv4bYbCEPLZPwvDLToU5vQRvTyYdGsM");'>
+<div class="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-lg">RELÂMPAGO</div>
+</div>
+<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-5 @xl:px-6 px-4">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-sm">schedule</span>
+<p class="text-primary text-xs font-bold leading-normal uppercase tracking-widest">Expira em 01:54:22</p>
+</div>
+<p class="text-[#171311] dark:text-white text-xl font-extrabold leading-tight tracking-tight font-display">30% OFF na Calabresa Artística</p>
+<div class="flex flex-col gap-4 mt-2">
+<div class="flex flex-col gap-1">
+<p class="text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-relaxed">Só por 2 horas! Peça agora e receba quentinha na sua casa com nossa massa de fermentação lenta.</p>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-6 bg-primary text-white text-base font-bold leading-normal shadow-lg shadow-primary/30 active:scale-[0.98] transition-all">
+<span class="truncate">Aproveitar Agora</span>
+<span class="material-symbols-outlined ml-2 text-xl">shopping_cart_checkout</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Featured -->
+<div class="p-4 @container pt-0">
+<div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start shadow-lg shadow-black/5 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 overflow-hidden">
+<div class="w-full aspect-[16/9] bg-center bg-no-repeat bg-cover" data-alt="Couple sharing a pizza and drinking soda" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-yDv44zuMRqM9MlNnibuTXCv0-9yLAl9DDejWiSeLwEGArcZN1pnVwPXtyo26B6hJ8wyvY2lX-9v2_8Ek0a9BUjeZNVCz1PHsUa3lyXT3duBwAHCDoyGUFy07HwcUtzE9bYa0lzvxZFHX0BjKol4iqdHP0VFWo9bw4iJqHwrq1Mkrj5G3SOP3tsXnnpGpHOQTvuSq9k2bOwV2iaeIYWDLy0IjFrol4RDObnTlliFkWQywlBnYroenLTs_W-qu5xgvgtlMQLnc8ZI");'></div>
+<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-5 @xl:px-6 px-4">
+<p class="text-zinc-400 text-[10px] font-bold leading-normal uppercase tracking-[0.2em] mb-1">Destaque da Semana</p>
+<p class="text-[#171311] dark:text-white text-lg font-bold leading-tight font-display">Combo Casal Irresistível</p>
+<div class="flex flex-col gap-4 mt-1">
+<div class="flex flex-col gap-1">
+<p class="text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-relaxed">Pizza Grande + Refrigerante 2L com preço especial de Terça.</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-zinc-400 text-xs">location_on</span>
+<p class="text-zinc-400 text-xs font-normal">Disponível em todas as lojas</p>
+</div>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary/10 text-primary text-sm font-bold leading-normal hover:bg-primary/20 transition-colors">
+<span class="truncate">Ver Detalhes</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Freebie -->
+<div class="p-4 @container pt-0">
+<div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start shadow-lg shadow-black/5 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 overflow-hidden">
+<div class="w-full aspect-[16/9] bg-center bg-no-repeat bg-cover" data-alt="Extreme cheese pull from a pizza crust" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBHwGA--dR1xELQFry2sZNdmLfwAiiSnVoruys_K7iRm-5vvBUJ11P26ynStn8Vz2DYkCB68OP3FRYrJSJl2c4A0WtbnydmPGgOifWIQ9JwkuVEmQgXMKwTcn3wLnsRMol6ienDzCBKW6Lk1HomFIXgzEjdDjJHW1y4pR8HDGIQso5y9YYNDs8tZ1cC60p8AnwJuq7U7pN8vAZtza8LKiHWovauRUfADwqZiyZp5Im-VH5Do3R3KeA6lYq1RsSZ7oiTgbxel9AMdJ4");'></div>
+<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-5 @xl:px-6 px-4">
+<p class="text-green-600 dark:text-green-500 text-[10px] font-bold leading-normal uppercase tracking-[0.2em] mb-1">Presente para você</p>
+<p class="text-[#171311] dark:text-white text-lg font-bold leading-tight font-display">Borda Recheada de Graça</p>
+<div class="flex flex-col gap-4 mt-1">
+<div class="flex flex-col gap-1">
+<p class="text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-relaxed">Adicione borda de Catupiry ou Cheddar sem custo adicional em qualquer pizza.</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-zinc-400 text-xs">phone_iphone</span>
+<p class="text-zinc-400 text-xs font-normal">Exclusivo para pedidos via App</p>
+</div>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold leading-normal shadow-md active:opacity-90">
+<span class="truncate">Resgatar Cupom</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Tab Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border-t border-zinc-200 dark:border-zinc-800 pb-safe">
+<div class="flex items-center justify-around h-16">
+<button class="flex flex-col items-center justify-center gap-1 text-zinc-400">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Início</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-zinc-400">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Cardápio</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-primary relative">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Ofertas</span>
+<div class="absolute -top-1 right-2 size-2 bg-primary rounded-full ring-2 ring-white dark:ring-zinc-900"></div>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 text-zinc-400">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Perfil</span>
+</button>
+</div>
+</nav>
+</div>
+</body></html>

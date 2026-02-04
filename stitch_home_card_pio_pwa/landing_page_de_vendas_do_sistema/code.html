@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sabor &amp; Gestão - Sistema para Pizzarias</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2c5951",
+              "accent-gold": "#D4AF37",
+              "accent-orange": "#FF6F00",
+              "background-light": "#f6f7f7",
+              "background-dark": "#161c1b",
+            },
+            fontFamily: {
+              "display": ["Epilogue", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Epilogue', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#131615] dark:text-white transition-colors duration-300">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-[#dee3e2] dark:border-white/10">
+<div class="flex items-center p-4 justify-between max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<div class="text-primary size-10 flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-2xl">local_pizza</span>
+</div>
+<h2 class="text-[#131615] dark:text-white text-lg font-bold leading-tight tracking-tight">Sabor &amp; Gestão</h2>
+</div>
+<div class="flex items-center">
+<button class="bg-primary/10 hover:bg-primary/20 text-primary dark:text-primary dark:bg-primary/20 px-4 py-2 rounded-full text-sm font-bold transition-all">
+                    Demo
+                </button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto">
+<!-- HeroSection -->
+<section class="relative px-4 py-10 md:py-20">
+<div class="flex flex-col gap-8 md:flex-row md:items-center">
+<div class="flex-1 flex flex-col gap-6">
+<div class="inline-flex items-center gap-2 bg-accent-orange/10 text-accent-orange px-3 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+<span class="text-xs font-bold uppercase tracking-wider">White-label 2024</span>
+</div>
+<h1 class="text-[#131615] dark:text-white text-4xl md:text-6xl font-black leading-tight tracking-[-0.033em]">
+                        Transforme sua Pizzaria em uma <span class="text-primary italic">Máquina de Vendas</span>
+</h1>
+<h2 class="text-[#6d7e7b] dark:text-gray-400 text-lg font-normal leading-relaxed max-w-xl">
+                        Sem mensalidades abusivas. Tenha seu próprio sistema com PWA, Programa de Fidelidade e Gestão de Entregas automatizada.
+                    </h2>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="bg-primary hover:bg-primary/90 text-white h-14 px-8 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20">
+                            Solicitar Orçamento
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex-1 relative group">
+<div class="absolute -inset-4 bg-primary/5 rounded-3xl blur-2xl group-hover:bg-primary/10 transition-all"></div>
+<div class="relative w-full aspect-square md:aspect-video rounded-2xl bg-cover bg-center shadow-2xl border-4 border-white dark:border-zinc-800" data-alt="Mockup of the management system on multiple devices showing sales charts" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhXHIUVhdR6AmwtXATDadZJbK35yeox0Fu8cqz_zorgiZcMmFUDNFOzT1pCfFZJGPjgWm3xIKnzeheOw6_esWo62ld1s83jnPVfsIgl6zGsl4QdERAY_TFuG2uX3wl_Z2pzu3Clsi6Eed5FhGXzU6PBhOrDGy57zEfzQlOdUeubls4qNSmKpApFEsHnQV6XzX4C-VKFYJQrPZ-a0UbAsaakDWG1SVWMwiJlRPSKeC24qQWQ1G6J1Sg-rwlyqD6kRtOAYeoNZa8bX8");'>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-xl hidden sm:flex items-center gap-4 border border-zinc-100 dark:border-zinc-700">
+<div class="bg-green-100 p-2 rounded-full"><span class="material-symbols-outlined text-green-600">trending_up</span></div>
+<div>
+<p class="text-[10px] text-zinc-500 font-bold uppercase">Aumento Médio</p>
+<p class="text-lg font-black">+35% em 3 meses</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SectionHeader -->
+<section class="px-4 pt-12 pb-6">
+<div class="flex items-end justify-between border-b border-[#dee3e2] dark:border-white/10 pb-4">
+<div class="flex flex-col gap-1">
+<p class="text-primary font-bold text-sm tracking-widest uppercase italic">O que entregamos</p>
+<h2 class="text-[#131615] dark:text-white text-3xl font-bold leading-tight">Funcionalidades Premium</h2>
+</div>
+</div>
+</section>
+<!-- TextGrid (Bento Style) -->
+<section class="p-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-4 rounded-2xl border border-[#dee3e2] dark:border-white/10 bg-white dark:bg-zinc-900/50 p-6 hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="bg-primary/5 text-primary size-12 flex items-center justify-center rounded-xl group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">print</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-[#131615] dark:text-white text-lg font-bold">Impressão Automática</h3>
+<p class="text-[#6d7e7b] dark:text-gray-400 text-sm leading-relaxed">Sincronia total entre os pedidos do cliente e a impressora da sua cozinha.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-2xl border border-[#dee3e2] dark:border-white/10 bg-white dark:bg-zinc-900/50 p-6 hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="bg-primary/5 text-primary size-12 flex items-center justify-center rounded-xl group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-[#131615] dark:text-white text-lg font-bold">Notificações Push</h3>
+<p class="text-[#6d7e7b] dark:text-gray-400 text-sm leading-relaxed">Mantenha seu cliente engajado com promoções diretamente no celular dele.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-2xl border border-[#dee3e2] dark:border-white/10 bg-white dark:bg-zinc-900/50 p-6 hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="bg-primary/5 text-primary size-12 flex items-center justify-center rounded-xl group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">card_membership</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-[#131615] dark:text-white text-lg font-bold">Fidelidade Própria</h3>
+<p class="text-[#6d7e7b] dark:text-gray-400 text-sm leading-relaxed">Crie cupons e pontuação para reter seus clientes sem depender de terceiros.</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 rounded-2xl border border-[#dee3e2] dark:border-white/10 bg-white dark:bg-zinc-900/50 p-6 hover:shadow-xl hover:border-primary/30 transition-all group">
+<div class="bg-primary/5 text-primary size-12 flex items-center justify-center rounded-xl group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-[#131615] dark:text-white text-lg font-bold">Fechamento de Caixa</h3>
+<p class="text-[#6d7e7b] dark:text-gray-400 text-sm leading-relaxed">Gestão financeira completa com relatórios diários automáticos.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="px-4 pt-16 pb-12">
+<h2 class="text-primary font-bold text-sm tracking-widest uppercase italic mb-2">Social Proof</h2>
+<h2 class="text-[#131615] dark:text-white text-3xl font-bold leading-tight mb-8">Quem usa, aprova</h2>
+<div class="flex overflow-x-auto gap-4 pb-8 no-scrollbar snap-x">
+<div class="min-w-[300px] flex-shrink-0 snap-center bg-primary text-white p-8 rounded-2xl relative overflow-hidden">
+<span class="material-symbols-outlined absolute top-4 right-4 text-6xl opacity-10">format_quote</span>
+<div class="flex text-accent-gold mb-4">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<p class="text-lg leading-relaxed mb-6 font-medium">"Economizamos mais de R$ 1.500 mensais em taxas de aplicativos depois que migramos para nosso sistema próprio."</p>
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center" data-alt="Portrait of a happy pizzeria owner" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA_ObD2yuEIbwhZbl1_96n2qesCn5B6MyqifUW_yhnZ6uiSdJWu3Pm82WdYwBgoiVq95MF3hYt8MAoFbkGDqLvTzBR4pWxItdL4JMAP26WDdauUuyYaatUYSeTKIZ_MbBxeqNCVbTuUyfMKubKvHDQQiswhxEl2YE50f9fo4OBQ3mM8J09YQSuq2cWBCwWxgh0se-2PBEf901vmUnO-Au1_wQCaXqhMBBKkCn8EHqHkG0CW8BL1yP2FAfX5Gn9wMUN-UgeYeJe7Mgk");'></div>
+<div>
+<p class="font-bold">Ricardo S.</p>
+<p class="text-xs opacity-70">Don Peppone Pizzeria</p>
+</div>
+</div>
+</div>
+<div class="min-w-[300px] flex-shrink-0 snap-center bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-[#dee3e2] dark:border-white/10 relative">
+<span class="material-symbols-outlined absolute top-4 right-4 text-6xl text-primary opacity-10">format_quote</span>
+<div class="flex text-accent-gold mb-4">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<p class="text-lg leading-relaxed mb-6 font-medium text-zinc-700 dark:text-zinc-300">"O PWA mudou nosso delivery. Os clientes amam a facilidade de pedir sem precisar baixar nada na App Store."</p>
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center" data-alt="Portrait of a female entrepreneur" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCw0yl9ciLTQJqKf4xJN7YqMxqTsV8r_AyzizRkKO1dnwsS1qpZKHdDZgff2_xKzjJVQU7xGMzEZ5HwUxwDOQTmV1nVxIi2hGjiWXnkWn5BSz_-XVVF9sc-rcSa9kif0vkN6qo8zVKDjid-uccvtORy3DziCsR1y3cOBiclHXSFZcBo6eeu50jNdQsyi290zIf5V8f0b3jWnB8jpNQYt-1cocJk7pVYfRR8TDf8XFIl-v2mWFXPM1aj3Mr-7uKYjyIWPye7jDkIAQk");'></div>
+<div>
+<p class="font-bold dark:text-white">Carla M.</p>
+<p class="text-xs text-zinc-500">Mamma Mia Gourmet</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="px-4 py-16 mb-20">
+<div class="bg-[#131615] text-white rounded-[2rem] p-8 md:p-16 relative overflow-hidden flex flex-col items-center text-center">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-[120px] opacity-30"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-orange rounded-full blur-[120px] opacity-20"></div>
+<h2 class="text-3xl md:text-5xl font-black mb-6 max-w-2xl relative z-10">Pronto para digitalizar sua pizzaria hoje?</h2>
+<p class="text-zinc-400 text-lg mb-10 max-w-lg relative z-10">Junte-se a mais de 200 pizzarias que reduziram custos e aumentaram o faturamento em até 40%.</p>
+<div class="flex flex-col sm:flex-row gap-4 relative z-10 w-full max-w-md">
+<button class="flex-1 bg-white text-black h-14 rounded-xl font-bold hover:bg-zinc-200 transition-all">Solicitar Demonstração</button>
+<button class="flex-1 bg-primary text-white h-14 rounded-xl font-bold border border-white/10 hover:bg-primary/80 transition-all">Falar com Consultor</button>
+</div>
+<p class="mt-8 text-xs text-zinc-500 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                    Instalação em até 48 horas úteis
+                </p>
+</div>
+</section>
+</main>
+<!-- Footer Simple -->
+<footer class="bg-white dark:bg-background-dark border-t border-[#dee3e2] dark:border-white/10 py-10 px-4">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_pizza</span>
+<span class="font-bold">Sabor &amp; Gestão © 2024</span>
+</div>
+<div class="flex gap-6 text-sm text-zinc-500">
+<a class="hover:text-primary" href="#">Termos</a>
+<a class="hover:text-primary" href="#">Privacidade</a>
+<a class="hover:text-primary" href="#">Suporte</a>
+</div>
+</div>
+</footer>
+</body></html>
