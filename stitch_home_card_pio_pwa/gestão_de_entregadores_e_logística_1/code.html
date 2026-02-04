@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestão de Entregadores e Logística</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1295a1",
+                        "background-light": "#f7f7f8",
+                        "background-dark": "#22262a",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+        .ios-scroller::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#111718] dark:text-white min-h-screen pb-20">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-[#dce4e5] dark:border-gray-700">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<div class="text-primary flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10" data-icon="ArrowLeft">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Logística &amp; Entregas</h2>
+<div class="size-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">local_pizza</span>
+</div>
+</div>
+</header>
+<main class="max-w-md mx-auto px-4 py-6 space-y-8">
+<!-- Section: Cadastro -->
+<section class="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-[#dce4e5] dark:border-gray-700">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">person_add</span>
+<h3 class="text-lg font-bold tracking-tight">Novo Entregador</h3>
+</div>
+<div class="space-y-4">
+<label class="flex flex-col w-full">
+<p class="text-sm font-medium pb-1.5 opacity-80">Nome Completo</p>
+<input class="form-input w-full rounded-lg border border-[#dce4e5] dark:border-gray-600 bg-white dark:bg-gray-700 h-12 px-4 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="Ex: João Silva"/>
+</label>
+<div class="flex gap-4">
+<label class="flex flex-col flex-1">
+<p class="text-sm font-medium pb-1.5 opacity-80">Placa</p>
+<input class="form-input w-full rounded-lg border border-[#dce4e5] dark:border-gray-600 bg-white dark:bg-gray-700 h-12 px-4 focus:ring-2 focus:ring-primary focus:border-primary outline-none uppercase" placeholder="ABC-1234"/>
+</label>
+<label class="flex flex-col flex-1">
+<p class="text-sm font-medium pb-1.5 opacity-80">Telefone</p>
+<input class="form-input w-full rounded-lg border border-[#dce4e5] dark:border-gray-600 bg-white dark:bg-gray-700 h-12 px-4 focus:ring-2 focus:ring-primary focus:border-primary outline-none" placeholder="(11) 99999-9999"/>
+</label>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 rounded-lg flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">save</span>
+                    Cadastrar Entregador
+                </button>
+</div>
+</section>
+<!-- Section: Entregadores Disponíveis -->
+<section>
+<div class="flex justify-between items-end mb-3">
+<h3 class="text-lg font-bold tracking-tight">Status da Frota</h3>
+<span class="text-xs font-semibold text-primary uppercase">8 Ativos</span>
+</div>
+<div class="flex overflow-x-auto gap-4 pb-2 ios-scroller">
+<!-- Status Card: Disponível -->
+<div class="flex-none w-40 bg-white dark:bg-gray-800 rounded-xl p-3 border-l-4 border-green-500 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>
+</div>
+<span class="text-[10px] font-bold text-green-600 uppercase tracking-widest">Livre</span>
+</div>
+<p class="font-bold text-sm truncate">Carlos Alberto</p>
+<p class="text-[11px] opacity-60">BRA-2J44</p>
+</div>
+<!-- Status Card: Em Entrega -->
+<div class="flex-none w-40 bg-white dark:bg-gray-800 rounded-xl p-3 border-l-4 border-amber-400 shadow-sm opacity-80">
+<div class="flex justify-between items-start mb-2">
+<div class="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-600 text-lg">moped</span>
+</div>
+<span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Rua</span>
+</div>
+<p class="font-bold text-sm truncate">Felipe Mota</p>
+<p class="text-[11px] opacity-60">ABC-1234</p>
+</div>
+<!-- Status Card: Disponível -->
+<div class="flex-none w-40 bg-white dark:bg-gray-800 rounded-xl p-3 border-l-4 border-green-500 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600 text-lg">check_circle</span>
+</div>
+<span class="text-[10px] font-bold text-green-600 uppercase tracking-widest">Livre</span>
+</div>
+<p class="font-bold text-sm truncate">Junior D.</p>
+<p class="text-[11px] opacity-60">XYZ-9876</p>
+</div>
+</div>
+</section>
+<!-- Section: Pedidos Prontos -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold tracking-tight">Prontos para Entrega</h3>
+<div class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse">3 URGENTES</div>
+</div>
+<div class="space-y-3">
+<!-- Order Item -->
+<div class="flex items-center gap-3 bg-white dark:bg-gray-800 p-4 rounded-xl border border-[#dce4e5] dark:border-gray-700">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-bold text-base">#4829 - Ana Paula</span>
+<span class="text-[10px] font-bold bg-primary/10 text-primary px-2 rounded-full">PIZZA G + REFRI</span>
+</div>
+<div class="flex items-center gap-3 text-xs opacity-60">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 12 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span> 2.4 km</span>
+</div>
+</div>
+<button class="bg-primary/10 text-primary p-2 rounded-lg hover:bg-primary/20">
+<span class="material-symbols-outlined">add_task</span>
+</button>
+</div>
+<!-- Order Item -->
+<div class="flex items-center gap-3 bg-white dark:bg-gray-800 p-4 rounded-xl border border-[#dce4e5] dark:border-gray-700">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-bold text-base">#4830 - Roberto M.</span>
+<span class="text-[10px] font-bold bg-primary/10 text-primary px-2 rounded-full">COMBO FAMÍLIA</span>
+</div>
+<div class="flex items-center gap-3 text-xs opacity-60">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 5 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span> 0.8 km</span>
+</div>
+</div>
+<button class="bg-primary/10 text-primary p-2 rounded-lg hover:bg-primary/20">
+<span class="material-symbols-outlined">add_task</span>
+</button>
+</div>
+<!-- Order Item -->
+<div class="flex items-center gap-3 bg-white dark:bg-gray-800 p-4 rounded-xl border border-[#dce4e5] dark:border-gray-700">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-bold text-base">#4831 - Lucas F.</span>
+<span class="text-[10px] font-bold bg-primary/10 text-primary px-2 rounded-full">BROTINHO</span>
+</div>
+<div class="flex items-center gap-3 text-xs opacity-60">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 2 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span> 4.1 km</span>
+</div>
+</div>
+<button class="bg-primary/10 text-primary p-2 rounded-lg hover:bg-primary/20">
+<span class="material-symbols-outlined">add_task</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Dispatch Action -->
+<section class="pt-4">
+<button class="w-full bg-white dark:bg-gray-800 border-2 border-dashed border-[#dce4e5] dark:border-gray-700 text-[#111718] dark:text-gray-300 font-bold py-6 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">electric_moped</span>
+<div class="text-center">
+<p class="text-base">Chamar Motoboy Externo</p>
+<p class="text-[10px] opacity-60 font-medium">INTEGRAÇÃO IFOOD / LOGGI</p>
+</div>
+</button>
+</section>
+</main>
+<!-- Navigation Tab Bar (iOS style) -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-[#dce4e5] dark:border-gray-700 pb-5 pt-2">
+<div class="max-w-md mx-auto flex justify-around items-center">
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[10px] font-bold">Menu</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="text-[10px] font-bold">Pedidos</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-primary">
+<div class="relative">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="absolute -top-1 -right-1 flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+</div>
+<span class="text-[10px] font-bold">Logística</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-bold">Relatórios</span>
+</div>
+</div>
+</nav>
+</body></html>

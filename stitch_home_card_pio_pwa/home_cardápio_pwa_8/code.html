@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Home PWA - Lista Lateral</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b34",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .active-category {
+            @apply bg-white dark:bg-gray-800 text-primary border-l-4 border-primary font-bold;
+        }
+        body {
+            overscroll-behavior-y: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#181111] dark:text-white h-screen flex flex-col overflow-hidden">
+<header class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 z-50">
+<div class="max-w-md mx-auto px-4 py-3 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">restaurant</span>
+</div>
+<h1 class="font-bold text-lg tracking-tight">Bella Pizza</h1>
+</div>
+<button class="relative size-10 flex items-center justify-center text-gray-700 dark:text-gray-200">
+<span class="material-symbols-outlined text-2xl">shopping_cart</span>
+<span class="absolute top-1 right-1 bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+</button>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-400">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="w-full bg-gray-100 dark:bg-gray-800 border-none rounded-xl py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-gray-500" placeholder="O que você quer comer hoje?" type="text"/>
+</div>
+</div>
+</header>
+<main class="flex-1 flex overflow-hidden max-w-md mx-auto w-full">
+<aside class="w-20 md:w-24 bg-gray-50 dark:bg-gray-950 border-r border-gray-100 dark:border-gray-800 flex flex-col overflow-y-auto no-scrollbar">
+<nav class="flex flex-col">
+<a class="active-category flex flex-col items-center py-4 px-2 gap-1 text-center transition-colors" href="#">
+<div class="size-10 rounded-full bg-cover bg-center mb-1 border-2 border-primary" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDt7j9pd9LeNJa5oA0yEOKrLvekL2dfg0IB961SC_JZJ-92QrgTngbhfjuj5aKpxU3SV6g6Qv4Ke6i58Ne7Qlca-bZBJQdLcSaXE6AGzkNlSYFrxIPvFZlw4iYPGHmA6wbrDukH2bsaQm9bWyQs-rCOxEFEU2XlxPVklFt5fLIIaH-3D--3mnKaw4ZVxExLiQYzATIUjgrbRypbMaM3l_nsw6UCEaKwXIGmgIeHT9TRnKqAzawt3JEEbxa_aFfee6Eed8jn-vqlT2g');"></div>
+<span class="text-[10px] uppercase tracking-wider">Pizzas</span>
+</a>
+<a class="flex flex-col items-center py-4 px-2 gap-1 text-center text-gray-500 dark:text-gray-400 transition-colors" href="#">
+<div class="size-10 rounded-full bg-cover bg-center mb-1 grayscale opacity-70" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXwzHbGIcpL6wtx1i2LpnCTq99L11Zyb2JudP3_iEatR7Vs4kvlpFaDFfX5_-CbAU0x3JHx43bmax8Cks9vgkak1hwX74ybjOIRCB2oqlrxXYhbAh07eM_krQeUTI1b5QQU5zk--cARcqaIrDKurdWs-uvzjoJk-pH5bvDaS7uH970RKiwpaTctntZbyO4fU2dqkXKgZQCZ5lR6cAAbOMHoU5QcCZdcwowuJrdVcbQVIYOCksvQwc_UDg-HQWjfSy-3-6_ZixmPhM');"></div>
+<span class="text-[10px] uppercase tracking-wider">Bebidas</span>
+</a>
+<a class="flex flex-col items-center py-4 px-2 gap-1 text-center text-gray-500 dark:text-gray-400 transition-colors" href="#">
+<div class="size-10 rounded-full bg-cover bg-center mb-1 grayscale opacity-70" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBPouGNBQXpK9h0mS74PUwm9tmVklSanBw58n8MjpQxnVSogm93Bm5Lh0ohxktE82-aNOjEi6sXEElO6nuofTMlroHAdTZphx_wnM73kaAnOZCMv36VyS472dOpoNxHVBKSXjVUqj-sUbq5yu9a2DbjjNj6CT4sDvobdD1PGpuZUctNTJLkLdvIJfNgIfIAhAbxzHkgBGuFDJL0BZWbnsO06sSy5KRj1O669ApvsZxr6rdd59dLUn5-qWKy2x7BkFhJZYZB6xNXDyQ');"></div>
+<span class="text-[10px] uppercase tracking-wider">Doces</span>
+</a>
+<a class="flex flex-col items-center py-4 px-2 gap-1 text-center text-gray-500 dark:text-gray-400 transition-colors" href="#">
+<div class="size-10 rounded-full bg-cover bg-center mb-1 grayscale opacity-70" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDtdXbyVJVVO-ijj3q6MD61XHl9Izo-rXKnHInLlH5_c8rpegn6IghuICB9C4nChhncHA-lCMDn-VsyibH4lpzYRU7g0QHb2xVV-3Cu6DMOfRMpIk-RaRogDn-136bJSzQsLwTIsLvUpfyugu8UXbLOD3XmwDVX1fzykkrT9hgwvO5Dpna-rC7WrbvS9oMqsDIh9D90txdbN2chjJnvF0EPmS_fCBPgEitKDEHq9d7WhhjX9uFtOF5IJJrpsOnRw_-rYBGPXe6OK8s');"></div>
+<span class="text-[10px] uppercase tracking-wider">Combos</span>
+</a>
+<a class="flex flex-col items-center py-4 px-2 gap-1 text-center text-gray-500 dark:text-gray-400 transition-colors" href="#">
+<div class="size-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-xl">star</span>
+</div>
+<span class="text-[10px] uppercase tracking-wider">Promo</span>
+</a>
+</nav>
+</aside>
+<section class="flex-1 bg-white dark:bg-background-dark overflow-y-auto no-scrollbar pb-24">
+<div class="px-4 py-4 sticky top-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-sm z-10 border-b border-gray-50 dark:border-gray-800 mb-2">
+<h2 class="font-bold text-base">Pizzas Clássicas</h2>
+</div>
+<div class="flex flex-col">
+<div class="flex gap-3 px-4 py-4 border-b border-gray-50 dark:border-gray-800 active:bg-gray-50 dark:active:bg-gray-800/50 transition-colors">
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<h3 class="font-bold text-[15px] leading-tight mb-1 truncate">Margherita Clássica</h3>
+<p class="text-gray-500 dark:text-gray-400 text-xs line-clamp-2">Molho de tomate pelati, mozzarella de búfala, manjericão fresco e azeite.</p>
+</div>
+<div class="mt-2">
+<span class="text-primary font-bold">R$ 45,90</span>
+</div>
+</div>
+<div class="relative">
+<div class="size-20 bg-cover bg-center rounded-lg shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSIN0TM7w7rVclVTJLlCLESyk8ozrpYXXIwg5RDhdmuLXsA1-lZs15QmFOG_ggFqg1sP4nBoV1mokSNzBJUuDjYzEEBKYrXsbdo4sfnWpDQ6y_HYUMPNrV2UVWPllEfVDfSTa_Ym_JyhYZOyuipz-HiuUF_LhwUWGL2Jupgg75cHZYtgiK7WCt6ZzXkfUnIpwN_yL8CNnWJuLt2jMZZMo32luxHOeIkIEOwxsCusyKXFCSaMOFERJ0vxb1MR0Mb5BCdnXt-L1aoBA');"></div>
+<button class="absolute -bottom-1 -right-1 bg-white dark:bg-gray-800 text-primary size-7 rounded-full shadow-md flex items-center justify-center border border-gray-100 dark:border-gray-700">
+<span class="material-symbols-outlined text-lg font-bold">add</span>
+</button>
+</div>
+</div>
+<div class="flex gap-3 px-4 py-4 border-b border-gray-50 dark:border-gray-800 active:bg-gray-50 dark:active:bg-gray-800/50 transition-colors">
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<h3 class="font-bold text-[15px] leading-tight mb-1 truncate">Pepperoni Especial</h3>
+<p class="text-gray-500 dark:text-gray-400 text-xs line-clamp-2">Mozzarella, pepperoni artesanal crocante e orégano chileno.</p>
+</div>
+<div class="mt-2">
+<span class="text-primary font-bold">R$ 52,90</span>
+</div>
+</div>
+<div class="relative">
+<div class="size-20 bg-cover bg-center rounded-lg shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC8xmvQ19rWExr8erHVkna9PZQqtXA_YesRpJmGdu1ftiQBur0kTjAdghCXTvGkixUnLVo5s3j2qzd15gN4SiaPw_H85vWizRoh4HLk_hf9sN3Fl0n2cjaWdFpSXzCgLBuN_T38ml2QfNLjYcQT_wbW3jyQDd_6gI5Oxp4A1dnBtDfWzkP7BGxSAHWJg_RSYXO4kk5oNoptDoApSS3tu-xjKJlyO26Wf5HJXqJeTjPQGZwHr1M-NHYadJm3At7vQQmc_hyq6xS_Hg0');"></div>
+<button class="absolute -bottom-1 -right-1 bg-white dark:bg-gray-800 text-primary size-7 rounded-full shadow-md flex items-center justify-center border border-gray-100 dark:border-gray-700">
+<span class="material-symbols-outlined text-lg font-bold">add</span>
+</button>
+</div>
+</div>
+<div class="px-4 py-4 bg-gray-50 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 my-2">
+<h2 class="font-bold text-base">Pizzas Premium</h2>
+</div>
+<div class="flex gap-3 px-4 py-4 border-b border-gray-50 dark:border-gray-800 active:bg-gray-50 dark:active:bg-gray-800/50 transition-colors">
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<h3 class="font-bold text-[15px] leading-tight mb-1 truncate">Quatro Formaggi</h3>
+<p class="text-gray-500 dark:text-gray-400 text-xs line-clamp-2">Mozzarella, gorgonzola, parmesão e catupiry original.</p>
+</div>
+<div class="mt-2">
+<span class="text-primary font-bold">R$ 54,90</span>
+</div>
+</div>
+<div class="relative">
+<div class="size-20 bg-cover bg-center rounded-lg shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDkm6xtJx1fzL1oXHdAvQXuIcDnldGzpu9kq9jbsL3dOspP1n0Ux50U0nPNiRv7lMQk4cOYwUjoubCuXCrBW-oNcZ-Y_9mZx1OBJZbzL8ErcIrCHp-w4gRA43K8lFNaCUd7UaIReLtykMafhmDwg2SjtizPs-KxKw6b_TILMKLq3Nfxbztx-QUaQMviH9JseN7LSv1k0Vfg_DG3BfAoPImcVdi63CP0UdvwFawLWRBglHG8k4Y3Z-wbkK5WMSHCw5-soPkbwVOX30g');"></div>
+<button class="absolute -bottom-1 -right-1 bg-white dark:bg-gray-800 text-primary size-7 rounded-full shadow-md flex items-center justify-center border border-gray-100 dark:border-gray-700">
+<span class="material-symbols-outlined text-lg font-bold">add</span>
+</button>
+</div>
+</div>
+<div class="flex gap-3 px-4 py-4 border-b border-gray-50 dark:border-gray-800 active:bg-gray-50 dark:active:bg-gray-800/50 transition-colors">
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<h3 class="font-bold text-[15px] leading-tight mb-1 truncate">Cogumelos Trufados</h3>
+<p class="text-gray-500 dark:text-gray-400 text-xs line-clamp-2">Mix de cogumelos frescos e azeite trufado.</p>
+</div>
+<div class="mt-2">
+<span class="text-primary font-bold">R$ 64,90</span>
+</div>
+</div>
+<div class="relative">
+<div class="size-20 bg-cover bg-center rounded-lg shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRSNV3reLpvSu7TrdlClGD34ZZjYqPtVl1sAtDiwnjF-R0TiJEa70tmwU5nG5q7H0NQUlnMBf_ibMmW3z3Y635JeZ9TD8jLk4wW9zBG-NmIl0Dqnd-gvUMz8Wx_jlVjiwW57eDCDvzWjA87m90PpuWGGWgHbm6t_BTM_hbSt5ulVuklA2SboGwiN3quf5hpDVFoU8Do7W8tdrUgrtG0bizqn32xuZ0ev7tiH_gvF7dxe-19Hiv68ScKNwIjnb2V-f3HrTqG_29Zfg');"></div>
+<button class="absolute -bottom-1 -right-1 bg-white dark:bg-gray-800 text-primary size-7 rounded-full shadow-md flex items-center justify-center border border-gray-100 dark:border-gray-700">
+<span class="material-symbols-outlined text-lg font-bold">add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800 pb-safe z-50">
+<div class="max-w-md mx-auto flex items-center justify-around h-16">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[26px] fill-1">home</span>
+<span class="text-[10px] font-medium">Início</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400" href="#">
+<span class="material-symbols-outlined text-[26px]">search</span>
+<span class="text-[10px] font-medium">Busca</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400" href="#">
+<span class="material-symbols-outlined text-[26px]">receipt_long</span>
+<span class="text-[10px] font-medium">Pedidos</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400" href="#">
+<span class="material-symbols-outlined text-[26px]">person</span>
+<span class="text-[10px] font-medium">Perfil</span>
+</a>
+</div>
+<div class="h-5 bg-white dark:bg-gray-950"></div>
+</footer>
+<div class="fixed bottom-20 left-1/2 -translate-x-1/2 w-[92%] max-w-[400px] z-40 pointer-events-none">
+<button class="pointer-events-auto w-full bg-primary text-white h-12 rounded-xl shadow-lg flex items-center justify-between px-4 active:scale-95 transition-transform">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span class="font-bold text-sm">Ver carrinho</span>
+</div>
+<span class="bg-white/20 px-2 py-0.5 rounded text-xs font-bold tracking-wide">R$ 98,80</span>
+</button>
+</div>
+
+</body></html>

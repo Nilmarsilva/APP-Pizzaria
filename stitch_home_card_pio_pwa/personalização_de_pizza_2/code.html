@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b34",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221011",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: "Work Sans", sans-serif;
+        }::-webkit-scrollbar {
+            width: 0px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white antialiased">
+<div class="relative flex min-h-screen w-full flex-col max-w-[480px] mx-auto bg-white dark:bg-background-dark shadow-xl pb-40">
+<div class="relative h-72 w-full overflow-hidden">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0_3jtg7Yknd7zvCJ-k2U7wuLT4tNHt-51wt9zS_OF8P1uIMibwMjSIBo5sM1RYNfJnzFLxyh1VIqJoJsvwsddxLrJwksNJY_91SFTPX-p35b87NGoRHdyggAL9Z7oYPgpOdVLokDNuXhnq11RLaBx5B6Uzutu3lgtcRlyBPD-YFPPEVy9-xD363cwuiQoUNb08RZgA0LUgOnRY52dtesRZWZ9GXjZDyOwaT2RNEaruK-8gpjs1k2eIsDkSBrBgFLpADLhHKpb4pg");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+<div class="absolute top-0 left-0 right-0 flex items-center justify-between p-4">
+<button class="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white border border-white/20 transition-active active:scale-95">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white border border-white/20">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white border border-white/20">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 text-white">
+<span class="bg-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider mb-2 inline-block">Destaque do Mês</span>
+<h1 class="text-3xl font-bold leading-tight">Calabresa Especial</h1>
+<p class="text-white/80 text-sm line-clamp-2 mt-1 leading-snug">Molho artesanal, muçarela, calabresa fatiada, cebola roxa e o toque secreto da casa.</p>
+</div>
+</div>
+<div class="px-4 py-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold tracking-tight">Escolha o Tamanho</h3>
+<span class="text-[10px] font-bold bg-primary/10 text-primary px-2 py-1 rounded-full uppercase">Obrigatório</span>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<label class="relative flex flex-col items-center justify-center rounded-2xl border-2 border-primary bg-primary/5 p-4 transition-all cursor-pointer">
+<input checked="" class="hidden" name="size" type="radio"/>
+<span class="text-sm font-bold block">M</span>
+<span class="text-[10px] text-gray-500 dark:text-gray-400">30cm</span>
+<span class="text-xs font-bold mt-2 text-primary">R$ 59,90</span>
+<div class="absolute top-2 right-2 flex size-4 items-center justify-center rounded-full bg-primary">
+<span class="material-symbols-outlined text-[10px] text-white font-bold">check</span>
+</div>
+</label>
+<label class="relative flex flex-col items-center justify-center rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-4 transition-all cursor-pointer">
+<input class="hidden" name="size" type="radio"/>
+<span class="text-sm font-bold block">G</span>
+<span class="text-[10px] text-gray-500 dark:text-gray-400">35cm</span>
+<span class="text-xs font-bold mt-2">R$ 72,90</span>
+</label>
+<label class="relative flex flex-col items-center justify-center rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-4 transition-all cursor-pointer">
+<input class="hidden" name="size" type="radio"/>
+<span class="text-sm font-bold block">GG</span>
+<span class="text-[10px] text-gray-500 dark:text-gray-400">40cm</span>
+<span class="text-xs font-bold mt-2">R$ 84,90</span>
+</label>
+</div>
+</div>
+<div class="h-2 bg-background-light dark:bg-black/20 w-full"></div>
+<div class="px-4 py-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold tracking-tight">Borda Recheada</h3>
+<span class="text-[10px] font-bold bg-gray-100 dark:bg-gray-800 text-gray-500 px-2 py-1 rounded-full uppercase">Opcional</span>
+</div>
+<div class="space-y-3">
+<label class="flex items-center justify-between p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-white/5 cursor-pointer">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 text-primary border-gray-300 focus:ring-primary dark:bg-gray-800 dark:border-gray-700" name="borda" type="radio"/>
+<span class="font-medium">Sem borda recheada</span>
+</div>
+<span class="text-sm text-gray-500 font-medium">Grátis</span>
+</label>
+<label class="flex items-center justify-between p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-white/5 cursor-pointer">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 text-primary border-gray-300 focus:ring-primary dark:bg-gray-800 dark:border-gray-700" name="borda" type="radio"/>
+<span class="font-medium">Catupiry Original</span>
+</div>
+<span class="text-sm text-primary font-bold">+ R$ 12,00</span>
+</label>
+<label class="flex items-center justify-between p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-white/5 cursor-pointer">
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 text-primary border-gray-300 focus:ring-primary dark:bg-gray-800 dark:border-gray-700" name="borda" type="radio"/>
+<span class="font-medium">Cheddar Cremoso</span>
+</div>
+<span class="text-sm text-primary font-bold">+ R$ 12,00</span>
+</label>
+</div>
+</div>
+<div class="h-2 bg-background-light dark:bg-black/20 w-full"></div>
+<div class="px-4 py-6">
+<h3 class="text-lg font-bold tracking-tight mb-4">Adicionais</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex items-center gap-3 p-3 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/40">
+<div class="size-14 rounded-lg bg-cover bg-center shrink-0 border border-gray-100 dark:border-gray-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0_3jtg7Yknd7zvCJ-k2U7wuLT4tNHt-51wt9zS_OF8P1uIMibwMjSIBo5sM1RYNfJnzFLxyh1VIqJoJsvwsddxLrJwksNJY_91SFTPX-p35b87NGoRHdyggAL9Z7oYPgpOdVLokDNuXhnq11RLaBx5B6Uzutu3lgtcRlyBPD-YFPPEVy9-xD363cwuiQoUNb08RZgA0LUgOnRY52dtesRZWZ9GXjZDyOwaT2RNEaruK-8gpjs1k2eIsDkSBrBgFLpADLhHKpb4pg"); opacity: 0.8;'></div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Bacon Extra</p>
+<p class="text-[10px] text-primary font-bold">+ R$ 6,00</p>
+</div>
+<input class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/40">
+<div class="size-14 rounded-lg bg-cover bg-center shrink-0 border border-gray-100 dark:border-gray-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0_3jtg7Yknd7zvCJ-k2U7wuLT4tNHt-51wt9zS_OF8P1uIMibwMjSIBo5sM1RYNfJnzFLxyh1VIqJoJsvwsddxLrJwksNJY_91SFTPX-p35b87NGoRHdyggAL9Z7oYPgpOdVLokDNuXhnq11RLaBx5B6Uzutu3lgtcRlyBPD-YFPPEVy9-xD363cwuiQoUNb08RZgA0LUgOnRY52dtesRZWZ9GXjZDyOwaT2RNEaruK-8gpjs1k2eIsDkSBrBgFLpADLhHKpb4pg"); opacity: 0.8;'></div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Milho</p>
+<p class="text-[10px] text-primary font-bold">+ R$ 4,00</p>
+</div>
+<input class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/40">
+<div class="size-14 rounded-lg bg-cover bg-center shrink-0 border border-gray-100 dark:border-gray-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0_3jtg7Yknd7zvCJ-k2U7wuLT4tNHt-51wt9zS_OF8P1uIMibwMjSIBo5sM1RYNfJnzFLxyh1VIqJoJsvwsddxLrJwksNJY_91SFTPX-p35b87NGoRHdyggAL9Z7oYPgpOdVLokDNuXhnq11RLaBx5B6Uzutu3lgtcRlyBPD-YFPPEVy9-xD363cwuiQoUNb08RZgA0LUgOnRY52dtesRZWZ9GXjZDyOwaT2RNEaruK-8gpjs1k2eIsDkSBrBgFLpADLhHKpb4pg"); opacity: 0.8;'></div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Dobro de Queijo</p>
+<p class="text-[10px] text-primary font-bold">+ R$ 9,00</p>
+</div>
+<input class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900/40">
+<div class="size-14 rounded-lg bg-cover bg-center shrink-0 border border-gray-100 dark:border-gray-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0_3jtg7Yknd7zvCJ-k2U7wuLT4tNHt-51wt9zS_OF8P1uIMibwMjSIBo5sM1RYNfJnzFLxyh1VIqJoJsvwsddxLrJwksNJY_91SFTPX-p35b87NGoRHdyggAL9Z7oYPgpOdVLokDNuXhnq11RLaBx5B6Uzutu3lgtcRlyBPD-YFPPEVy9-xD363cwuiQoUNb08RZgA0LUgOnRY52dtesRZWZ9GXjZDyOwaT2RNEaruK-8gpjs1k2eIsDkSBrBgFLpADLhHKpb4pg"); opacity: 0.8;'></div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Azeitona</p>
+<p class="text-[10px] text-primary font-bold">+ R$ 3,00</p>
+</div>
+<input class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+</div>
+</div>
+<div class="h-2 bg-background-light dark:bg-black/20 w-full"></div>
+<div class="px-4 py-6">
+<h3 class="text-lg font-bold tracking-tight mb-3">Observações</h3>
+<div class="relative">
+<textarea class="w-full p-4 rounded-2xl border border-gray-200 dark:border-gray-800 dark:bg-gray-900/50 focus:border-primary focus:ring-0 text-sm min-h-[100px] placeholder-gray-400" placeholder="Alguma restrição ou pedido especial?"></textarea>
+<div class="absolute bottom-3 right-3 text-[10px] text-gray-400 font-medium tracking-widest uppercase">0 / 140</div>
+</div>
+</div>
+<div class="fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-background-dark/95 backdrop-blur-lg border-t border-gray-100 dark:border-gray-800 max-w-[480px] mx-auto pb-safe">
+<div class="p-4 pt-4 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center bg-gray-100 dark:bg-gray-800 rounded-xl p-1 shrink-0">
+<button class="flex size-10 items-center justify-center text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined font-bold">remove</span>
+</button>
+<span class="w-8 text-center font-bold text-base">1</span>
+<button class="flex size-10 items-center justify-center text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined font-bold">add</span>
+</button>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Total do pedido</span>
+<span class="text-xl font-bold text-primary leading-none">R$ 59,90</span>
+</div>
+</div>
+<button class="w-full flex items-center justify-center bg-primary text-white rounded-2xl h-14 font-bold shadow-lg shadow-primary/20 transition-active active:scale-95">
+                    Adicionar ao Carrinho
+                </button>
+</div>
+<div class="w-32 h-1 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-2 mt-1"></div>
+</div>
+</div>
+
+</body></html>

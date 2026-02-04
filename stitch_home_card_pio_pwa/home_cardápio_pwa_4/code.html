@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fechamento de Caixa e Relatórios</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b34",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .chart-pie {
+            background: conic-gradient(
+                #ee2b34 0% 45%, 
+                #3b82f6 45% 80%, 
+                #10b981 80% 100%
+            );
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#181111] dark:text-white min-h-screen">
+<nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-none">Relatórios</h1>
+<p class="text-xs text-gray-500 dark:text-gray-400">Resumo Operacional</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-semibold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">CAIXA ABERTO</span>
+</div>
+</div>
+</nav>
+<main class="max-w-md mx-auto pb-32">
+<div class="p-4 grid grid-cols-3 gap-3">
+<div class="bg-white dark:bg-gray-800 p-3 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">
+<p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Total Vendas</p>
+<p class="text-sm font-bold text-primary">R$ 2.450</p>
+</div>
+<div class="bg-white dark:bg-gray-800 p-3 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">
+<p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Pedidos</p>
+<p class="text-sm font-bold">48</p>
+</div>
+<div class="bg-white dark:bg-gray-800 p-3 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">
+<p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Ticket Médio</p>
+<p class="text-sm font-bold text-blue-500">R$ 51,04</p>
+</div>
+</div>
+<div class="px-4 mb-6">
+<div class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700 shadow-sm">
+<h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Distribuição de Pagamentos</h3>
+<div class="flex items-center gap-8">
+<div class="size-24 rounded-full chart-pie relative flex items-center justify-center">
+<div class="size-12 bg-white dark:bg-gray-800 rounded-full"></div>
+</div>
+<div class="flex-1 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-gray-600 dark:text-gray-300">Cartão</span>
+</div>
+<span class="font-bold">45%</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-blue-500"></div>
+<span class="text-gray-600 dark:text-gray-300">Pix</span>
+</div>
+<span class="font-bold">35%</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-green-500"></div>
+<span class="text-gray-600 dark:text-gray-300">Dinheiro</span>
+</div>
+<span class="font-bold">20%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 mb-6">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider">Produtos Vendidos</h2>
+<span class="text-xs text-primary font-medium">Ver tudo</span>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 overflow-hidden shadow-sm">
+<div class="divide-y divide-gray-50 dark:divide-gray-700">
+<div class="p-4 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="text-sm font-bold text-primary bg-primary/10 w-8 h-8 flex items-center justify-center rounded-lg">45</span>
+<span class="text-sm font-medium">Pizzas Margherita</span>
+</div>
+<span class="text-xs text-gray-400">R$ 2.065,50</span>
+</div>
+<div class="p-4 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="text-sm font-bold text-primary bg-primary/10 w-8 h-8 flex items-center justify-center rounded-lg">20</span>
+<span class="text-sm font-medium">Coca-Cola 2L</span>
+</div>
+<span class="text-xs text-gray-400">R$ 280,00</span>
+</div>
+<div class="p-4 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="text-sm font-bold text-primary bg-primary/10 w-8 h-8 flex items-center justify-center rounded-lg">12</span>
+<span class="text-sm font-medium">Pizzas Calabresa</span>
+</div>
+<span class="text-xs text-gray-400">R$ 540,00</span>
+</div>
+<div class="p-4 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="text-sm font-bold text-primary bg-primary/10 w-8 h-8 flex items-center justify-center rounded-lg">08</span>
+<span class="text-sm font-medium">Brotinho Chocolate</span>
+</div>
+<span class="text-xs text-gray-400">R$ 192,00</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4">
+<div class="bg-gradient-to-br from-gray-900 to-gray-800 dark:from-black dark:to-gray-900 rounded-3xl p-6 shadow-xl text-white">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+<h3 class="text-lg font-bold">Fechamento de Caixa</h3>
+</div>
+<p class="text-gray-400 text-xs mb-6">Confirme todos os valores recebidos antes de encerrar o expediente de hoje.</p>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-sm py-2 border-b border-white/10">
+<span class="text-gray-400">Saldo Inicial</span>
+<span>R$ 200,00</span>
+</div>
+<div class="flex justify-between text-sm py-2 border-b border-white/10">
+<span class="text-gray-400">Entradas (Vendas)</span>
+<span class="text-green-400">+ R$ 2.450,00</span>
+</div>
+<div class="flex justify-between text-sm py-2">
+<span class="font-bold">Total em Caixa</span>
+<span class="font-bold">R$ 2.650,00</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-red-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/30 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">lock</span>
+                    Encerrar Expediente
+                </button>
+</div>
+</div>
+</main>
+<div class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-gray-950/90 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 pb-6 pt-2">
+<div class="max-w-md mx-auto flex justify-around items-center px-4">
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined text-2xl">dashboard</span>
+<span class="text-[10px] font-medium">Início</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+<span class="text-[10px] font-medium">Pedidos</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-400">
+<span class="material-symbols-outlined text-2xl">restaurant_menu</span>
+<span class="text-[10px] font-medium">Cardápio</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">analytics</span>
+<span class="text-[10px] font-bold">Relatórios</span>
+</button>
+</div>
+</div>
+
+</body></html>

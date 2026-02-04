@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acompanhamento de Pedido</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d7461d",
+                        "background-light": "#fcfaf9",
+                        "background-dark": "#1a1210",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .timeline-line {
+            width: 2px;
+            background: linear-gradient(to bottom, #d7461d 75%, #e5dedc 75%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#171311] dark:text-white min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col max-w-[480px] mx-auto overflow-x-hidden">
+<!-- TopAppBar -->
+<div class="sticky top-0 z-10 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 pb-4 justify-between border-b border-[#e5dedc]/50 dark:border-white/10">
+<div class="text-[#171311] dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-white/10 cursor-pointer">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</div>
+<h2 class="text-[#171311] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Pedido #4092</h2>
+<div class="size-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">help</span>
+</div>
+</div>
+<!-- Hero Section / Status Message -->
+<div class="p-6 flex flex-col gap-2">
+<h1 class="text-3xl font-bold tracking-tight text-[#171311] dark:text-white">A caminho!</h1>
+<p class="text-[#876b64] dark:text-stone-400 text-base">O Ricardo está trazendo sua pizza quentinha.</p>
+</div>
+<!-- Map Section -->
+<div class="px-4 py-2">
+<div class="relative w-full aspect-[16/10] bg-zinc-200 dark:bg-zinc-800 rounded-xl overflow-hidden shadow-sm border border-[#e5dedc] dark:border-white/5">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Simplified map showing delivery route from pizzeria to home" data-location="São Paulo, Brazil" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANdEE79i9OallPomsE834tNGxID6tiqezZm7SAL_NwMrQHwGehxRbBc4T5LFthDNHZ2hSu1EcKTVF8ICiFjY7I7vugUUGahG8s4-eDTx9ZZ_bc-suugqIx1g7HLqbSejqdlXPCNXDna9NB2fxRT6_gCas4cLvYSjNq3-uO5HUi0AhYT0f5i2klmu9xM7Ga0rFJ7RXewyZCtVF9V06LeOm_pZU6OUwvEkHtxvFBgwCzielWsFzjMhnF2x1kAhINRNPZtEIdigCraXQ')"></div>
+<!-- Delivery Marker -->
+<div class="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-8 h-8 bg-primary/30 rounded-full animate-ping"></div>
+<div class="z-10 bg-primary p-2 rounded-full shadow-lg text-white">
+<span class="material-symbols-outlined text-sm">delivery_dining</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Courier Profile Header (Shown when Saiu para Entrega) -->
+<div class="px-4 py-4">
+<div class="flex p-4 rounded-xl border border-[#e5dedc] dark:border-white/10 bg-white dark:bg-[#2a1d19] shadow-sm items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-16 w-16 border-2 border-primary/20" data-alt="Portrait of a friendly delivery partner named Ricardo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBilIi5xTJMQUu5C_mACjaW48gLhvshHBIkEL7MgjrqxtKt0U7eI0GGR7Vxgh46qoP41605H9xvM808HSBFv22KcCr0wBIwd7XFJCa3Mm1A8qBiLjGYzPq4VEtLg4L-JXEsEptDIbAU8EC2xy-eOkJ3ZIIdrpBi90FpqQgQdHFy5DERON8tz9lAh4aKSuXZnPB1nV8oKya4PXUE--c8hByBTnL3GetWdhwio41VMlDe3_o64zyEH5bOKvljDa7JgBZcyNBJ1cs0BCE')"></div>
+<div class="flex flex-col flex-1">
+<p class="text-[#171311] dark:text-white text-lg font-bold leading-tight">Ricardo Silva</p>
+<div class="flex items-center gap-1 text-[#876b64] dark:text-stone-400 text-sm">
+<span class="material-symbols-outlined text-[16px] text-yellow-500 fill-current">star</span>
+<span>4.9 • Entregador parceiro</span>
+</div>
+</div>
+<a class="flex items-center justify-center rounded-full h-12 w-12 bg-green-500 text-white shadow-lg hover:bg-green-600 transition-colors" href="#">
+<span class="material-symbols-outlined">chat</span>
+</a>
+</div>
+</div>
+<!-- Timeline Section -->
+<div class="px-6 py-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-[#876b64] mb-6">Etapas do Pedido</h3>
+<div class="grid grid-cols-[40px_1fr] gap-x-3">
+<!-- Step 1 -->
+<div class="flex flex-col items-center">
+<div class="z-10 bg-primary text-white p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="w-[2px] bg-primary h-12"></div>
+</div>
+<div class="flex flex-col pb-6">
+<p class="text-[#171311] dark:text-white text-base font-bold">Pedido Recebido</p>
+<p class="text-[#876b64] dark:text-stone-400 text-sm">Confirmado às 19:00</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center">
+<div class="z-10 bg-primary text-white p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="w-[2px] bg-primary h-12"></div>
+</div>
+<div class="flex flex-col pb-6">
+<p class="text-[#171311] dark:text-white text-base font-bold">Em Preparo</p>
+<p class="text-[#876b64] dark:text-stone-400 text-sm">Iniciado às 19:15</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center">
+<div class="z-10 bg-primary text-white p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="w-[2px] bg-primary h-12"></div>
+</div>
+<div class="flex flex-col pb-6">
+<p class="text-[#171311] dark:text-white text-base font-bold">No Forno</p>
+<p class="text-[#876b64] dark:text-stone-400 text-sm">Assando às 19:25</p>
+</div>
+<!-- Step 4 Active -->
+<div class="flex flex-col items-center">
+<div class="z-10 border-2 border-primary bg-background-light dark:bg-background-dark text-primary p-1 rounded-full flex items-center justify-center shadow-[0_0_10px_rgba(215,70,29,0.3)]">
+<span class="material-symbols-outlined text-[20px] animate-pulse">delivery_dining</span>
+</div>
+</div>
+<div class="flex flex-col">
+<p class="text-primary text-base font-bold">Saiu para Entrega</p>
+<p class="text-[#876b64] dark:text-stone-400 text-sm font-medium">Previsão: 10-15 min</p>
+</div>
+</div>
+</div>
+<!-- Action Panel -->
+<div class="p-4 mt-auto">
+<div class="flex flex-col gap-3 rounded-xl border border-[#e5dedc] dark:border-white/10 bg-white dark:bg-[#2a1d19] p-5 shadow-sm">
+<div class="flex flex-col gap-1">
+<p class="text-[#171311] dark:text-white text-base font-bold leading-tight">Cupom Fiscal</p>
+<p class="text-[#876b64] dark:text-stone-400 text-sm font-normal">Sua nota fiscal já está disponível para visualização.</p>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal transition-transform active:scale-95">
+<span class="truncate">Ver Cupom</span>
+</button>
+</div>
+</div>
+<div class="h-10"></div>
+</div>
+</body></html>

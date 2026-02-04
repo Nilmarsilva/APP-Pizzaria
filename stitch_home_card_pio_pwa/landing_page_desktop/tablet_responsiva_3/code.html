@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PizzaSystem - Calculadora de ROI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c5951",
+                        "background-light": "#fafaf9",
+                        "background-dark": "#0a0a0a",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Epilogue', sans-serif;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #3f3f46;
+            border-radius: 999px;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #10b981;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 4px solid #1a1a1a;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+        .bar-transition {
+            transition: height 0.3s ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#131615] dark:text-white transition-colors duration-300">
+<nav class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-[#dee3e2] dark:border-white/10">
+<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="text-primary dark:text-white bg-primary/10 p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">local_pizza</span>
+</div>
+<h2 class="text-[#131615] dark:text-white text-lg font-extrabold tracking-tight">PizzaSystem</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-opacity-90 transition-all">
+                Começar
+            </button>
+</div>
+</div>
+</nav>
+<main class="w-full">
+<section class="max-w-7xl mx-auto px-4 pt-12 pb-6 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500 mb-4">
+            SIMULADOR DE ECONOMIA
+        </span>
+<h1 class="text-3xl md:text-5xl font-black mb-4 dark:text-white">Pare de queimar dinheiro com taxas</h1>
+<p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">Calcule agora quanto você economizaria migrando do marketplace para seu próprio sistema de delivery.</p>
+</section>
+<section class="max-w-7xl mx-auto px-4 py-12">
+<div class="bg-[#1a1a1a] rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl">
+<div class="flex flex-col lg:flex-row">
+<div class="w-full lg:w-1/2 p-8 md:p-12 space-y-12">
+<div class="space-y-8">
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Faturamento Mensal</label>
+<span class="text-2xl font-black text-white">R$ <span id="label-faturamento">20.000</span></span>
+</div>
+<input class="cursor-pointer" id="input-faturamento" max="200000" min="5000" oninput="calculateROI()" step="1000" type="range" value="20000"/>
+<div class="flex justify-between text-[10px] text-gray-500 font-bold">
+<span>R$ 5K</span>
+<span>R$ 200K</span>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<label class="text-sm font-bold text-gray-400 uppercase tracking-widest">Taxa do Marketplace</label>
+<span class="text-2xl font-black text-white"><span id="label-taxa">18</span>%</span>
+</div>
+<input class="cursor-pointer" id="input-taxa" max="30" min="10" oninput="calculateROI()" step="1" type="range" value="18"/>
+<div class="flex justify-between text-[10px] text-gray-500 font-bold">
+<span>10%</span>
+<span>30%</span>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5">
+<h4 class="text-xs font-bold text-gray-500 uppercase mb-8">Comparativo Mensal</h4>
+<div class="flex items-end justify-center gap-12 h-48">
+<div class="flex flex-col items-center gap-3 w-16">
+<div class="w-full bg-red-500/20 border-t-4 border-red-500 rounded-t-lg bar-transition" id="bar-marketplace" style="height: 80%;"></div>
+<span class="text-[10px] font-bold text-red-500 text-center uppercase">Marketplace</span>
+</div>
+<div class="flex flex-col items-center gap-3 w-16">
+<div class="w-full bg-emerald-500/20 border-t-4 border-emerald-500 rounded-t-lg bar-transition" id="bar-system" style="height: 15%;"></div>
+<span class="text-[10px] font-bold text-emerald-500 text-center uppercase">Nosso Sistema</span>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full lg:w-1/2 bg-zinc-900/50 p-8 md:p-12 flex flex-col justify-center border-l border-white/5">
+<div class="space-y-8">
+<div class="space-y-2">
+<p class="text-red-500 font-bold text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+                                Perda mensal identificada: <span id="perda-mensal">R$ 3.600,00</span>
+</p>
+<h2 class="text-white text-3xl font-extrabold leading-tight">Economia Anual Estimada</h2>
+<div class="text-emerald-400 text-5xl md:text-7xl font-black tracking-tighter" id="economia-anual">
+                                R$ 43.200,00
+                            </div>
+</div>
+<div class="bg-white/5 rounded-2xl p-6 border border-white/10">
+<p class="text-gray-300 text-lg leading-relaxed">
+                                Com nosso sistema de pagamento único, esse lucro que hoje vai para terceiros <span class="text-emerald-400 font-bold">volta direto para o seu bolso.</span>
+</p>
+</div>
+<div class="flex flex-col gap-4">
+<button class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 h-16 rounded-2xl font-black text-xl transition-all flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-[1.02] active:scale-[0.98]">
+                                Começar a economizar agora
+                                <span class="material-symbols-outlined font-black">arrow_forward</span>
+</button>
+<p class="text-center text-gray-500 text-xs font-medium italic">
+                                * Cálculo baseado na média de taxas do mercado versus plano fixo PizzaSystem.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 bg-background-light dark:bg-background-dark">
+<div class="max-w-4xl mx-auto px-4">
+<div class="text-center mb-16">
+<h2 class="text-[#131615] dark:text-white text-3xl font-black mb-4">Sua Pizzaria vs. Marketplaces</h2>
+<p class="text-[#6d7e7b] dark:text-gray-400">Compare os custos e veja por que investir no seu próprio sistema é mais lucrativo.</p>
+</div>
+<div class="overflow-hidden rounded-2xl border border-[#dee3e2] dark:border-white/10 shadow-xl bg-white dark:bg-zinc-900">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-white/5">
+<th class="p-6 font-bold border-b border-[#dee3e2] dark:border-white/10">Recursos</th>
+<th class="p-6 font-bold border-b border-[#dee3e2] dark:border-white/10 text-emerald-500">Nosso Sistema</th>
+<th class="p-6 font-bold border-b border-[#dee3e2] dark:border-white/10 opacity-50">Marketplaces</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#dee3e2] dark:divide-white/10">
+<tr>
+<td class="p-6 dark:text-gray-300">Taxa por Pedido</td>
+<td class="p-6 font-bold text-emerald-500">R$ 0,00</td>
+<td class="p-6 dark:text-gray-500">Até 30%</td>
+</tr>
+<tr>
+<td class="p-6 dark:text-gray-300">Domínio dos Clientes</td>
+<td class="p-6"><span class="material-symbols-outlined text-green-500">check_circle</span></td>
+<td class="p-6"><span class="material-symbols-outlined text-red-400">cancel</span></td>
+</tr>
+<tr>
+<td class="p-6 dark:text-gray-300">Pagamento Instantâneo</td>
+<td class="p-6"><span class="material-symbols-outlined text-green-500">check_circle</span></td>
+<td class="p-6"><span class="material-symbols-outlined text-red-400">cancel</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-background-light dark:bg-zinc-950 border-t border-[#dee3e2] dark:border-white/10 py-12">
+<div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="text-primary dark:text-white bg-primary/10 p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">local_pizza</span>
+</div>
+<h2 class="text-[#131615] dark:text-white text-lg font-extrabold">PizzaSystem</h2>
+</div>
+<p class="text-[#6d7e7b] dark:text-gray-500 text-sm">© 2024 PizzaSystem Technology. Todos os direitos reservados.</p>
+</div>
+</footer>
+<script>
+    function calculateROI() {
+        const faturamento = parseInt(document.getElementById('input-faturamento').value);
+        const taxa = parseInt(document.getElementById('input-taxa').value);
+        // Custo fixo do sistema (exemplo para o gráfico)
+        const custoFixoSistema = 297; 
+        const custoMarketplace = (faturamento * taxa) / 100;
+        const economiaMensal = custoMarketplace - custoFixoSistema;
+        const economiaAnual = economiaMensal * 12;
+        // Labels
+        document.getElementById('label-faturamento').textContent = faturamento.toLocaleString('pt-BR');
+        document.getElementById('label-taxa').textContent = taxa;
+        // Result values
+        document.getElementById('perda-mensal').textContent = 'R$ ' + custoMarketplace.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('economia-anual').textContent = 'R$ ' + (economiaAnual > 0 ? economiaAnual : 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        // Bars logic
+        const barMarketplace = document.getElementById('bar-marketplace');
+        const barSystem = document.getElementById('bar-system');
+        // Max height for visualization (based on 100% relative to possible max loss)
+        const maxPosibleLoss = (200000 * 30) / 100; // 60k
+        const heightMarketplace = Math.max((custoMarketplace / maxPosibleLoss) * 100, 5);
+        const heightSystem = Math.max((custoFixoSistema / maxPosibleLoss) * 100, 5);
+        barMarketplace.style.height = heightMarketplace + '%';
+        barSystem.style.height = heightSystem + '%';
+    }
+    // Initialize
+    calculateROI();
+</script>
+
+</body></html>

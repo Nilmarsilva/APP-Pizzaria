@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b34",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221011",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: "Work Sans", sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col max-w-[480px] mx-auto bg-white dark:bg-background-dark shadow-xl">
+<!-- Top App Bar (Overlaid on Header Image) -->
+<div class="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4 bg-gradient-to-b from-black/40 to-transparent">
+<button class="flex size-10 items-center justify-center rounded-full bg-white/90 text-[#181111] backdrop-blur-sm">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-full bg-white/90 text-[#181111] backdrop-blur-sm">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-full bg-white/90 text-[#181111] backdrop-blur-sm">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+<!-- Header Image -->
+<div class="w-full h-80 bg-center bg-no-repeat bg-cover flex flex-col justify-end" data-alt="Delicious pepperoni pizza with melted cheese and fresh herbs" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0_3jtg7Yknd7zvCJ-k2U7wuLT4tNHt-51wt9zS_OF8P1uIMibwMjSIBo5sM1RYNfJnzFLxyh1VIqJoJsvwsddxLrJwksNJY_91SFTPX-p35b87NGoRHdyggAL9Z7oYPgpOdVLokDNuXhnq11RLaBx5B6Uzutu3lgtcRlyBPD-YFPPEVy9-xD363cwuiQoUNb08RZgA0LUgOnRY52dtesRZWZ9GXjZDyOwaT2RNEaruK-8gpjs1k2eIsDkSBrBgFLpADLhHKpb4pg");'>
+</div>
+<!-- Content Section -->
+<div class="flex flex-col gap-1 px-4 pt-6 pb-4">
+<div class="flex items-center justify-between">
+<h1 class="text-[#181111] dark:text-white tracking-tight text-3xl font-bold leading-tight">Calabresa Especial</h1>
+<span class="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Mais Vendida</span>
+</div>
+<p class="text-[#181111] dark:text-gray-300 text-base font-normal leading-relaxed pt-2">
+                Molho de tomate artesanal, muçarela, calabresa fatiada, cebola roxa, azeitonas pretas e orégano fresco. Massa de fermentação lenta.
+            </p>
+</div>
+<!-- Divider -->
+<div class="h-2 bg-background-light dark:bg-black/20"></div>
+<!-- Section: Tamanho -->
+<div class="px-4 py-4">
+<div class="flex items-center justify-between pb-4">
+<h3 class="text-[#181111] dark:text-white text-lg font-bold leading-tight tracking-tight">Escolha o tamanho</h3>
+<span class="text-xs font-medium bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded uppercase">Obrigatório</span>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<label class="relative flex cursor-pointer items-center justify-between rounded-xl border-2 border-primary bg-primary/5 p-4 transition-all">
+<div class="flex items-center gap-3">
+<div class="flex size-5 items-center justify-center rounded-full border-2 border-primary">
+<div class="size-2.5 rounded-full bg-primary"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-[#181111] dark:text-white">Gigante (40cm)</span>
+<span class="text-sm text-gray-500 dark:text-gray-400">12 fatias - Serve 4 pessoas</span>
+</div>
+</div>
+<span class="font-bold text-primary">R$ 84,90</span>
+<input checked="" class="hidden" name="size" type="radio"/>
+</label>
+<label class="relative flex cursor-pointer items-center justify-between rounded-xl border-2 border-gray-100 dark:border-gray-800 p-4 transition-all hover:border-primary/50">
+<div class="flex items-center gap-3">
+<div class="flex size-5 items-center justify-center rounded-full border-2 border-gray-300 dark:border-gray-600"></div>
+<div class="flex flex-col">
+<span class="font-bold text-[#181111] dark:text-white">Grande (35cm)</span>
+<span class="text-sm text-gray-500 dark:text-gray-400">8 fatias - Serve 3 pessoas</span>
+</div>
+</div>
+<span class="font-bold text-[#181111] dark:text-white">R$ 72,90</span>
+<input class="hidden" name="size" type="radio"/>
+</label>
+<label class="relative flex cursor-pointer items-center justify-between rounded-xl border-2 border-gray-100 dark:border-gray-800 p-4 transition-all hover:border-primary/50">
+<div class="flex items-center gap-3">
+<div class="flex size-5 items-center justify-center rounded-full border-2 border-gray-300 dark:border-gray-600"></div>
+<div class="flex flex-col">
+<span class="font-bold text-[#181111] dark:text-white">Média (30cm)</span>
+<span class="text-sm text-gray-500 dark:text-gray-400">6 fatias - Serve 2 pessoas</span>
+</div>
+</div>
+<span class="font-bold text-[#181111] dark:text-white">R$ 59,90</span>
+<input class="hidden" name="size" type="radio"/>
+</label>
+</div>
+</div>
+<!-- Section: Bordas Recheadas -->
+<div class="px-4 py-4">
+<h3 class="text-[#181111] dark:text-white text-lg font-bold leading-tight tracking-tight pb-4">Borda recheada</h3>
+<div class="flex flex-col gap-2">
+<label class="flex items-center justify-between p-3 rounded-lg border border-gray-100 dark:border-gray-800">
+<span class="text-base text-[#181111] dark:text-gray-300">Catupiry Original</span>
+<div class="flex items-center gap-3">
+<span class="text-sm font-semibold text-primary">+ R$ 12,00</span>
+<input class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg border border-gray-100 dark:border-gray-800">
+<span class="text-base text-[#181111] dark:text-gray-300">Cheddar Cremoso</span>
+<div class="flex items-center gap-3">
+<span class="text-sm font-semibold text-primary">+ R$ 12,00</span>
+<input class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+</div>
+</label>
+</div>
+</div>
+<!-- Section: Observações -->
+<div class="px-4 py-4 pb-32">
+<h3 class="text-[#181111] dark:text-white text-lg font-bold leading-tight tracking-tight pb-3">Observações</h3>
+<div class="relative">
+<textarea class="w-full p-4 rounded-xl border border-gray-200 dark:border-gray-800 dark:bg-gray-900/50 focus:border-primary focus:ring-0 text-base min-h-[100px]" placeholder="Ex: Tirar a cebola, bem passada, etc..."></textarea>
+<div class="absolute bottom-3 right-3 text-xs text-gray-400">0 / 140</div>
+</div>
+</div>
+<!-- Sticky Footer Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-gray-100 dark:border-gray-800 max-w-[480px] mx-auto">
+<div class="flex items-center gap-4">
+<!-- Quantity Stepper -->
+<div class="flex items-center justify-between bg-gray-100 dark:bg-gray-800 rounded-lg p-1 h-12 w-32 shrink-0">
+<button class="flex size-10 items-center justify-center text-primary">
+<span class="material-symbols-outlined font-bold">remove</span>
+</button>
+<span class="font-bold text-lg">1</span>
+<button class="flex size-10 items-center justify-center text-primary">
+<span class="material-symbols-outlined font-bold">add</span>
+</button>
+</div>
+<!-- Add to Cart Button -->
+<button class="flex-1 flex items-center justify-between bg-primary text-white rounded-lg h-12 px-5 font-bold transition-transform active:scale-95">
+<span>Adicionar</span>
+<span class="text-sm opacity-90">R$ 84,90</span>
+</button>
+</div>
+<!-- Home Indicator (iOS style) -->
+<div class="w-32 h-1 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mt-6 mb-1"></div>
+</div>
+</div>
+</body></html>

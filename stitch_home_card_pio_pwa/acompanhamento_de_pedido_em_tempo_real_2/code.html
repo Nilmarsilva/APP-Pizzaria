@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acompanhamento de Pedido</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d7461d",
+                        "status-pending": "#9ca3af",
+                        "status-done": "#10b981",
+                        "background-light": "#f8f9fa",
+                        "background-dark": "#121212",
+                    },
+                    fontFamily: {
+                        "sans": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "ios": "1.25rem"
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .ios-blur {
+                @apply backdrop-blur-xl bg-white/80 dark:bg-black/80;
+            }
+            .timeline-dot-done {
+                @apply bg-status-done text-white;
+            }
+            .timeline-dot-pending {
+                @apply bg-status-pending text-white;
+            }
+            .timeline-line-done {
+                @apply bg-status-done;
+            }
+            .timeline-line-pending {
+                @apply bg-gray-200 dark:bg-zinc-800;
+            }
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-zinc-900 dark:text-zinc-100 font-sans antialiased">
+<div class="relative flex min-h-screen w-full flex-col max-w-[480px] mx-auto overflow-x-hidden pb-24">
+<header class="sticky top-0 z-30 px-4 pt-4 pb-2 ios-blur border-b border-gray-200 dark:border-zinc-800">
+<div class="flex items-center justify-between mb-4">
+<button class="size-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span>
+</button>
+<div class="text-center">
+<p class="text-xs font-semibold uppercase tracking-widest text-zinc-500">Pedido #4092</p>
+<p class="text-lg font-bold">Acompanhamento</p>
+</div>
+<button class="size-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800">
+<span class="material-symbols-outlined text-[20px] text-primary">help</span>
+</button>
+</div>
+<div class="bg-white dark:bg-zinc-900 rounded-ios p-4 shadow-sm border border-gray-100 dark:border-zinc-800 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary">schedule</span>
+</div>
+<div>
+<p class="text-xs text-zinc-500 font-medium leading-none mb-1">Previsão de Entrega</p>
+<p class="text-xl font-bold leading-none">19:45 - 20:00</p>
+</div>
+</div>
+<div class="h-8 w-[1px] bg-gray-200 dark:bg-zinc-800"></div>
+<div class="text-right">
+<p class="text-xs text-zinc-500 font-medium leading-none mb-1">Status</p>
+<p class="text-sm font-bold text-status-done">Em trânsito</p>
+</div>
+</div>
+</header>
+<section class="p-6">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl font-bold tracking-tight">Saiu para entrega!</h1>
+<p class="text-zinc-500 dark:text-zinc-400">O entregador já coletou seu pedido e está a caminho do seu endereço.</p>
+</div>
+</section>
+<section class="px-4 mb-8">
+<div class="relative w-full aspect-[16/9] rounded-ios overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANdEE79i9OallPomsE834tNGxID6tiqezZm7SAL_NwMrQHwGehxRbBc4T5LFthDNHZ2hSu1EcKTVF8ICiFjY7I7vugUUGahG8s4-eDTx9ZZ_bc-suugqIx1g7HLqbSejqdlXPCNXDna9NB2fxRT6_gCas4cLvYSjNq3-uO5HUi0AhYT0f5i2klmu9xM7Ga0rFJ7RXewyZCtVF9V06LeOm_pZU6OUwvEkHtxvFBgwCzielWsFzjMhnF2x1kAhINRNPZtEIdigCraXQ')"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-10 h-10 bg-primary/40 rounded-full scale-150"></div>
+<div class="z-10 bg-primary p-2 rounded-full shadow-lg text-white ring-4 ring-white/20">
+<span class="material-symbols-outlined text-sm">delivery_dining</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="px-6 mb-8">
+<h3 class="text-xs font-bold uppercase tracking-[0.15em] text-zinc-400 mb-6">Linha do Tempo</h3>
+<div class="space-y-0">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="z-10 size-8 rounded-full timeline-dot-done flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="w-0.5 h-12 timeline-line-done"></div>
+</div>
+<div class="pt-1 pb-8">
+<p class="font-bold text-zinc-900 dark:text-zinc-100">Pedido Recebido</p>
+<p class="text-sm text-zinc-500">Recebemos seu pedido às 19:10</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="z-10 size-8 rounded-full timeline-dot-done flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="w-0.5 h-12 timeline-line-done"></div>
+</div>
+<div class="pt-1 pb-8">
+<p class="font-bold text-zinc-900 dark:text-zinc-100">Preparando</p>
+<p class="text-sm text-zinc-500">Sua pizza está sendo montada</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="z-10 size-8 rounded-full timeline-dot-done flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="w-0.5 h-12 timeline-line-done"></div>
+</div>
+<div class="pt-1 pb-8">
+<p class="font-bold text-zinc-900 dark:text-zinc-100">No Forno</p>
+<p class="text-sm text-zinc-500">Assando em temperatura ideal</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="z-10 size-8 rounded-full bg-status-done text-white flex items-center justify-center ring-4 ring-status-done/20">
+<span class="material-symbols-outlined text-[18px]">delivery_dining</span>
+</div>
+</div>
+<div class="pt-1">
+<p class="font-bold text-status-done">Saiu para Entrega</p>
+<p class="text-sm text-zinc-500 font-medium">O entregador está no caminho</p>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4">
+<div class="bg-white dark:bg-zinc-900 rounded-ios p-5 border border-gray-200 dark:border-zinc-800 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="size-16 rounded-full bg-center bg-cover border-2 border-gray-100 dark:border-zinc-800" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBilIi5xTJMQUu5C_mACjaW48gLhvshHBIkEL7MgjrqxtKt0U7eI0GGR7Vxgh46qoP41605H9xvM808HSBFv22KcCr0wBIwd7XFJCa3Mm1A8qBiLjGYzPq4VEtLg4L-JXEsEptDIbAU8EC2xy-eOkJ3ZIIdrpBi90FpqQgQdHFy5DERON8tz9lAh4aKSuXZnPB1nV8oKya4PXUE--c8hByBTnL3GetWdhwio41VMlDe3_o64zyEH5bOKvljDa7JgBZcyNBJ1cs0BCE')"></div>
+<div class="absolute -bottom-1 -right-1 bg-status-done size-5 rounded-full border-2 border-white dark:border-zinc-900 flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-white fill-current">check_circle</span>
+</div>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-lg leading-tight">Ricardo Silva</h4>
+<div class="flex items-center gap-1.5 mt-0.5">
+<div class="flex items-center text-yellow-500">
+<span class="material-symbols-outlined text-[14px] fill-current">star</span>
+<span class="text-xs font-bold ml-0.5">4.9</span>
+</div>
+<span class="text-zinc-300 dark:text-zinc-700 text-xs">•</span>
+<span class="text-xs text-zinc-500">Entregador oficial</span>
+</div>
+</div>
+<a class="flex items-center justify-center size-12 rounded-full bg-green-500 text-white shadow-md active:scale-90 transition-transform" href="https://wa.me/#">
+<span class="material-symbols-outlined text-[24px]">chat</span>
+</a>
+</div>
+</div>
+</section>
+<footer class="mt-8 px-4 pb-10">
+<button class="w-full h-14 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold rounded-ios flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">receipt_long</span>
+                Ver Detalhes do Pedido
+            </button>
+</footer>
+</div>
+
+</body></html>

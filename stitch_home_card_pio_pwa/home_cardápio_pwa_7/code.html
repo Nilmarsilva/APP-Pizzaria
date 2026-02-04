@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Home PWA - Grid Layout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b34",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221011",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+            min-height: 100dvh;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#181111] dark:text-white">
+<nav class="sticky top-0 z-50 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<button class="text-[#181111] dark:text-white size-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">short_text</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Delivery em</span>
+<div class="flex items-center gap-1">
+<span class="text-sm font-bold">Rua das Flores, 123</span>
+<span class="material-symbols-outlined text-primary text-sm">expand_more</span>
+</div>
+</div>
+<button class="size-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+<span class="material-symbols-outlined text-2xl">person</span>
+</button>
+</div>
+</nav>
+<main class="max-w-md mx-auto pb-32">
+<div class="px-4 py-3">
+<div class="flex items-center rounded-2xl h-12 bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700 px-4 gap-3">
+<span class="material-symbols-outlined text-gray-400">search</span>
+<input class="w-full border-none bg-transparent focus:ring-0 p-0 text-sm placeholder:text-gray-400" placeholder="O que vamos comer hoje?"/>
+</div>
+</div>
+<div class="mt-2">
+<div class="flex overflow-x-auto no-scrollbar snap-x snap-mandatory px-4 gap-3">
+<div class="snap-center flex-shrink-0 w-full">
+<div class="w-full bg-center bg-no-repeat aspect-[21/9] bg-cover rounded-2xl shadow-sm flex flex-col justify-end p-4 relative overflow-hidden" style='background-image: linear-gradient(to right, rgba(0,0,0,0.8), transparent), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCi5BpxKqAXjWE6ald_uyW-Vxr3FVtiMvmu0kxgGlvlLC_YXeJJ4MPjx5ZCZATsi7lNdVi4dZJjZnv8E0iiEaXZ7rzz0FiZYt2ShS6IOZbfOq7BI9xGxqIm7RHXEXUNSQu78p8suC45m0V_7HLdK2XZoyQtm_P8O4XM2Ab6dSjcoph-rrmHj8xvJp_oPfNTI6EBnxlwDiQum-K5gW6PF-yYd-yDV4iViFG5DNMD8jDA_JwKTB79ZzkFoJZKfoXkL0riMnGZFMe9AzU");'>
+<span class="absolute top-3 right-3 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-tighter">Destaque do Dia</span>
+<p class="text-white text-xl font-black italic leading-tight uppercase">2 Pizzas<br/>por R$ 79,90</p>
+</div>
+</div>
+<div class="snap-center flex-shrink-0 w-full">
+<div class="w-full bg-center bg-no-repeat aspect-[21/9] bg-cover rounded-2xl shadow-sm flex flex-col justify-end p-4 relative overflow-hidden" style='background-image: linear-gradient(to right, rgba(0,0,0,0.8), transparent), url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1mdziDFMEOK-wa9ZVPlSGbIN4ZokUbfDyYdYmzfDPjktDjauoGCo-LpN-HTDRVT-Uur7D1VL6NszogjjmFDJPPCp-BActQaO02YNvx8UYVGSyHro61WXCFNmtyZSdOOQeKw7iXoh3PnH-fhI_XHxqVYOf6BW3QZRCX2y_O2cHNocI5DFeLQ-_KG3gbplAcn9pQSmU6UzT6WVcB4F-urTYuVNtFdJ6tl7gavs25xIl8F8GwJV2iUkFOr_sJU1AAeUFJ9w-w1gQx7A");'>
+<p class="text-white text-xl font-black italic leading-tight uppercase">Borda Recheada<br/>Grátis hoje</p>
+</div>
+</div>
+</div>
+<div class="flex justify-center gap-1.5 mt-3">
+<div class="h-1.5 w-4 rounded-full bg-primary"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+</div>
+</div>
+<div class="mt-8">
+<div class="flex items-center justify-between px-4 mb-4">
+<h3 class="font-bold text-lg">Categorias</h3>
+</div>
+<div class="flex overflow-x-auto no-scrollbar px-4 gap-6">
+<a class="flex flex-col items-center gap-2 shrink-0" href="#">
+<div class="size-16 rounded-full bg-white dark:bg-gray-800 shadow-sm border-2 border-primary p-1 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDt7j9pd9LeNJa5oA0yEOKrLvekL2dfg0IB961SC_JZJ-92QrgTngbhfjuj5aKpxU3SV6g6Qv4Ke6i58Ne7Qlca-bZBJQdLcSaXE6AGzkNlSYFrxIPvFZlw4iYPGHmA6wbrDukH2bsaQm9bWyQs-rCOxEFEU2XlxPVklFt5fLIIaH-3D--3mnKaw4ZVxExLiQYzATIUjgrbRypbMaM3l_nsw6UCEaKwXIGmgIeHT9TRnKqAzawt3JEEbxa_aFfee6Eed8jn-vqlT2g");'></div>
+</div>
+<span class="text-xs font-bold">Pizzas</span>
+</a>
+<a class="flex flex-col items-center gap-2 shrink-0" href="#">
+<div class="size-16 rounded-full bg-white dark:bg-gray-800 shadow-sm border border-transparent p-1 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXwzHbGIcpL6wtx1i2LpnCTq99L11Zyb2JudP3_iEatR7Vs4kvlpFaDFfX5_-CbAU0x3JHx43bmax8Cks9vgkak1hwX74ybjOIRCB2oqlrxXYhbAh07eM_krQeUTI1b5QQU5zk--cARcqaIrDKurdWs-uvzjoJk-pH5bvDaS7uH970RKiwpaTctntZbyO4fU2dqkXKgZQCZ5lR6cAAbOMHoU5QcCZdcwowuJrdVcbQVIYOCksvQwc_UDg-HQWjfSy-3-6_ZixmPhM");'></div>
+</div>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">Bebidas</span>
+</a>
+<a class="flex flex-col items-center gap-2 shrink-0" href="#">
+<div class="size-16 rounded-full bg-white dark:bg-gray-800 shadow-sm border border-transparent p-1 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPouGNBQXpK9h0mS74PUwm9tmVklSanBw58n8MjpQxnVSogm93Bm5Lh0ohxktE82-aNOjEi6sXEElO6nuofTMlroHAdTZphx_wnM73kaAnOZCMv36VyS472dOpoNxHVBKSXjVUqj-sUbq5yu9a2DbjjNj6CT4sDvobdD1PGpuZUctNTJLkLdvIJfNgIfIAhAbxzHkgBGuFDJL0BZWbnsO06sSy5KRj1O669ApvsZxr6rdd59dLUn5-qWKy2x7BkFhJZYZB6xNXDyQ");'></div>
+</div>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">Doces</span>
+</a>
+<a class="flex flex-col items-center gap-2 shrink-0" href="#">
+<div class="size-16 rounded-full bg-white dark:bg-gray-800 shadow-sm border border-transparent p-1 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDtdXbyVJVVO-ijj3q6MD61XHl9Izo-rXKnHInLlH5_c8rpegn6IghuICB9C4nChhncHA-lCMDn-VsyibH4lpzYRU7g0QHb2xVV-3Cu6DMOfRMpIk-RaRogDn-136bJSzQsLwTIsLvUpfyugu8UXbLOD3XmwDVX1fzykkrT9hgwvO5Dpna-rC7WrbvS9oMqsDIh9D90txdbN2chjJnvF0EPmS_fCBPgEitKDEHq9d7WhhjX9uFtOF5IJJrpsOnRw_-rYBGPXe6OK8s");'></div>
+</div>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">Combos</span>
+</a>
+<a class="flex flex-col items-center gap-2 shrink-0" href="#">
+<div class="size-16 rounded-full bg-white dark:bg-gray-800 shadow-sm border border-transparent p-1 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSIN0TM7w7rVclVTJLlCLESyk8ozrpYXXIwg5RDhdmuLXsA1-lZs15QmFOG_ggFqg1sP4nBoV1mokSNzBJUuDjYzEEBKYrXsbdo4sfnWpDQ6y_HYUMPNrV2UVWPllEfVDfSTa_Ym_JyhYZOyuipz-HiuUF_LhwUWGL2Jupgg75cHZYtgiK7WCt6ZzXkfUnIpwN_yL8CNnWJuLt2jMZZMo32luxHOeIkIEOwxsCusyKXFCSaMOFERJ0vxb1MR0Mb5BCdnXt-L1aoBA");'></div>
+</div>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">Promoções</span>
+</a>
+</div>
+</div>
+<div class="px-4 mt-8 mb-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold text-lg">Os mais pedidos</h3>
+<button class="text-primary text-xs font-bold uppercase tracking-tight">Ver todos</button>
+</div>
+<div class="product-grid">
+<div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col">
+<div class="relative w-full aspect-square bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSIN0TM7w7rVclVTJLlCLESyk8ozrpYXXIwg5RDhdmuLXsA1-lZs15QmFOG_ggFqg1sP4nBoV1mokSNzBJUuDjYzEEBKYrXsbdo4sfnWpDQ6y_HYUMPNrV2UVWPllEfVDfSTa_Ym_JyhYZOyuipz-HiuUF_LhwUWGL2Jupgg75cHZYtgiK7WCt6ZzXkfUnIpwN_yL8CNnWJuLt2jMZZMo32luxHOeIkIEOwxsCusyKXFCSaMOFERJ0vxb1MR0Mb5BCdnXt-L1aoBA");'>
+<button class="absolute top-2 right-2 size-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-400">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h4 class="font-bold text-sm leading-tight mb-1 line-clamp-1">Margherita</h4>
+<p class="text-[10px] text-gray-500 dark:text-gray-400 mb-2 line-clamp-1">Molho, mozzarella, manjericão</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-primary font-bold text-sm">R$ 45,90</span>
+<button class="size-7 bg-primary text-white rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col">
+<div class="relative w-full aspect-square bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8xmvQ19rWExr8erHVkna9PZQqtXA_YesRpJmGdu1ftiQBur0kTjAdghCXTvGkixUnLVo5s3j2qzd15gN4SiaPw_H85vWizRoh4HLk_hf9sN3Fl0n2cjaWdFpSXzCgLBuN_T38ml2QfNLjYcQT_wbW3jyQDd_6gI5Oxp4A1dnBtDfWzkP7BGxSAHWJg_RSYXO4kk5oNoptDoApSS3tu-xjKJlyO26Wf5HJXqJeTjPQGZwHr1M-NHYadJm3At7vQQmc_hyq6xS_Hg0");'>
+<button class="absolute top-2 right-2 size-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-400">
+<span class="material-symbols-outlined text-xl">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h4 class="font-bold text-sm leading-tight mb-1 line-clamp-1">Pepperoni</h4>
+<p class="text-[10px] text-gray-500 dark:text-gray-400 mb-2 line-clamp-1">Pepperoni artesanal e queijo</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-primary font-bold text-sm">R$ 52,90</span>
+<button class="size-7 bg-primary text-white rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col">
+<div class="relative w-full aspect-square bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDkm6xtJx1fzL1oXHdAvQXuIcDnldGzpu9kq9jbsL3dOspP1n0Ux50U0nPNiRv7lMQk4cOYwUjoubCuXCrBW-oNcZ-Y_9mZx1OBJZbzL8ErcIrCHp-w4gRA43K8lFNaCUd7UaIReLtykMafhmDwg2SjtizPs-KxKw6b_TILMKLq3Nfxbztx-QUaQMviH9JseN7LSv1k0Vfg_DG3BfAoPImcVdi63CP0UdvwFawLWRBglHG8k4Y3Z-wbkK5WMSHCw5-soPkbwVOX30g");'>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h4 class="font-bold text-sm leading-tight mb-1 line-clamp-1">4 Queijos</h4>
+<p class="text-[10px] text-gray-500 dark:text-gray-400 mb-2 line-clamp-1">Parmesão, gorgonzola, catupiry</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-primary font-bold text-sm">R$ 54,90</span>
+<button class="size-7 bg-primary text-white rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col">
+<div class="relative w-full aspect-square bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBRSNV3reLpvSu7TrdlClGD34ZZjYqPtVl1sAtDiwnjF-R0TiJEa70tmwU5nG5q7H0NQUlnMBf_ibMmW3z3Y635JeZ9TD8jLk4wW9zBG-NmIl0Dqnd-gvUMz8Wx_jlVjiwW57eDCDvzWjA87m90PpuWGGWgHbm6t_BTM_hbSt5ulVuklA2SboGwiN3quf5hpDVFoU8Do7W8tdrUgrtG0bizqn32xuZ0ev7tiH_gvF7dxe-19Hiv68ScKNwIjnb2V-f3HrTqG_29Zfg");'>
+</div>
+<div class="p-3 flex flex-col flex-1">
+<h4 class="font-bold text-sm leading-tight mb-1 line-clamp-1">Shimeji</h4>
+<p class="text-[10px] text-gray-500 dark:text-gray-400 mb-2 line-clamp-1">Cogumelos e azeite trufado</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-primary font-bold text-sm">R$ 64,90</span>
+<button class="size-7 bg-primary text-white rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-8 right-6 z-50">
+<button class="relative bg-primary text-white size-16 rounded-full shadow-2xl flex items-center justify-center transition-transform active:scale-90 overflow-visible">
+<span class="material-symbols-outlined text-3xl">shopping_bag</span>
+<div class="absolute -top-1 -right-1 bg-white dark:bg-background-dark text-primary border-2 border-primary size-6 flex items-center justify-center rounded-full text-xs font-black">
+                2
+            </div>
+<div class="absolute -top-10 right-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-100 dark:border-gray-700 whitespace-nowrap">
+<span class="text-xs font-bold text-primary">R$ 98,80</span>
+</div>
+</button>
+</div>
+<div class="h-8 bg-background-light dark:bg-background-dark"></div>
+
+</body></html>
