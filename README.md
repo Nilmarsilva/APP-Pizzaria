@@ -10,22 +10,24 @@ Plataforma de vendas e operação para pizzaria, com:
 ## Status atual
 
 ### ✅ Já implementado
-- Backend FastAPI com módulos: autenticação, cardápio, pedidos, fidelidade e administração.
-- Armazenamento em memória (`InMemoryDB`) para prototipação.
-- Endpoints administrativos para configurações, produtos/categorias, cupons, bairros, motoboys e pedidos.
-- Frontend iniciado com múltiplas telas (cliente e admin) e roteamento configurado.
+- Backend FastAPI com módulos: autenticação, cardápio, pedidos, fidelidade, notificações e administração.
+- Cardápio avançado no backend: variações (M/G/GG), adicionais/bordas, imagem e estoque por produto.
+- Endpoints administrativos para configurações, produtos/categorias, variações, adicionais, estoque, cupons (incluindo editar/remover), bairros, motoboys, notificações e pedidos.
+- Endpoints de pedido com **simulação** (`POST /orders/quote`) + criação e rastreio.
+- Frontend com páginas cliente e admin integradas de forma incremental com API real (menu, checkout, pedidos, perfil, fidelidade, notificações, cupons admin).
 
 ### ⚠️ Em andamento / limitações
-- Autenticação ainda sem JWT real (token fake no fluxo atual).
+- Autenticação ainda sem JWT real (fluxo atual simplificado).
 - Banco ainda não persistente (sem PostgreSQL).
-- Frontend ainda com foco visual, com integrações parciais com a API.
+- Não há tempo real por WebSocket/SSE para acompanhamento de pedidos.
+- Parte do módulo admin ainda depende de endpoints analíticos e operacionais avançados.
 
 ### 🎯 Próximo foco
-Implementar **recursos avançados de produto**:
-1. variações M/G/GG
-2. adicionais/bordas
-3. imagens de produto
-4. controle de estoque
+1. JWT + permissões de acesso (cliente/admin)
+2. Migração para PostgreSQL + SQLAlchemy + Alembic
+3. Tracking em tempo real de pedidos (WebSocket/SSE)
+4. Reorder, recompensas de fidelidade e perfil completo (endereços/pagamento salvo)
+5. Dashboard analítico e campanhas
 
 ---
 
@@ -33,7 +35,7 @@ Implementar **recursos avançados de produto**:
 - `backend/`: API FastAPI com regras de negócio e schemas.
 - `frontend/`: aplicação React + Vite + Tailwind.
 - `stitch_home_card_pio_pwa/`: referências visuais das telas.
-- `BACKLOG.md` e `ANALISE_GAP.md`: planejamento e análise de lacunas.
+- `BACKLOG.md`, `ANALISE_GAP.md` e `PLANO_INTEGRACAO_FRONTEND_BACKEND.md`: planejamento e análise de lacunas.
 
 ---
 
@@ -62,8 +64,8 @@ Frontend disponível por padrão em `http://127.0.0.1:5173`.
 ---
 
 ## Próximas entregas (macro)
-1. Recursos avançados de produto (variações, adicionais, imagens, estoque)
-2. Migração para PostgreSQL
-3. JWT + permissões
-4. Integração completa frontend/backend
-5. Tempo real com WebSocket para pedidos
+1. JWT + permissões
+2. PostgreSQL + migrações
+3. Tempo real com WebSocket/SSE para pedidos
+4. Funcionalidades pendentes do plano (reorder, campanhas, analytics, hardware)
+5. Consolidação da integração frontend/backend em 100% das telas

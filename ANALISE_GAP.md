@@ -1,6 +1,6 @@
 # Análise de Gap - Sistema Pizzaria Pro
 **Data:** 27/02/2026  
-**Status:** Backend em memória funcional + Frontend React/Vite iniciado
+**Status:** Backend e frontend com integração parcial funcional
 
 ---
 
@@ -11,84 +11,89 @@
 ### Backend (FastAPI)
 
 #### Infraestrutura base
-- ✅ Estrutura FastAPI organizada por módulos (`auth`, `menu`, `orders`, `loyalty`, `admin`)
+- ✅ Estrutura modular (`auth`, `menu`, `orders`, `loyalty`, `notifications`, `admin`)
 - ✅ Schemas Pydantic para validação
 - ✅ Armazenamento em memória com `InMemoryDB`
 - ✅ Endpoint de health check (`GET /health`)
 
 #### Autenticação e usuários
-- ✅ Cadastro de usuário via WhatsApp (`POST /auth/register`)
+- ✅ Cadastro de usuário (`POST /auth/register`)
 - ✅ Consulta de usuário (`GET /auth/users/{user_id}`)
-- ⚠️ Token de autenticação ainda é fake (sem JWT real)
+- ✅ Atualização básica de perfil (`PUT /auth/users/{user_id}`)
+- ⚠️ Token ainda simplificado (sem JWT real)
 
-#### Gestão administrativa (API)
-- ✅ Proteção administrativa por header `X-Admin-Token`
-- ✅ Configurações gerais da loja (`GET/PUT /admin/settings`)
-- ✅ Configurações de fidelidade (`GET/PUT /admin/loyalty-settings`)
-- ✅ Configurações de pagamento (`GET/PUT /admin/payment-settings`)
-- ✅ CRUD básico de categorias (`POST/GET /admin/categories`)
-- ✅ CRUD básico de produtos (`POST/GET /admin/products`)
-- ✅ Gestão de pedidos no painel (`GET /admin/orders`, `PATCH /admin/orders/{order_id}/status`)
-- ✅ Atribuição de motoboy (`PATCH /admin/orders/{order_id}/assign-courier`)
-- ✅ Relatório de fechamento diário (`GET /admin/reports/daily-close`)
-- ✅ CRUD de bairros e taxa de entrega (`POST/GET /admin/neighborhoods`)
-- ✅ CRUD de cupons (`POST/GET /admin/coupons`)
-- ✅ CRUD de motoboys (`POST/GET /admin/couriers`)
+#### Cardápio e produtos
+- ✅ Cardápio público (`GET /menu/`) com filtro por categoria e busca textual (`q`)
+- ✅ Cardápio detalhado (`GET /menu/detailed`) com variações e adicionais
+- ✅ Categorias públicas (`GET /menu/categories`)
+- ✅ Gestão de produto com imagem e estoque no admin (`POST/GET /admin/products`, `PATCH /admin/products/{product_id}/stock`)
+- ✅ Gestão de variações (`POST/GET /admin/products/{product_id}/variants`)
+- ✅ Gestão de adicionais/bordas (`POST/GET /admin/products/{product_id}/addons`)
 
 #### Pedidos
+- ✅ Simulação de pedido (`POST /orders/quote`)
 - ✅ Criação de pedido (`POST /orders/`)
-- ✅ Rastreamento de pedido (`GET /orders/track/{id}`)
-- ✅ Resumo de pedido (`GET /orders/{id}`)
-- ✅ Listagem de pedidos por usuário (`GET /orders/user/{user_id}`)
-- ✅ Cálculo de taxa por bairro
-- ✅ Aplicação de cupom no cálculo
-- ✅ Acúmulo de pontos ao marcar pedido como entregue
+- ✅ Rastreamento (`GET /orders/track/{id}`)
+- ✅ Resumo (`GET /orders/{id}`)
+- ✅ Listagem por usuário (`GET /orders/user/{user_id}`)
+- ✅ Validação e decremento de estoque no fluxo de pedido
+- ✅ Cálculo de taxa por bairro e aplicação de cupom
 
-#### Fidelidade
-- ✅ Consulta de pontos (`GET /loyalty/points/{user_id}`)
-- ✅ Regras de fidelidade configuráveis no admin
+#### Gestão administrativa
+- ✅ Configurações gerais (`GET/PUT /admin/settings`)
+- ✅ Configurações de fidelidade (`GET/PUT /admin/loyalty-settings`)
+- ✅ Configurações de pagamento (`GET/PUT /admin/payment-settings`)
+- ✅ Categorias e produtos (`POST/GET /admin/categories`, `POST/GET /admin/products`)
+- ✅ Pedidos no painel (`GET /admin/orders`, `PATCH /admin/orders/{order_id}/status`)
+- ✅ Atribuição de motoboy (`PATCH /admin/orders/{order_id}/assign-courier`)
+- ✅ Fechamento diário (`GET /admin/reports/daily-close`)
+- ✅ Bairros/taxas (`POST/GET /admin/neighborhoods`)
+- ✅ Cupons completo (`POST/GET/PATCH/DELETE /admin/coupons`)
+- ✅ Motoboys (`POST/GET /admin/couriers`)
+- ✅ Notificações administrativas (`POST /admin/notifications`)
+
+#### Fidelidade e notificações
+- ✅ Pontos de fidelidade (`GET /loyalty/points/{user_id}`)
+- ✅ Notificações do cliente (`GET /notifications/{user_id}`, `PATCH /notifications/{notification_id}`)
 
 ### Frontend (React + Vite + Tailwind)
-- ✅ Projeto frontend inicializado com React + Vite + TypeScript
-- ✅ Tailwind configurado
-- ✅ ESLint configurado
-- ✅ Estrutura de páginas do módulo cliente implementada
-- ✅ Estrutura de páginas do módulo administrativo implementada
-- ⚠️ Grande parte das telas ainda está estática (sem integração plena com API)
+- ✅ Telas cliente e admin implementadas
+- ✅ Integração parcial com API real em fluxos principais
+- ✅ API client e carrinho local (`localStorage`) implementados
+- ⚠️ Ainda há telas e ações dependentes de endpoints não existentes
 
 ---
 
 ## ❌ O QUE FALTA IMPLEMENTAR (priorizado)
 
 ### Fase 0 — Fundação técnica
-1. ❌ Autenticação real com JWT (access/refresh) e middleware de proteção
-2. ❌ Modelo de permissões (ex.: `is_admin`) em autenticação real
-3. ❌ Migração de InMemoryDB para PostgreSQL + SQLAlchemy + Alembic
+1. ❌ JWT real (access/refresh) e middleware robusto
+2. ❌ Permissões formais (ex.: `is_admin`) com autenticação real
+3. ❌ Migração de `InMemoryDB` para PostgreSQL + SQLAlchemy + Alembic
 
-### Fase 1 — Cardápio avançado (PRÓXIMO FOCO)
-1. ❌ **Variações de produto** (M, G, GG)
-2. ❌ **Adicionais e bordas** (com regras de seleção)
-3. ❌ **Imagens dos produtos** (upload e URL)
-4. ❌ **Estoque** (controle de disponibilidade/quantidade)
-5. ❌ Filtros por categoria no cardápio público
+### Fase 1 — Operação e experiência de compra
+1. ❌ Reorder (`POST /orders/{id}/reorder`)
+2. ❌ Perfil completo: endereços e métodos de pagamento salvos
+3. ❌ Catálogo e resgate de recompensas de fidelidade
+4. ❌ Busca de cliente no admin por termo (telefone/nome)
 
-### Fase 2 — Checkout e operação
-1. ❌ Integração real frontend ↔ backend (carrinho, checkout, perfil, pedidos)
-2. ❌ WebSocket para atualização de pedidos em tempo real
-3. ❌ Dashboard operacional de pedidos com atualização ao vivo
+### Fase 2 — Tempo real e inteligência operacional
+1. ❌ WebSocket/SSE para status de pedido em tempo real
+2. ❌ Tracking logístico (posição/ETA do entregador)
+3. ❌ Dashboard analítico por período/produto/canal
+4. ❌ Acerto financeiro avançado por motoboy/período
 
-### Fase 3 — Integrações e crescimento
-1. ❌ Push notifications e campanhas
-2. ❌ Impressão térmica (ESC/POS)
-3. ❌ Relatórios analíticos avançados
+### Fase 3 — Crescimento e integrações
+1. ❌ Campanhas (CRUD + segmentação + disparo)
+2. ❌ Integração transacional real de pagamentos/webhooks
+3. ❌ Hardware/impressão térmica (ESC/POS)
 
 ---
 
-## 🎯 Próximo passo acordado
-Vamos seguir para a implementação de **recursos avançados de produto**:
-- variações M/G/GG
-- adicionais/bordas
-- imagens
-- estoque
+## 🎯 Próximo passo sugerido
+Executar o próximo lote focado em **destravar operação diária**:
+1. busca de cliente no admin (`/admin/lancamento`)
+2. reorder no histórico de pedidos
+3. atualização de perfil com endereço
 
-Esse bloco será implementado primeiro no backend (modelagem + rotas + regras), e depois conectado ao frontend.
+Depois disso, partir para tempo real (WebSocket/SSE) e analytics.
