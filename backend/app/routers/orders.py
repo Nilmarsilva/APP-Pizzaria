@@ -8,6 +8,10 @@ from app.schemas.orders import CreateOrderRequest, OrderStatusResponse, OrderSum
 router = APIRouter()
 
 
+def _has_stock(estoque_ilimitado: bool, estoque_quantidade: int) -> bool:
+    return estoque_ilimitado or estoque_quantidade > 0
+
+
 @router.post("/", response_model=OrderStatusResponse)
 def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
     """Cria um novo pedido e retorna status inicial."""
@@ -18,6 +22,17 @@ def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
         produto = next((p for p in db.products if p.id == item.produto_id), None)
         if not produto:
             raise HTTPException(status_code=404, detail="Produto não encontrado.")
+        if not produto.disponivel:
+            raise HTTPException(status_code=400, detail=f"Produto {produto.nome} indisponível.")
+        if not _has_stock(produto.estoque_ilimitado, produto.estoque_quantidade):
+            raise HTTPException(status_code=400, detail=f"Produto {produto.nome} sem estoque.")
+
+        if not produto.estoque_ilimitado and item.quantidade > produto.estoque_quantidade:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Estoque insuficiente para {produto.nome}. Disponível: {produto.estoque_quantidade}.",
+            )
+
         subtotal = produto.preco_base * item.quantidade
         total_produtos += subtotal
         itens_pedido.append(
@@ -67,6 +82,13 @@ def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
         desconto_aplicado=desconto_aplicado,
     )
     db.add_order(pedido)
+
+    for item in payload.itens:
+        produto = next((p for p in db.products if p.id == item.produto_id), None)
+        if produto and not produto.estoque_ilimitado:
+            produto.estoque_quantidade = max(produto.estoque_quantidade - item.quantidade, 0)
+            if produto.estoque_quantidade == 0:
+                produto.disponivel = False
 
     return OrderStatusResponse(pedido_id=pedido.id, status=pedido.status)
 
