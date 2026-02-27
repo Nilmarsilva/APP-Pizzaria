@@ -51,6 +51,7 @@
 - ✅ Cupons completo (`POST/GET/PATCH/DELETE /admin/coupons`)
 - ✅ Motoboys (`POST/GET /admin/couriers`)
 - ✅ Notificações administrativas (`POST /admin/notifications`)
+- ✅ Busca de cliente para lançamento manual (`GET /admin/users/search?q=...`)
 
 #### Fidelidade e notificações
 - ✅ Pontos de fidelidade (`GET /loyalty/points/{user_id}`)
@@ -75,7 +76,6 @@
 1. ❌ Reorder (`POST /orders/{id}/reorder`)
 2. ❌ Perfil completo: endereços e métodos de pagamento salvos
 3. ❌ Catálogo e resgate de recompensas de fidelidade
-4. ❌ Busca de cliente no admin por termo (telefone/nome)
 
 ### Fase 2 — Tempo real e inteligência operacional
 1. ❌ WebSocket/SSE para status de pedido em tempo real
@@ -92,8 +92,8 @@
 
 ## 🎯 Próximo passo sugerido
 Executar o próximo lote focado em **destravar operação diária**:
-1. busca de cliente no admin (`/admin/lancamento`)
-2. reorder no histórico de pedidos
-3. atualização de perfil com endereço
+1. reorder no histórico de pedidos
+2. atualização de perfil com endereço
+3. decisão de carrinho server-side vs localStorage-only
 
 Depois disso, partir para tempo real (WebSocket/SSE) e analytics.

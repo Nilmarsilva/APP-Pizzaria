@@ -8,6 +8,7 @@ from fastapi.security import APIKeyHeader
 from app.core.storage import Coupon, Courier, NeighborhoodFee, UserNotification, db
 from app.schemas.admin import DailyCloseReport, OrderStatusUpdate
 from app.schemas.admin_settings import StoreSettingsResponse, StoreSettingsUpdate
+from app.schemas.auth import UserResponse
 from app.schemas.couriers import CourierCreate, CourierResponse
 from app.schemas.loyalty import LoyaltySettingsResponse, LoyaltySettingsUpdate
 from app.schemas.marketing import (
@@ -460,6 +461,27 @@ def delete_coupon(codigo: str) -> dict[str, str]:
 
     db.coupons.remove(cupom)
     return {"detail": "Cupom removido com sucesso."}
+
+
+
+
+@router.get("/users/search", response_model=list[UserResponse])
+def search_users(q: str) -> list[UserResponse]:
+    """Busca clientes por nome ou WhatsApp para lançamento manual."""
+    termo = q.strip().lower()
+    if len(termo) < 2:
+        return []
+
+    usuarios_filtrados = [
+        user
+        for user in db.users
+        if termo in user.nome.lower() or termo in user.whatsapp.lower()
+    ]
+
+    return [
+        UserResponse(id=user.id, nome=user.nome, whatsapp=user.whatsapp)
+        for user in usuarios_filtrados[:20]
+    ]
 
 
 @router.post("/couriers", response_model=CourierResponse)

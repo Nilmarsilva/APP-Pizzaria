@@ -109,7 +109,7 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 
 ### 3.11 `/admin/lancamento` (LancamentoPedidos)
 - Buscar cliente por termo (telefone/nome).
-  - Status: **CRIAR**.
+  - Status: **OK** → `GET /admin/users/search?q=...` (frontend integrado).
 - Listar produtos/categorias para montar pedido.
   - Status: **OK** → `GET /admin/categories`, `GET /admin/products`.
 - Criar pedido no balcão.
@@ -174,10 +174,10 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 ## 4) Itens backend a criar (lista consolidada)
 
 ### Prioridade P0
-1. Busca de clientes por termo (admin lançamento)
-2. Reorder de pedido
-3. Perfil completo (endereços e pagamento salvo)
-4. Definição oficial de carrinho (server-side ou localStorage-only)
+1. Reorder de pedido
+2. Perfil completo (endereços e pagamento salvo)
+3. Definição oficial de carrinho (server-side ou localStorage-only)
+4. Captura de lead/contato (LP)
 
 ### Prioridade P1
 1. Tracking em tempo real (WebSocket/SSE)
@@ -196,9 +196,9 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 ## 5) Plano de execução por sprint
 
 ### Sprint 1 — Operação comercial
-- Busca de cliente no admin lançamento.
 - Reorder no módulo de pedidos.
 - Endereços de usuário (perfil).
+- Definição oficial de carrinho (server-side ou localStorage-only).
 
 ### Sprint 2 — Experiência e retenção
 - Recompensas/resgate de fidelidade.
