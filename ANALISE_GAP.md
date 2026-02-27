@@ -19,7 +19,7 @@
 #### Autenticação e usuários
 - ✅ Cadastro de usuário (`POST /auth/register`)
 - ✅ Consulta de usuário (`GET /auth/users/{user_id}`)
-- ✅ Atualização básica de perfil (`PUT /auth/users/{user_id}`)
+- ✅ Atualização de perfil com endereço e pagamento preferido (`PUT /auth/users/{user_id}`)
 - ⚠️ Token ainda simplificado (sem JWT real)
 
 #### Cardápio e produtos
@@ -74,7 +74,7 @@
 3. ❌ Migração de `InMemoryDB` para PostgreSQL + SQLAlchemy + Alembic
 
 ### Fase 1 — Operação e experiência de compra
-1. ❌ Perfil completo: endereços e métodos de pagamento salvos
+1. ❌ Perfil avançado: múltiplos endereços e cartões salvos
 2. ❌ Catálogo e resgate de recompensas de fidelidade
 3. ❌ Captura de lead/contato (LP)
 
@@ -93,8 +93,8 @@
 
 ## 🎯 Próximo passo sugerido
 Executar o próximo lote focado em **destravar operação diária**:
-1. atualização de perfil com endereço
-2. decisão de carrinho server-side vs localStorage-only
-3. captura de lead/contato (LP)
+1. decisão de carrinho server-side vs localStorage-only
+2. captura de lead/contato (LP)
+3. catálogo/resgate de fidelidade
 
 Depois disso, partir para tempo real (WebSocket/SSE) e analytics.

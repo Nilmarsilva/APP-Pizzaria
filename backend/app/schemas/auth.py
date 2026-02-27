@@ -17,15 +17,19 @@ class AuthResponse(BaseModel):
 
 
 class UserResponse(BaseModel):
-    """Dados básicos do usuário."""
+    """Dados do usuário."""
 
     id: str
     nome: str
     whatsapp: str
+    endereco: str = ""
+    metodo_pagamento_preferido: str = ""
 
 
 class UpdateUserRequest(BaseModel):
-    """Atualização de dados básicos do usuário."""
+    """Atualização de dados de perfil do usuário."""
 
     nome: str = Field(..., min_length=2)
     whatsapp: str = Field(..., min_length=8)
+    endereco: str = Field(default="")
+    metodo_pagamento_preferido: str = Field(default="")

@@ -19,6 +19,8 @@ def register_user(payload: RegisterRequest) -> AuthResponse:
             id=str(uuid4()),
             nome=payload.nome,
             whatsapp=payload.whatsapp,
+            endereco="",
+            metodo_pagamento_preferido="",
         )
     )
     db.add_notification(
@@ -43,7 +45,13 @@ def get_user(user_id: str) -> UserResponse:
     usuario = next((user for user in db.users if user.id == user_id), None)
     if not usuario:
         raise HTTPException(status_code=404, detail="Usuário não encontrado.")
-    return UserResponse(id=usuario.id, nome=usuario.nome, whatsapp=usuario.whatsapp)
+    return UserResponse(
+        id=usuario.id,
+        nome=usuario.nome,
+        whatsapp=usuario.whatsapp,
+        endereco=usuario.endereco,
+        metodo_pagamento_preferido=usuario.metodo_pagamento_preferido,
+    )
 
 
 @router.put("/users/{user_id}", response_model=UserResponse)
@@ -61,4 +69,13 @@ def update_user(user_id: str, payload: UpdateUserRequest) -> UserResponse:
 
     usuario.nome = payload.nome
     usuario.whatsapp = payload.whatsapp
-    return UserResponse(id=usuario.id, nome=usuario.nome, whatsapp=usuario.whatsapp)
+    usuario.endereco = payload.endereco
+    usuario.metodo_pagamento_preferido = payload.metodo_pagamento_preferido
+
+    return UserResponse(
+        id=usuario.id,
+        nome=usuario.nome,
+        whatsapp=usuario.whatsapp,
+        endereco=usuario.endereco,
+        metodo_pagamento_preferido=usuario.metodo_pagamento_preferido,
+    )

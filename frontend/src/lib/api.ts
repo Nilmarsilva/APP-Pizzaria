@@ -10,6 +10,8 @@ export interface UserProfile {
   id: string;
   nome: string;
   whatsapp: string;
+  endereco: string;
+  metodo_pagamento_preferido: string;
 }
 
 export interface LoyaltyPointsResponse {
@@ -138,7 +140,7 @@ export const api = {
 
   getUser: (userId: string) => request<UserProfile>(`/auth/users/${userId}`),
 
-  updateUser: (userId: string, payload: { nome: string; whatsapp: string }) =>
+  updateUser: (userId: string, payload: { nome: string; whatsapp: string; endereco: string; metodo_pagamento_preferido: string }) =>
     request<UserProfile>(`/auth/users/${userId}`, {
       method: 'PUT',
       body: JSON.stringify(payload),

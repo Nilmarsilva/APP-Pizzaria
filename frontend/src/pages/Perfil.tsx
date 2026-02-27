@@ -9,6 +9,8 @@ const Perfil: React.FC = () => {
   const navigate = useNavigate();
   const [nome, setNome] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [metodoPagamentoPreferido, setMetodoPagamentoPreferido] = useState('');
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -23,6 +25,8 @@ const Perfil: React.FC = () => {
       .then((user) => {
         setNome(user.nome);
         setWhatsapp(user.whatsapp);
+        setEndereco(user.endereco ?? '');
+        setMetodoPagamentoPreferido(user.metodo_pagamento_preferido ?? '');
       })
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -38,7 +42,12 @@ const Perfil: React.FC = () => {
     try {
       setSaving(true);
       setMessage(null);
-      const updated = await api.updateUser(userId, { nome, whatsapp });
+      const updated = await api.updateUser(userId, {
+        nome,
+        whatsapp,
+        endereco,
+        metodo_pagamento_preferido: metodoPagamentoPreferido,
+      });
       localStorage.setItem('user_name', updated.nome);
       setMessage('Perfil atualizado com sucesso.');
     } catch (error) {
@@ -65,6 +74,21 @@ const Perfil: React.FC = () => {
 
           <Input label="Nome" value={nome} onChange={(e) => setNome(e.target.value)} icon="person" />
           <Input label="WhatsApp" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} icon="chat" />
+          <Input label="Endereço" value={endereco} onChange={(e) => setEndereco(e.target.value)} icon="home" />
+
+          <label className="flex flex-col gap-2">
+            <span className="text-sm font-medium">Pagamento preferido</span>
+            <select
+              value={metodoPagamentoPreferido}
+              onChange={(e) => setMetodoPagamentoPreferido(e.target.value)}
+              className="w-full border rounded-lg p-3 bg-white dark:bg-gray-800 dark:border-gray-700"
+            >
+              <option value="">Selecione</option>
+              <option value="pix">PIX</option>
+              <option value="card_on_delivery">Cartão na entrega</option>
+              <option value="cash">Dinheiro</option>
+            </select>
+          </label>
 
           {message ? <p className="text-sm text-primary-admin">{message}</p> : null}
 

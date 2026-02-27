@@ -291,6 +291,8 @@ class User:
     id: str
     nome: str
     whatsapp: str
+    endereco: str = ""
+    metodo_pagamento_preferido: str = ""
     pontos_fidelidade: int = 0
 
 

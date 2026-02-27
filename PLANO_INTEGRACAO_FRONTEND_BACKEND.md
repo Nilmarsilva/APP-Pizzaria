@@ -84,8 +84,8 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
   - Status: **OK** → `GET /auth/users/{user_id}`.
 - Atualizar nome/whatsapp.
   - Status: **OK** → `PUT /auth/users/{user_id}`.
-- Endereços/métodos salvos.
-  - Status: **CRIAR**.
+- Endereços/método de pagamento preferido.
+  - Status: **PARCIAL** → `PUT /auth/users/{user_id}` com persistência básica no perfil.
 
 ### 3.8 `/fidelidade` (Fidelidade)
 - Consultar pontos.
@@ -174,10 +174,10 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 ## 4) Itens backend a criar (lista consolidada)
 
 ### Prioridade P0
-1. Perfil completo (endereços e pagamento salvo)
-2. Definição oficial de carrinho (server-side ou localStorage-only)
-3. Captura de lead/contato (LP)
-4. Recompensas e resgate de fidelidade
+1. Definição oficial de carrinho (server-side ou localStorage-only)
+2. Captura de lead/contato (LP)
+3. Recompensas e resgate de fidelidade
+4. Evoluir perfil para múltiplos endereços e cartões salvos
 
 ### Prioridade P1
 1. Tracking em tempo real (WebSocket/SSE)
@@ -196,9 +196,9 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 ## 5) Plano de execução por sprint
 
 ### Sprint 1 — Operação comercial
-- Endereços de usuário (perfil).
 - Definição oficial de carrinho (server-side ou localStorage-only).
 - Captura de lead/contato (LP).
+- Evolução do perfil (múltiplos endereços/cartões).
 
 ### Sprint 2 — Experiência e retenção
 - Recompensas/resgate de fidelidade.
