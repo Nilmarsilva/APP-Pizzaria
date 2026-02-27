@@ -1,34 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
+import { api } from '../lib/api';
 
-/**
- * Landing Page de Vendas do Sistema - Módulo Comercial
- * Baseada no arquivo code.html original.
- */
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
+  const [nome, setNome] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
+  const [mensagem, setMensagem] = useState('');
+  const [loadingLead, setLoadingLead] = useState(false);
+  const [feedback, setFeedback] = useState<string | null>(null);
+
+  const handleLead = async () => {
+    if (!nome.trim() || !whatsapp.trim()) {
+      setFeedback('Preencha nome e WhatsApp.');
+      return;
+    }
+
+    try {
+      setLoadingLead(true);
+      setFeedback(null);
+      await api.submitLead({
+        nome: nome.trim(),
+        whatsapp: whatsapp.trim(),
+        mensagem: mensagem.trim(),
+      });
+      setFeedback('Recebemos seu contato! Em breve falaremos com você.');
+      setNome('');
+      setWhatsapp('');
+      setMensagem('');
+    } catch (error) {
+      console.error(error);
+      setFeedback('Não foi possível enviar agora. Tente novamente.');
+    } finally {
+      setLoadingLead(false);
+    }
+  };
 
   return (
-    <div className="bg-background-light dark:bg-background-dark text-[#131615] dark:text-white transition-colors duration-300 min-h-screen font-display">
-      {/* Barra de Navegação Superior */}
+    <div className="bg-background-light dark:bg-background-dark text-[#131615] dark:text-white min-h-screen font-display">
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-[#dee3e2] dark:border-white/10">
         <div className="flex items-center p-4 justify-between max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
             <div className="text-primary size-10 flex items-center justify-center bg-primary/10 rounded-lg">
               <span className="material-symbols-outlined text-2xl">local_pizza</span>
             </div>
-            <h2 className="text-[#131615] dark:text-white text-lg font-bold">Sabor & Gestão</h2>
+            <h2 className="text-lg font-bold">Sabor & Gestão</h2>
           </div>
-          <button className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-bold transition-all active:scale-95">
+          <button className="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-bold" onClick={() => navigate('/cadastro')}>
             Demo
           </button>
         </div>
       </header>
 
       <main className="max-w-7xl mx-auto">
-        {/* Seção Hero */}
         <section className="relative px-4 py-10 md:py-20">
           <div className="flex flex-col gap-8 md:flex-row md:items-center">
             <div className="flex-1 flex flex-col gap-6 text-center md:text-left items-center md:items-start">
@@ -36,35 +62,21 @@ const LandingPage: React.FC = () => {
                 <span className="material-symbols-outlined text-sm">auto_awesome</span>
                 <span className="text-xs font-bold uppercase tracking-wider">White-label 2024</span>
               </div>
-              <h1 className="text-[#131615] dark:text-white text-4xl md:text-6xl font-black leading-tight">
+              <h1 className="text-4xl md:text-6xl font-black leading-tight">
                 Transforme sua Pizzaria em uma <span className="text-primary italic">Máquina de Vendas</span>
               </h1>
               <p className="text-[#6d7e7b] dark:text-gray-400 text-lg max-w-xl">
                 Sem mensalidades abusivas. Tenha seu próprio sistema com PWA, Fidelidade e Gestão de Entregas.
               </p>
-              <div className="pt-4">
-                <Button
-                  className="h-14 px-8 text-lg flex items-center gap-2"
-                  onClick={() => navigate('/cadastro')}
-                >
-                  Começar Agora
-                  <span className="material-symbols-outlined">arrow_forward</span>
-                </Button>
-              </div>
-            </div>
-
-            <div className="flex-1 relative">
-              <div
-                className="relative w-full aspect-video rounded-2xl bg-cover bg-center shadow-2xl border-4 border-white dark:border-zinc-800"
-                style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhXHIUVhdR6AmwtXATDadZJbK35yeox0Fu8cqz_zorgiZcMmFUDNFOzT1pCfFZJGPjgWm3xIKnzeheOw6_esWo62ld1s83jnPVfsIgl6zGsl4QdERAY_TFuG2uX3wl_Z2pzu3Clsi6Eed5FhGXzU6PBhOrDGy57zEfzQlOdUeubls4qNSmKpApFEsHnQV6XzX4C-VKFYJQrPZ-a0UbAsaakDWG1SVWMwiJlRPSKeC24qQWQ1G6J1Sg-rwlyqD6kRtOAYeoNZa8bX8")' }}
-              ></div>
+              <Button className="h-14 px-8 text-lg" onClick={() => navigate('/cadastro')}>
+                Ver demonstração do app
+              </Button>
             </div>
           </div>
         </section>
 
-        {/* Seção de Funcionalidades */}
-        <section className="p-4 py-16">
-          <div className="text-center mb-12">
+        <section className="p-4 py-10">
+          <div className="text-center mb-8">
             <p className="text-primary font-bold text-sm uppercase tracking-widest italic">O que entregamos</p>
             <h2 className="text-3xl font-bold mt-2">Funcionalidades Premium</h2>
           </div>
@@ -74,38 +86,59 @@ const LandingPage: React.FC = () => {
               { title: 'Impressão Automática', desc: 'Sincronia total entre pedidos e a cozinha.', icon: 'print' },
               { title: 'Notificações Push', desc: 'Engaje clientes com promoções no celular.', icon: 'notifications_active' },
               { title: 'Fidelidade Própria', desc: 'Cupons e pontos para reter clientes.', icon: 'card_membership' },
-              { title: 'Gestão Financeira', desc: 'Relatórios diários e fechamento de caixa.', icon: 'account_balance_wallet' }
-            ].map((feat, i) => (
-              <Card key={i} className="p-6 flex flex-col gap-4 border-gray-100 hover:shadow-xl transition-all">
+              { title: 'Gestão Financeira', desc: 'Relatórios diários e fechamento de caixa.', icon: 'account_balance_wallet' },
+            ].map((feat) => (
+              <Card key={feat.title} className="p-6 flex flex-col gap-4 border-gray-100">
                 <div className="bg-primary/10 text-primary size-12 flex items-center justify-center rounded-xl">
                   <span className="material-symbols-outlined">{feat.icon}</span>
                 </div>
                 <h3 className="text-lg font-bold">{feat.title}</h3>
-                <p className="text-[#6d7e7b] dark:text-gray-400 text-sm leading-relaxed">{feat.desc}</p>
+                <p className="text-[#6d7e7b] dark:text-gray-400 text-sm">{feat.desc}</p>
               </Card>
             ))}
           </div>
         </section>
 
-        {/* CTA Final */}
-        <section className="px-4 py-16 mb-10">
-          <div className="bg-[#131615] text-white rounded-[2rem] p-8 md:p-16 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-[120px] opacity-20"></div>
-            <h2 className="text-3xl md:text-5xl font-black mb-6 relative z-10">Pronto para digitalizar?</h2>
-            <p className="text-zinc-400 text-lg mb-10 relative z-10">Junte-se a mais de 200 pizzarias que reduziram custos.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-              <Button className="bg-white text-black hover:bg-gray-200">Ver Demonstração</Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white/10">Falar com Consultor</Button>
+        <section className="px-4 py-12 mb-10">
+          <Card className="p-6 md:p-10 border-gray-100 space-y-4">
+            <h2 className="text-2xl md:text-3xl font-black">Falar com consultor</h2>
+            <p className="text-sm text-gray-500">Deixe seus dados e nossa equipe retorna com proposta.</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <input
+                className="w-full border rounded-lg p-3 bg-white dark:bg-gray-800 dark:border-gray-700"
+                placeholder="Seu nome"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+              />
+              <input
+                className="w-full border rounded-lg p-3 bg-white dark:bg-gray-800 dark:border-gray-700"
+                placeholder="WhatsApp"
+                value={whatsapp}
+                onChange={(e) => setWhatsapp(e.target.value)}
+              />
             </div>
-          </div>
+
+            <textarea
+              className="w-full border rounded-lg p-3 bg-white dark:bg-gray-800 dark:border-gray-700 min-h-24"
+              placeholder="Mensagem (opcional)"
+              value={mensagem}
+              onChange={(e) => setMensagem(e.target.value)}
+            />
+
+            {feedback ? <p className="text-sm text-primary-admin">{feedback}</p> : null}
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button className="sm:w-auto" onClick={() => void handleLead()} isLoading={loadingLead}>
+                Enviar contato
+              </Button>
+              <Button variant="outline" className="sm:w-auto" onClick={() => navigate('/cadastro')}>
+                Ver demonstração
+              </Button>
+            </div>
+          </Card>
         </section>
       </main>
-
-      <footer className="py-10 px-4 border-t border-[#dee3e2] dark:border-white/10">
-        <div className="max-w-7xl mx-auto flex flex-col md:row justify-between items-center opacity-60">
-          <p className="font-bold">Sabor & Gestão © 2024</p>
-        </div>
-      </footer>
     </div>
   );
 };

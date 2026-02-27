@@ -117,6 +117,7 @@ class InMemoryDB:
     couriers: list["Courier"] = field(default_factory=list)
     users: list["User"] = field(default_factory=list)
     notifications: list[UserNotification] = field(default_factory=list)
+    leads: list["Lead"] = field(default_factory=list)
 
     def add_category(self, nome: str, posicao: int) -> Category:
         categoria = Category(id=str(uuid4()), nome=nome, posicao=posicao)
@@ -223,6 +224,10 @@ class InMemoryDB:
         self.notifications.append(notification)
         return notification
 
+    def add_lead(self, lead: "Lead") -> "Lead":
+        """Registra um lead comercial vindo da landing page."""
+        self.leads.append(lead)
+        return lead
 
 
 @dataclass
@@ -282,6 +287,18 @@ class Courier:
     whatsapp: str
     placa_veiculo: str
     ativo: bool = True
+
+
+@dataclass
+class Lead:
+    """Lead comercial capturado pela landing page."""
+
+    id: str
+    nome: str
+    whatsapp: str
+    mensagem: str = ""
+    origem: str = "lp"
+    criado_em: str = ""
 
 
 @dataclass

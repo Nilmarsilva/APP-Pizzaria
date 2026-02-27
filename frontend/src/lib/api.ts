@@ -94,6 +94,13 @@ export interface OrderStatus {
   status: string;
 }
 
+export interface LeadPayload {
+  nome: string;
+  whatsapp: string;
+  mensagem?: string;
+  origem?: string;
+}
+
 export interface Coupon {
   codigo: string;
   tipo: "percentage" | "fixed" | string;
@@ -150,6 +157,12 @@ export const api = {
     request<LoyaltyPointsResponse>(`/loyalty/points/${userId}`),
 
   listNotifications: (userId: string) => request<UserNotification[]>(`/notifications/${userId}`),
+
+  submitLead: (payload: LeadPayload) =>
+    request<{ id: string }>(`/leads/`, {
+      method: 'POST',
+      body: JSON.stringify({ ...payload, origem: payload.origem ?? 'lp' }),
+    }),
 
   markNotificationRead: (notificationId: string, lida: boolean = true) =>
     request<UserNotification>(`/notifications/${notificationId}`, {

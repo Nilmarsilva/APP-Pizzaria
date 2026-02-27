@@ -57,6 +57,7 @@
 #### Fidelidade e notificações
 - ✅ Pontos de fidelidade (`GET /loyalty/points/{user_id}`)
 - ✅ Notificações do cliente (`GET /notifications/{user_id}`, `PATCH /notifications/{notification_id}`)
+- ✅ Captura de lead comercial (`POST /leads/`)
 
 ### Frontend (React + Vite + Tailwind)
 - ✅ Telas cliente e admin implementadas
@@ -76,7 +77,7 @@
 ### Fase 1 — Operação e experiência de compra
 1. ❌ Perfil avançado: múltiplos endereços e cartões salvos
 2. ❌ Catálogo e resgate de recompensas de fidelidade
-3. ❌ Captura de lead/contato (LP)
+3. ❌ Carrinho server-side (se sair do modelo localStorage-only)
 
 ### Fase 2 — Tempo real e inteligência operacional
 1. ❌ WebSocket/SSE para status de pedido em tempo real
@@ -94,7 +95,7 @@
 ## 🎯 Próximo passo sugerido
 Executar o próximo lote focado em **destravar operação diária**:
 1. decisão de carrinho server-side vs localStorage-only
-2. captura de lead/contato (LP)
-3. catálogo/resgate de fidelidade
+2. catálogo/resgate de fidelidade
+3. evolução do perfil para múltiplos endereços/cartões
 
 Depois disso, partir para tempo real (WebSocket/SSE) e analytics.

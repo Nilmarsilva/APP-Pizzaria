@@ -103,7 +103,7 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 
 ### 3.10 `/lp` (LandingPage)
 - Captura de lead/contato.
-  - Status: **CRIAR**.
+  - Status: **OK** → `POST /leads/` (frontend integrado na LP).
 
 ## Módulo Administrativo
 
@@ -175,21 +175,21 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 
 ### Prioridade P0
 1. Definição oficial de carrinho (server-side ou localStorage-only)
-2. Captura de lead/contato (LP)
+2. Evoluir perfil para múltiplos endereços e cartões salvos
 3. Recompensas e resgate de fidelidade
-4. Evoluir perfil para múltiplos endereços e cartões salvos
+4. Decisão de notificações com arquivamento/filtros
 
 ### Prioridade P1
 1. Tracking em tempo real (WebSocket/SSE)
 2. Tracking logístico com ETA/localização
-3. Catálogo/resgate de recompensas
-4. Dashboard analítico mensal
+3. Dashboard analítico mensal
+4. Campanhas (CRUD + envio)
 
 ### Prioridade P2
-1. Campanhas (CRUD + envio)
-2. Hardware/impressão térmica
-3. Acerto financeiro avançado
-4. Integração de pagamento transacional real
+1. Hardware/impressão térmica
+2. Acerto financeiro avançado
+3. Integração de pagamento transacional real
+4. Refino de campanhas com segmentação avançada
 
 ---
 
@@ -197,13 +197,13 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 
 ### Sprint 1 — Operação comercial
 - Definição oficial de carrinho (server-side ou localStorage-only).
-- Captura de lead/contato (LP).
 - Evolução do perfil (múltiplos endereços/cartões).
+- Recompensas e resgate de fidelidade.
 
 ### Sprint 2 — Experiência e retenção
-- Recompensas/resgate de fidelidade.
 - Evolução de notificações (arquivar/filtros).
 - Decisão e implementação final de carrinho.
+- Ajustes de fidelidade no fluxo cliente.
 
 ### Sprint 3 — Escala operacional
 - WebSocket/SSE + tracking logístico.
