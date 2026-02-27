@@ -6,7 +6,7 @@ class RegisterRequest(BaseModel):
 
     nome: str = Field(..., min_length=2)
     whatsapp: str = Field(..., min_length=8)
-    senha: str = Field(..., min_length=6)
+    senha: str | None = Field(default=None, min_length=6)
 
 
 class AuthResponse(BaseModel):
@@ -22,3 +22,10 @@ class UserResponse(BaseModel):
     id: str
     nome: str
     whatsapp: str
+
+
+class UpdateUserRequest(BaseModel):
+    """Atualização de dados básicos do usuário."""
+
+    nome: str = Field(..., min_length=2)
+    whatsapp: str = Field(..., min_length=8)

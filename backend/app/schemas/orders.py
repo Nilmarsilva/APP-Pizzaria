@@ -20,6 +20,15 @@ class CreateOrderRequest(BaseModel):
     usuario_id: str | None = None
 
 
+class CreateOrderQuoteRequest(BaseModel):
+    """Dados para simulação de pedido sem efetivar criação."""
+
+    itens: list[OrderItem]
+    tipo_entrega: str
+    cupom_codigo: str | None = None
+    bairro_entrega: str | None = None
+
+
 class OrderStatusResponse(BaseModel):
     """Resposta de status de pedido para o cliente."""
 
@@ -38,4 +47,14 @@ class OrderSummaryResponse(BaseModel):
     taxa_entrega: float
     total_geral: float
     desconto_aplicado: float
+    cupom_codigo: str | None
+
+
+class OrderQuoteResponse(BaseModel):
+    """Resposta de simulação de pedido."""
+
+    total_produtos: float
+    taxa_entrega: float
+    desconto_aplicado: float
+    total_geral: float
     cupom_codigo: str | None

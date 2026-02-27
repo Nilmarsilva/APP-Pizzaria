@@ -52,7 +52,52 @@ class Product:
     nome: str
     descricao: str
     preco_base: float
+    image_url: str | None = None
+    estoque_quantidade: int = 0
+    estoque_ilimitado: bool = True
     disponivel: bool = True
+
+
+@dataclass
+class ProductVariant:
+    """Variações de tamanho do produto (M/G/GG)."""
+
+    id: str
+    product_id: str
+    nome_tamanho: str
+    preco: float
+    ordem: int = 0
+    ativo: bool = True
+    estoque_quantidade: int = 0
+    estoque_ilimitado: bool = True
+
+
+@dataclass
+class ProductAddon:
+    """Adicionais e bordas disponíveis para o produto."""
+
+    id: str
+    product_id: str
+    nome: str
+    tipo: str
+    preco: float
+    maximo_selecoes: int = 1
+    ativo: bool = True
+
+
+
+
+@dataclass
+class UserNotification:
+    """Notificação direcionada ao cliente."""
+
+    id: str
+    user_id: str
+    titulo: str
+    mensagem: str
+    tipo: str = "promo"
+    lida: bool = False
+    criado_em: str = ""
 
 
 @dataclass
@@ -64,11 +109,14 @@ class InMemoryDB:
     payment_settings: PaymentSettings = field(default_factory=PaymentSettings)
     categories: list[Category] = field(default_factory=list)
     products: list[Product] = field(default_factory=list)
+    product_variants: list[ProductVariant] = field(default_factory=list)
+    product_addons: list[ProductAddon] = field(default_factory=list)
     orders: list["Order"] = field(default_factory=list)
     neighborhoods: list["NeighborhoodFee"] = field(default_factory=list)
     coupons: list["Coupon"] = field(default_factory=list)
     couriers: list["Courier"] = field(default_factory=list)
     users: list["User"] = field(default_factory=list)
+    notifications: list[UserNotification] = field(default_factory=list)
 
     def add_category(self, nome: str, posicao: int) -> Category:
         categoria = Category(id=str(uuid4()), nome=nome, posicao=posicao)
@@ -81,6 +129,9 @@ class InMemoryDB:
         nome: str,
         descricao: str,
         preco_base: float,
+        image_url: str | None = None,
+        estoque_quantidade: int = 0,
+        estoque_ilimitado: bool = True,
         disponivel: bool = True,
     ) -> Product:
         produto = Product(
@@ -89,10 +140,57 @@ class InMemoryDB:
             nome=nome,
             descricao=descricao,
             preco_base=preco_base,
+            image_url=image_url,
+            estoque_quantidade=estoque_quantidade,
+            estoque_ilimitado=estoque_ilimitado,
             disponivel=disponivel,
         )
         self.products.append(produto)
         return produto
+
+    def add_product_variant(
+        self,
+        product_id: str,
+        nome_tamanho: str,
+        preco: float,
+        ordem: int = 0,
+        ativo: bool = True,
+        estoque_quantidade: int = 0,
+        estoque_ilimitado: bool = True,
+    ) -> ProductVariant:
+        variante = ProductVariant(
+            id=str(uuid4()),
+            product_id=product_id,
+            nome_tamanho=nome_tamanho,
+            preco=preco,
+            ordem=ordem,
+            ativo=ativo,
+            estoque_quantidade=estoque_quantidade,
+            estoque_ilimitado=estoque_ilimitado,
+        )
+        self.product_variants.append(variante)
+        return variante
+
+    def add_product_addon(
+        self,
+        product_id: str,
+        nome: str,
+        tipo: str,
+        preco: float,
+        maximo_selecoes: int = 1,
+        ativo: bool = True,
+    ) -> ProductAddon:
+        adicional = ProductAddon(
+            id=str(uuid4()),
+            product_id=product_id,
+            nome=nome,
+            tipo=tipo,
+            preco=preco,
+            maximo_selecoes=maximo_selecoes,
+            ativo=ativo,
+        )
+        self.product_addons.append(adicional)
+        return adicional
 
     def add_order(self, order: "Order") -> "Order":
         """Registra um novo pedido na memória."""
@@ -120,6 +218,12 @@ class InMemoryDB:
         return user
 
 
+    def add_notification(self, notification: "UserNotification") -> "UserNotification":
+        """Registra uma notificação para cliente."""
+        self.notifications.append(notification)
+        return notification
+
+
 
 @dataclass
 class OrderItem:
@@ -140,11 +244,11 @@ class Order:
     metodo_pagamento: str
     tipo_entrega: str
     usuario_id: str
-    courier_id: str | None = None
     itens: list[OrderItem]
     total_produtos: float
     taxa_entrega: float
     total_geral: float
+    courier_id: str | None = None
     cupom_codigo: str | None = None
     desconto_aplicado: float = 0.0
 

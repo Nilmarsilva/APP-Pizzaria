@@ -3,14 +3,40 @@ from uuid import uuid4
 from fastapi import APIRouter, HTTPException
 
 from app.core.storage import Order, OrderItem, db
-from app.schemas.orders import CreateOrderRequest, OrderStatusResponse, OrderSummaryResponse
+from app.schemas.orders import (
+    CreateOrderQuoteRequest,
+    CreateOrderRequest,
+    OrderQuoteResponse,
+    OrderStatusResponse,
+    OrderSummaryResponse,
+)
 
 router = APIRouter()
 
 
-@router.post("/", response_model=OrderStatusResponse)
-def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
-    """Cria um novo pedido e retorna status inicial."""
+def _has_stock(estoque_ilimitado: bool, estoque_quantidade: int) -> bool:
+    return estoque_ilimitado or estoque_quantidade > 0
+
+
+def _calculate_discount(total_produtos: float, cupom_codigo: str | None) -> float:
+    """Calcula desconto de cupom para centralizar regra entre quote e criação."""
+    if not cupom_codigo:
+        return 0.0
+
+    cupom = next((c for c in db.coupons if c.codigo == cupom_codigo and c.ativo), None)
+    if not cupom or total_produtos < cupom.minimo_pedido:
+        return 0.0
+
+    if cupom.tipo == "percentage":
+        return total_produtos * (cupom.valor / 100)
+    if cupom.tipo == "fixed":
+        return cupom.valor
+    return 0.0
+
+
+def _calculate_order_values(
+    payload: CreateOrderRequest | CreateOrderQuoteRequest,
+) -> tuple[list[OrderItem], float, float, float, str | None]:
     itens_pedido: list[OrderItem] = []
     total_produtos = 0.0
 
@@ -18,6 +44,17 @@ def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
         produto = next((p for p in db.products if p.id == item.produto_id), None)
         if not produto:
             raise HTTPException(status_code=404, detail="Produto não encontrado.")
+        if not produto.disponivel:
+            raise HTTPException(status_code=400, detail=f"Produto {produto.nome} indisponível.")
+        if not _has_stock(produto.estoque_ilimitado, produto.estoque_quantidade):
+            raise HTTPException(status_code=400, detail=f"Produto {produto.nome} sem estoque.")
+
+        if not produto.estoque_ilimitado and item.quantidade > produto.estoque_quantidade:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Estoque insuficiente para {produto.nome}. Disponível: {produto.estoque_quantidade}.",
+            )
+
         subtotal = produto.preco_base * item.quantidade
         total_produtos += subtotal
         itens_pedido.append(
@@ -40,17 +77,35 @@ def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
             if bairro:
                 taxa_entrega = bairro.taxa
 
-    desconto_aplicado = 0.0
     cupom_codigo = payload.cupom_codigo.upper() if payload.cupom_codigo else None
-    if cupom_codigo:
-        cupom = next((c for c in db.coupons if c.codigo == cupom_codigo and c.ativo), None)
-        if cupom and total_produtos >= cupom.minimo_pedido:
-            if cupom.tipo == "percentage":
-                desconto_aplicado = total_produtos * (cupom.valor / 100)
-            elif cupom.tipo == "fixed":
-                desconto_aplicado = cupom.valor
+    desconto_aplicado = _calculate_discount(total_produtos=total_produtos, cupom_codigo=cupom_codigo)
 
     total_geral = max(total_produtos + taxa_entrega - desconto_aplicado, 0.0)
+    return itens_pedido, total_produtos, taxa_entrega, total_geral, cupom_codigo
+
+
+@router.post("/quote", response_model=OrderQuoteResponse)
+def quote_order(payload: CreateOrderQuoteRequest) -> OrderQuoteResponse:
+    """Simula os totais de um pedido sem criar o registro."""
+    _, total_produtos, taxa_entrega, total_geral, cupom_codigo = _calculate_order_values(payload)
+
+    desconto_aplicado = max(total_produtos + taxa_entrega - total_geral, 0.0)
+    return OrderQuoteResponse(
+        total_produtos=total_produtos,
+        taxa_entrega=taxa_entrega,
+        desconto_aplicado=desconto_aplicado,
+        total_geral=total_geral,
+        cupom_codigo=cupom_codigo,
+    )
+
+
+@router.post("/", response_model=OrderStatusResponse)
+def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
+    """Cria um novo pedido e retorna status inicial."""
+    itens_pedido, total_produtos, taxa_entrega, total_geral, cupom_codigo = _calculate_order_values(
+        payload
+    )
+    desconto_aplicado = max(total_produtos + taxa_entrega - total_geral, 0.0)
 
     usuario_id = payload.usuario_id or "anonimo"
     pedido = Order(
@@ -67,6 +122,13 @@ def create_order(payload: CreateOrderRequest) -> OrderStatusResponse:
         desconto_aplicado=desconto_aplicado,
     )
     db.add_order(pedido)
+
+    for item in payload.itens:
+        produto = next((p for p in db.products if p.id == item.produto_id), None)
+        if produto and not produto.estoque_ilimitado:
+            produto.estoque_quantidade = max(produto.estoque_quantidade - item.quantidade, 0)
+            if produto.estoque_quantidade == 0:
+                produto.disponivel = False
 
     return OrderStatusResponse(pedido_id=pedido.id, status=pedido.status)
 

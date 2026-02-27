@@ -1,23 +1,35 @@
+from datetime import datetime, timezone
 import os
 from uuid import uuid4
 
 from fastapi import APIRouter, Depends, HTTPException, Security, status
 from fastapi.security import APIKeyHeader
 
-from app.core.storage import Coupon, Courier, NeighborhoodFee, db
+from app.core.storage import Coupon, Courier, NeighborhoodFee, UserNotification, db
 from app.schemas.admin import DailyCloseReport, OrderStatusUpdate
 from app.schemas.admin_settings import StoreSettingsResponse, StoreSettingsUpdate
+from app.schemas.couriers import CourierCreate, CourierResponse
+from app.schemas.loyalty import LoyaltySettingsResponse, LoyaltySettingsUpdate
 from app.schemas.marketing import (
     CouponCreate,
     CouponResponse,
     NeighborhoodCreate,
     NeighborhoodResponse,
 )
-from app.schemas.menu import CategoryCreate, CategoryResponse, ProductCreate, ProductResponse
-from app.schemas.loyalty import LoyaltySettingsResponse, LoyaltySettingsUpdate
-from app.schemas.payment import PaymentSettingsResponse, PaymentSettingsUpdate
+from app.schemas.menu import (
+    CategoryCreate,
+    CategoryResponse,
+    ProductAddonCreate,
+    ProductAddonResponse,
+    ProductCreate,
+    ProductResponse,
+    ProductStockUpdate,
+    ProductVariantCreate,
+    ProductVariantResponse,
+)
 from app.schemas.orders import OrderSummaryResponse
-from app.schemas.couriers import CourierCreate, CourierResponse
+from app.schemas.notifications import AdminNotificationCreate, NotificationResponse
+from app.schemas.payment import PaymentSettingsResponse, PaymentSettingsUpdate
 
 admin_token_header = APIKeyHeader(name="X-Admin-Token", auto_error=False)
 
@@ -122,11 +134,21 @@ def create_product(payload: ProductCreate) -> ProductResponse:
     categoria_existe = any(c.id == payload.categoria_id for c in db.categories)
     if not categoria_existe:
         raise HTTPException(status_code=404, detail="Categoria não encontrada.")
+
+    if not payload.estoque_ilimitado and payload.estoque_quantidade == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="Informe estoque_quantidade maior que zero ou marque estoque_ilimitado.",
+        )
+
     produto = db.add_product(
         categoria_id=payload.categoria_id,
         nome=payload.nome,
         descricao=payload.descricao,
         preco_base=payload.preco_base,
+        image_url=payload.image_url,
+        estoque_quantidade=payload.estoque_quantidade,
+        estoque_ilimitado=payload.estoque_ilimitado,
         disponivel=payload.disponivel,
     )
     return ProductResponse(
@@ -135,6 +157,9 @@ def create_product(payload: ProductCreate) -> ProductResponse:
         nome=produto.nome,
         descricao=produto.descricao,
         preco_base=produto.preco_base,
+        image_url=produto.image_url,
+        estoque_quantidade=produto.estoque_quantidade,
+        estoque_ilimitado=produto.estoque_ilimitado,
         disponivel=produto.disponivel,
     )
 
@@ -149,9 +174,136 @@ def list_products() -> list[ProductResponse]:
             nome=p.nome,
             descricao=p.descricao,
             preco_base=p.preco_base,
+            image_url=p.image_url,
+            estoque_quantidade=p.estoque_quantidade,
+            estoque_ilimitado=p.estoque_ilimitado,
             disponivel=p.disponivel,
         )
         for p in db.products
+    ]
+
+
+@router.patch("/products/{product_id}/stock", response_model=ProductResponse)
+def update_product_stock(product_id: str, payload: ProductStockUpdate) -> ProductResponse:
+    """Atualiza o estoque do produto principal."""
+    produto = next((p for p in db.products if p.id == product_id), None)
+    if not produto:
+        raise HTTPException(status_code=404, detail="Produto não encontrado.")
+
+    if not payload.estoque_ilimitado and payload.estoque_quantidade == 0:
+        produto.disponivel = False
+
+    produto.estoque_quantidade = payload.estoque_quantidade
+    produto.estoque_ilimitado = payload.estoque_ilimitado
+
+    return ProductResponse(
+        id=produto.id,
+        categoria_id=produto.categoria_id,
+        nome=produto.nome,
+        descricao=produto.descricao,
+        preco_base=produto.preco_base,
+        image_url=produto.image_url,
+        estoque_quantidade=produto.estoque_quantidade,
+        estoque_ilimitado=produto.estoque_ilimitado,
+        disponivel=produto.disponivel,
+    )
+
+
+@router.post("/products/{product_id}/variants", response_model=ProductVariantResponse)
+def create_product_variant(product_id: str, payload: ProductVariantCreate) -> ProductVariantResponse:
+    """Cria variação de tamanho para um produto."""
+    produto = next((p for p in db.products if p.id == product_id), None)
+    if not produto:
+        raise HTTPException(status_code=404, detail="Produto não encontrado.")
+
+    variante_existente = any(
+        v.product_id == product_id and v.nome_tamanho == payload.nome_tamanho
+        for v in db.product_variants
+    )
+    if variante_existente:
+        raise HTTPException(status_code=409, detail="Variação já cadastrada para este produto.")
+
+    variante = db.add_product_variant(
+        product_id=product_id,
+        nome_tamanho=payload.nome_tamanho,
+        preco=payload.preco,
+        ordem=payload.ordem,
+        ativo=payload.ativo,
+        estoque_quantidade=payload.estoque_quantidade,
+        estoque_ilimitado=payload.estoque_ilimitado,
+    )
+    return ProductVariantResponse(
+        id=variante.id,
+        product_id=variante.product_id,
+        nome_tamanho=variante.nome_tamanho,
+        preco=variante.preco,
+        ordem=variante.ordem,
+        ativo=variante.ativo,
+        estoque_quantidade=variante.estoque_quantidade,
+        estoque_ilimitado=variante.estoque_ilimitado,
+    )
+
+
+@router.get("/products/{product_id}/variants", response_model=list[ProductVariantResponse])
+def list_product_variants(product_id: str) -> list[ProductVariantResponse]:
+    """Lista variações de tamanho de um produto."""
+    return [
+        ProductVariantResponse(
+            id=variante.id,
+            product_id=variante.product_id,
+            nome_tamanho=variante.nome_tamanho,
+            preco=variante.preco,
+            ordem=variante.ordem,
+            ativo=variante.ativo,
+            estoque_quantidade=variante.estoque_quantidade,
+            estoque_ilimitado=variante.estoque_ilimitado,
+        )
+        for variante in db.product_variants
+        if variante.product_id == product_id
+    ]
+
+
+@router.post("/products/{product_id}/addons", response_model=ProductAddonResponse)
+def create_product_addon(product_id: str, payload: ProductAddonCreate) -> ProductAddonResponse:
+    """Cria adicional/borda para um produto."""
+    produto = next((p for p in db.products if p.id == product_id), None)
+    if not produto:
+        raise HTTPException(status_code=404, detail="Produto não encontrado.")
+
+    adicional = db.add_product_addon(
+        product_id=product_id,
+        nome=payload.nome,
+        tipo=payload.tipo,
+        preco=payload.preco,
+        maximo_selecoes=payload.maximo_selecoes,
+        ativo=payload.ativo,
+    )
+    return ProductAddonResponse(
+        id=adicional.id,
+        product_id=adicional.product_id,
+        nome=adicional.nome,
+        tipo=adicional.tipo,
+        preco=adicional.preco,
+        maximo_selecoes=adicional.maximo_selecoes,
+        ativo=adicional.ativo,
+    )
+
+
+@router.get("/products/{product_id}/addons", response_model=list[ProductAddonResponse])
+def list_product_addons(product_id: str) -> list[ProductAddonResponse]:
+    """Lista adicionais/bordas de um produto."""
+    return [
+        ProductAddonResponse(
+            id=adicional.id,
+            product_id=adicional.product_id,
+            nome=adicional.nome,
+            tipo=adicional.tipo,
+            preco=adicional.preco,
+            maximo_selecoes=adicional.maximo_selecoes,
+            ativo=adicional.ativo,
+        )
+        for adicional in db.product_addons
+        if adicional.product_id == product_id
     ]
 
 
@@ -322,3 +474,34 @@ def assign_courier(order_id: str, courier_id: str) -> dict:
         raise HTTPException(status_code=404, detail="Motoboy não encontrado.")
     pedido.courier_id = courier.id
     return {"pedido_id": order_id, "courier_id": courier.id}
+
+
+@router.post("/notifications", response_model=NotificationResponse)
+def create_user_notification(payload: AdminNotificationCreate) -> NotificationResponse:
+    """Cria notificação para um usuário específico."""
+    usuario = next((user for user in db.users if user.id == payload.user_id), None)
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado.")
+
+    criado_em = datetime.now(timezone.utc).isoformat()
+    notification = db.add_notification(
+        UserNotification(
+            id=str(uuid4()),
+            user_id=payload.user_id,
+            titulo=payload.titulo,
+            mensagem=payload.mensagem,
+            tipo=payload.tipo,
+            lida=False,
+            criado_em=criado_em,
+        )
+    )
+
+    return NotificationResponse(
+        id=notification.id,
+        user_id=notification.user_id,
+        titulo=notification.titulo,
+        mensagem=notification.mensagem,
+        tipo=notification.tipo,
+        lida=notification.lida,
+        criado_em=notification.criado_em,
+    )
