@@ -63,7 +63,7 @@ def list_menu_detailed(categoria_id: str | None = None) -> list[ProductMenuRespo
     """Retorna o cardápio detalhado com variações, adicionais e bordas."""
     result: list[ProductMenuResponse] = []
 
-    for produto in db.products:
+    for produto in sorted(db.products, key=lambda value: value.nome.lower()):
         if not produto.disponivel:
             continue
 
@@ -110,7 +110,7 @@ def list_menu_detailed(categoria_id: str | None = None) -> list[ProductMenuRespo
                 maximo_selecoes=adicional.maximo_selecoes,
                 ativo=adicional.ativo,
             )
-            for adicional in db.product_addons
+            for adicional in sorted(db.product_addons, key=lambda value: value.nome.lower())
             if adicional.product_id == produto.id and adicional.ativo
         ]
 

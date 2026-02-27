@@ -18,6 +18,22 @@ def _has_stock(estoque_ilimitado: bool, estoque_quantidade: int) -> bool:
     return estoque_ilimitado or estoque_quantidade > 0
 
 
+def _calculate_discount(total_produtos: float, cupom_codigo: str | None) -> float:
+    """Calcula desconto de cupom para centralizar regra entre quote e criação."""
+    if not cupom_codigo:
+        return 0.0
+
+    cupom = next((c for c in db.coupons if c.codigo == cupom_codigo and c.ativo), None)
+    if not cupom or total_produtos < cupom.minimo_pedido:
+        return 0.0
+
+    if cupom.tipo == "percentage":
+        return total_produtos * (cupom.valor / 100)
+    if cupom.tipo == "fixed":
+        return cupom.valor
+    return 0.0
+
+
 def _calculate_order_values(
     payload: CreateOrderRequest | CreateOrderQuoteRequest,
 ) -> tuple[list[OrderItem], float, float, float, str | None]:
@@ -61,15 +77,8 @@ def _calculate_order_values(
             if bairro:
                 taxa_entrega = bairro.taxa
 
-    desconto_aplicado = 0.0
     cupom_codigo = payload.cupom_codigo.upper() if payload.cupom_codigo else None
-    if cupom_codigo:
-        cupom = next((c for c in db.coupons if c.codigo == cupom_codigo and c.ativo), None)
-        if cupom and total_produtos >= cupom.minimo_pedido:
-            if cupom.tipo == "percentage":
-                desconto_aplicado = total_produtos * (cupom.valor / 100)
-            elif cupom.tipo == "fixed":
-                desconto_aplicado = cupom.valor
+    desconto_aplicado = _calculate_discount(total_produtos=total_produtos, cupom_codigo=cupom_codigo)
 
     total_geral = max(total_produtos + taxa_entrega - desconto_aplicado, 0.0)
     return itens_pedido, total_produtos, taxa_entrega, total_geral, cupom_codigo
