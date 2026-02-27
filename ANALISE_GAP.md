@@ -36,6 +36,7 @@
 - ✅ Rastreamento (`GET /orders/track/{id}`)
 - ✅ Resumo (`GET /orders/{id}`)
 - ✅ Listagem por usuário (`GET /orders/user/{user_id}`)
+- ✅ Reorder (`POST /orders/{id}/reorder`)
 - ✅ Validação e decremento de estoque no fluxo de pedido
 - ✅ Cálculo de taxa por bairro e aplicação de cupom
 
@@ -73,9 +74,9 @@
 3. ❌ Migração de `InMemoryDB` para PostgreSQL + SQLAlchemy + Alembic
 
 ### Fase 1 — Operação e experiência de compra
-1. ❌ Reorder (`POST /orders/{id}/reorder`)
-2. ❌ Perfil completo: endereços e métodos de pagamento salvos
-3. ❌ Catálogo e resgate de recompensas de fidelidade
+1. ❌ Perfil completo: endereços e métodos de pagamento salvos
+2. ❌ Catálogo e resgate de recompensas de fidelidade
+3. ❌ Captura de lead/contato (LP)
 
 ### Fase 2 — Tempo real e inteligência operacional
 1. ❌ WebSocket/SSE para status de pedido em tempo real
@@ -92,8 +93,8 @@
 
 ## 🎯 Próximo passo sugerido
 Executar o próximo lote focado em **destravar operação diária**:
-1. reorder no histórico de pedidos
-2. atualização de perfil com endereço
-3. decisão de carrinho server-side vs localStorage-only
+1. atualização de perfil com endereço
+2. decisão de carrinho server-side vs localStorage-only
+3. captura de lead/contato (LP)
 
 Depois disso, partir para tempo real (WebSocket/SSE) e analytics.

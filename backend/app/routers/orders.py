@@ -179,3 +179,28 @@ def list_user_orders(user_id: str) -> list[OrderSummaryResponse]:
         )
         for pedido in pedidos
     ]
+
+
+@router.post("/{order_id}/reorder", response_model=OrderStatusResponse)
+def reorder(order_id: str) -> OrderStatusResponse:
+    """Cria um novo pedido com base em um pedido anterior."""
+    pedido_original = next((o for o in db.orders if o.id == order_id), None)
+    if not pedido_original:
+        raise HTTPException(status_code=404, detail="Pedido não encontrado.")
+
+    payload = CreateOrderRequest(
+        itens=[
+            {
+                "produto_id": item.produto_id,
+                "quantidade": item.quantidade,
+                "observacoes": item.observacoes,
+            }
+            for item in pedido_original.itens
+        ],
+        metodo_pagamento=pedido_original.metodo_pagamento,
+        tipo_entrega=pedido_original.tipo_entrega,
+        cupom_codigo=pedido_original.cupom_codigo,
+        usuario_id=pedido_original.usuario_id,
+    )
+
+    return create_order(payload)

@@ -200,6 +200,11 @@ export const api = {
 
   listUserOrders: (userId: string) => request<OrderSummary[]>(`/orders/user/${userId}`),
 
+  reorderOrder: (orderId: string) =>
+    request<OrderStatus>(`/orders/${orderId}/reorder`, {
+      method: 'POST',
+    }),
+
   searchAdminUsers: (q: string) =>
     request<UserProfile[]>(`/admin/users/search?q=${encodeURIComponent(q)}`, {
       headers: { 'X-Admin-Token': ADMIN_TOKEN },

@@ -77,7 +77,7 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 - Ver detalhes.
   - Status: **OK** → `GET /orders/{order_id}`.
 - Pedir novamente (reorder).
-  - Status: **CRIAR** → `POST /orders/{id}/reorder`.
+  - Status: **OK** → `POST /orders/{id}/reorder` (frontend integrado).
 
 ### 3.7 `/perfil` (Perfil)
 - Ler perfil.
@@ -174,10 +174,10 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 ## 4) Itens backend a criar (lista consolidada)
 
 ### Prioridade P0
-1. Reorder de pedido
-2. Perfil completo (endereços e pagamento salvo)
-3. Definição oficial de carrinho (server-side ou localStorage-only)
-4. Captura de lead/contato (LP)
+1. Perfil completo (endereços e pagamento salvo)
+2. Definição oficial de carrinho (server-side ou localStorage-only)
+3. Captura de lead/contato (LP)
+4. Recompensas e resgate de fidelidade
 
 ### Prioridade P1
 1. Tracking em tempo real (WebSocket/SSE)
@@ -196,9 +196,9 @@ Conectar **100% das interações das telas** do frontend aos endpoints de backen
 ## 5) Plano de execução por sprint
 
 ### Sprint 1 — Operação comercial
-- Reorder no módulo de pedidos.
 - Endereços de usuário (perfil).
 - Definição oficial de carrinho (server-side ou localStorage-only).
+- Captura de lead/contato (LP).
 
 ### Sprint 2 — Experiência e retenção
 - Recompensas/resgate de fidelidade.

@@ -17,6 +17,7 @@ const MeusPedidos: React.FC = () => {
   const [orders, setOrders] = useState<OrderSummary[]>([]);
   const [tab, setTab] = useState<'historico' | 'andamento'>('historico');
   const [loading, setLoading] = useState(false);
+  const [reorderingId, setReorderingId] = useState<string | null>(null);
 
   useEffect(() => {
     const userId = localStorage.getItem('user_id');
@@ -29,6 +30,21 @@ const MeusPedidos: React.FC = () => {
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
+
+
+
+  const handleReorder = async (orderId: string) => {
+    try {
+      setReorderingId(orderId);
+      const novoPedido = await api.reorderOrder(orderId);
+      navigate(`/acompanhamento?order=${novoPedido.pedido_id}`);
+    } catch (error) {
+      console.error(error);
+      alert('Não foi possível repetir o pedido.');
+    } finally {
+      setReorderingId(null);
+    }
+  };
 
   const filteredOrders = useMemo(() => {
     if (tab === 'historico') {
@@ -98,6 +114,16 @@ const MeusPedidos: React.FC = () => {
                   <span className="material-symbols-outlined text-[20px]">visibility</span>
                   Ver andamento
                 </button>
+
+                {tab === 'historico' ? (
+                  <button
+                    className="flex-1 flex h-11 items-center justify-center rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm font-bold active:scale-95 transition-transform"
+                    onClick={() => void handleReorder(order.pedido_id)}
+                    disabled={reorderingId === order.pedido_id}
+                  >
+                    {reorderingId === order.pedido_id ? 'Repetindo...' : 'Pedir novamente'}
+                  </button>
+                ) : null}
               </div>
             </Card>
           ))}
