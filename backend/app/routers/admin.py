@@ -13,6 +13,7 @@ from app.schemas.loyalty import LoyaltySettingsResponse, LoyaltySettingsUpdate
 from app.schemas.marketing import (
     CouponCreate,
     CouponResponse,
+    CouponUpdate,
     NeighborhoodCreate,
     NeighborhoodResponse,
 )
@@ -425,6 +426,40 @@ def list_coupons() -> list[CouponResponse]:
         )
         for c in db.coupons
     ]
+
+
+@router.patch("/coupons/{codigo}", response_model=CouponResponse)
+def update_coupon(codigo: str, payload: CouponUpdate) -> CouponResponse:
+    """Atualiza um cupom existente."""
+    codigo_normalizado = codigo.upper()
+    cupom = next((c for c in db.coupons if c.codigo == codigo_normalizado), None)
+    if not cupom:
+        raise HTTPException(status_code=404, detail="Cupom não encontrado.")
+
+    cupom.tipo = payload.tipo
+    cupom.valor = payload.valor
+    cupom.minimo_pedido = payload.minimo_pedido
+    cupom.ativo = payload.ativo
+
+    return CouponResponse(
+        codigo=cupom.codigo,
+        tipo=cupom.tipo,
+        valor=cupom.valor,
+        minimo_pedido=cupom.minimo_pedido,
+        ativo=cupom.ativo,
+    )
+
+
+@router.delete("/coupons/{codigo}")
+def delete_coupon(codigo: str) -> dict[str, str]:
+    """Remove um cupom cadastrado."""
+    codigo_normalizado = codigo.upper()
+    cupom = next((c for c in db.coupons if c.codigo == codigo_normalizado), None)
+    if not cupom:
+        raise HTTPException(status_code=404, detail="Cupom não encontrado.")
+
+    db.coupons.remove(cupom)
+    return {"detail": "Cupom removido com sucesso."}
 
 
 @router.post("/couriers", response_model=CourierResponse)

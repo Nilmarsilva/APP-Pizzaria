@@ -185,9 +185,9 @@ Rotas cliente e admin atualmente registradas em `App.tsx`:
 
 ### 3.19 `/admin/cupons` (GestaoCupons)
 - Ação: criar/listar cupons.
-  - Status: **OK** → `POST/GET /admin/coupons`.
+  - Status: **OK** → `POST/GET /admin/coupons` (frontend integrado).
 - Ação: editar/ativar/desativar/remover cupom.
-  - Status: **CRIAR** → `PATCH/DELETE` de cupons.
+  - Status: **OK** → `PATCH/DELETE /admin/coupons/{codigo}` (frontend integrado).
 
 ### 3.20 `/admin/acerto` (AcertoFinanceiro)
 - Ação: ver resumo financeiro de fechamento diário.
@@ -207,7 +207,6 @@ Rotas cliente e admin atualmente registradas em `App.tsx`:
 
 ### Prioridade P1 (experiência completa)
 1. Tracking em tempo real (WebSocket/SSE) para `/acompanhamento` e painel admin.
-2. CRUD completo de cupons (`PATCH`, `DELETE`).
 3. Endpoints de perfil: update usuário + endereços + pagamento salvo.
 4. Analytics para dashboard mensal (vendas por período, top produtos, ticket médio).
 
@@ -236,7 +235,7 @@ Rotas cliente e admin atualmente registradas em `App.tsx`:
 ### Sprint 3 — Tempo real e analytics
 - WebSocket/SSE para pedido em tempo real.
 - Endpoints de dashboard mensal e relatórios operacionais.
-- CRUD completo de cupons e melhorias de estoque/alertas.
+- Melhorias de estoque/alertas e analytics operacional.
 
 ---
 

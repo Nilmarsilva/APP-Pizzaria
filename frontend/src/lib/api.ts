@@ -1,4 +1,5 @@
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000';
+const ADMIN_TOKEN = import.meta.env.VITE_ADMIN_TOKEN ?? 'admin-token';
 
 export interface AuthResponse {
   token: string;
@@ -89,6 +90,14 @@ export interface OrderQuote {
 export interface OrderStatus {
   pedido_id: string;
   status: string;
+}
+
+export interface Coupon {
+  codigo: string;
+  tipo: "percentage" | "fixed" | string;
+  valor: number;
+  minimo_pedido: number;
+  ativo: boolean;
 }
 
 export interface OrderSummary {
@@ -190,4 +199,44 @@ export const api = {
   getOrderSummary: (orderId: string) => request<OrderSummary>(`/orders/${orderId}`),
 
   listUserOrders: (userId: string) => request<OrderSummary[]>(`/orders/user/${userId}`),
+
+  listAdminCoupons: () =>
+    request<Coupon[]>('/admin/coupons', {
+      headers: { 'X-Admin-Token': ADMIN_TOKEN },
+    }),
+
+  createAdminCoupon: (payload: {
+    codigo: string;
+    tipo: 'percentage' | 'fixed';
+    valor: number;
+    minimo_pedido: number;
+    ativo: boolean;
+  }) =>
+    request<Coupon>('/admin/coupons', {
+      method: 'POST',
+      headers: { 'X-Admin-Token': ADMIN_TOKEN },
+      body: JSON.stringify(payload),
+    }),
+
+  updateAdminCoupon: (
+    codigo: string,
+    payload: {
+      tipo: 'percentage' | 'fixed';
+      valor: number;
+      minimo_pedido: number;
+      ativo: boolean;
+    },
+  ) =>
+    request<Coupon>(`/admin/coupons/${encodeURIComponent(codigo)}`, {
+      method: 'PATCH',
+      headers: { 'X-Admin-Token': ADMIN_TOKEN },
+      body: JSON.stringify(payload),
+    }),
+
+  deleteAdminCoupon: (codigo: string) =>
+    request<{ detail: string }>(`/admin/coupons/${encodeURIComponent(codigo)}`, {
+      method: 'DELETE',
+      headers: { 'X-Admin-Token': ADMIN_TOKEN },
+    }),
+
 };

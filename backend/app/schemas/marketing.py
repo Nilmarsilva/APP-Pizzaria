@@ -26,6 +26,15 @@ class CouponCreate(BaseModel):
     ativo: bool = True
 
 
+class CouponUpdate(BaseModel):
+    """Payload para atualização de cupom."""
+
+    tipo: str = Field(..., pattern="^(percentage|fixed)$")
+    valor: float = Field(..., ge=0)
+    minimo_pedido: float = Field(default=0.0, ge=0)
+    ativo: bool = True
+
+
 class CouponResponse(BaseModel):
     """Resposta de cupom de desconto."""
 
